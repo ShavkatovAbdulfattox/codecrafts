@@ -1,33 +1,16 @@
-import { Provider } from 'react-redux';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './App.css';
-import { store } from './app/store';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import MainLayout from './layouts/mainLayout/MainLayout';
-import DashboardPage from './pages/dashboard/DashboardPage';
 import LoginPage from './pages/loginPage/LoginPage';
 import NotFoundPage from './pages/notFoundPage/NotFoundPage';
-import SignUpPage from './pages/signUpPage/SignUpPage';
 import PrivateRoute from './router/PrivateRoute';
-
-import { loader } from "@monaco-editor/react";
-import * as monaco from 'monaco-editor';
-import editorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker';
-import jsonWorker from 'monaco-editor/esm/vs/language/json/json.worker?worker';
+import SignUpPage from './pages/signUpPage/SignUpPage';
+import { Provider } from 'react-redux';
+import { store } from './app/store';
 import ProblemPage from './pages/problems/ProblemPage';
 
-function App() {
-
-  self.MonacoEnvironment = {
-    getWorker(_, label) {
-      if (label === 'json') {
-        return new jsonWorker();
-      }
-      return new editorWorker();
-    },
-  };
-  loader.config({ 'vs/nls': { availableLanguages: { '*': "zh-cn" } }, monaco });
-
+const App = () => {
   const router = createBrowserRouter([
     {
       path: "/",
@@ -84,7 +67,7 @@ function App() {
     <Provider store={store}>
       <RouterProvider router={router} />
     </Provider>
-  )
+  );
 }
 
-export default App
+export default App;

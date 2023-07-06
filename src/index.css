@@ -1,5 +1,207 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
 /** @format */
 
 :root {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    --color-text: hsl(222deg, 22%, 5%);
+    --color-background: hsl(0deg, 0%, 100%);
+    --color-blurred-background: hsla(0deg, 0%, 100%, 0.85);
+    --color-primary: hsl(245deg, 100%, 60%);
+    --color-secondary: hsl(333deg, 100%, 45%);
+    --color-tertiary: hsl(255deg, 85%, 30%);
+    --color-decorative: hsl(200deg, 75%, 65%);
+    --color-muted: hsl(210deg, 55%, 92%);
+    --color-info: hsl(245deg, 100%, 60%);
+    --color-success: hsl(160deg, 100%, 40%);
+    --color-success-background: hsla(160deg, 100%, 40%, 0.1);
+    --color-error: hsl(340deg, 95%, 50%);
+    --color-error-background: hsla(340deg, 95%, 43%, 0.1);
+    --color-alert: hsl(37deg, 100%, 50%);
+    --color-alert-background: hsla(52deg, 100%, 50%, 0.25);
+    --color-subtle-background: hsl(225deg, 25%, 95%);
+    --color-subtle-floating: hsl(0deg, 0%, 100%);
+    --color-homepage-light: hsl(204deg, 67%, 85%);
+    --color-homepage-dark: hsl(202deg, 71%, 90%);
+    --color-homepage-bg: hsl(204deg, 67%, 85%);
+    --color-gray-100: hsl(225deg, 25%, 95%);
+    --color-gray-200: hsl(225deg, 16%, 90%);
+    --color-gray-300: hsl(225deg, 8%, 80%);
+    --color-gray-400: hsl(225deg, 8%, 70%);
+    --color-gray-500: hsl(225deg, 7%, 60%);
+    --color-gray-600: hsl(225deg, 15%, 50%);
+    --color-gray-700: hsl(225deg, 12%, 40%);
+    --color-gray-900: hsl(225deg, 25%, 20%);
+    --color-gray-1000: hsl(225deg, 15%, 15%);
+
+}
+
+
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+blockquote,
+q {
+    quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+    content: '';
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+a {
+    display: block;
+    text-decoration: none;
+}
+
+img {
+    display: block;
+}
+
+ul>li {
+    list-style: none;
+}
+
+/* GLOBAL STYLES */
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+    line-height: 1.45;
+    font-family: 'Nunito', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: auto;
+}
+
+#root {
+    /*
+    Create a stacking context, without a z-index.
+    This ensures that all portal content (modals and tooltips) will
+    float above the app.
+  */
+    isolation: isolate;
+}
+
+html,
+body,
+#root {
+    height: 100%;
+    scroll-behavior: smooth;
+    background-color: rgb(229, 231, 235);
 }
