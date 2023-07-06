@@ -1,14 +1,15 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import './App.css';
-import { ErrorBoundary } from './components/ErrorBoundary';
-import MainLayout from './layouts/mainLayout/MainLayout';
-import LoginPage from './pages/loginPage/LoginPage';
-import NotFoundPage from './pages/notFoundPage/NotFoundPage';
-import PrivateRoute from './router/PrivateRoute';
-import SignUpPage from './pages/signUpPage/SignUpPage';
-import { Provider } from 'react-redux';
-import { store } from './app/store';
-import ProblemPage from './pages/problems/ProblemPage';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import "./App.css";
+import { ErrorBoundary } from "./components/ErrorBoundary";
+import MainLayout from "./layouts/mainLayout/MainLayout";
+import LoginPage from "./pages/loginPage/LoginPage";
+import NotFoundPage from "./pages/notFoundPage/NotFoundPage";
+import PrivateRoute from "./router/PrivateRoute";
+import SignUpPage from "./pages/signUpPage/SignUpPage";
+import { Provider } from "react-redux";
+import { store } from "./app/store";
+import ProblemPage from "./pages/problems/ProblemPage";
+import Navigation from "./components/navbar/Navigation";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -16,7 +17,10 @@ const App = () => {
       path: "/",
       element: (
         // <PrivateRoute>
-        <MainLayout />
+        <>
+          <Navigation />
+          <MainLayout />
+        </>
         // </PrivateRoute>
       ),
       children: [
@@ -68,6 +72,6 @@ const App = () => {
       <RouterProvider router={router} />
     </Provider>
   );
-}
+};
 
 export default App;
