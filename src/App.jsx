@@ -1,17 +1,16 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import './App.css';
-import { ErrorBoundary } from './components/ErrorBoundary';
-import MainLayout from './layouts/mainLayout/MainLayout';
-import DashboardPage from './pages/dashboard/DashboardPage';
-import LoginPage from './pages/loginPage/LoginPage';
-import NotFoundPage from './pages/notFoundPage/NotFoundPage';
-import PrivateRoute from './router/PrivateRoute';
-import SignUpPage from './pages/signUpPage/SignUpPage';
-import { Provider } from 'react-redux';
-import { store } from './app/store';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import "./App.css";
+import { ErrorBoundary } from "./components/ErrorBoundary";
+import MainLayout from "./layouts/mainLayout/MainLayout";
+import DashboardPage from "./pages/dashboard/DashboardPage";
+import LoginPage from "./pages/loginPage/LoginPage";
+import NotFoundPage from "./pages/notFoundPage/NotFoundPage";
+import PrivateRoute from "./router/PrivateRoute";
+import SignUpPage from "./pages/signUpPage/SignUpPage";
+import { Provider } from "react-redux";
+import { store } from "./app/store";
 
 function App() {
-
   const router = createBrowserRouter([
     {
       path: "/",
@@ -68,7 +67,7 @@ function App() {
     <Provider store={store}>
       <RouterProvider router={router} />
     </Provider>
-  )
+  );
 }
 
-export default App
+export default App;

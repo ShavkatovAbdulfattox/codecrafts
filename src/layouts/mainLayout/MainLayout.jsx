@@ -6,15 +6,14 @@ import { Header } from "../../components/header/Header";
 import "./mainLayout.scss";
 
 const MainLayout = () => {
-
-    return (
-        <div className="global-layout">
-            <Header />
-            <main className="global-layout__main">
-                <Outlet />
-            </main>
-            <Footer />
-        </div>
-    );
+  return (
+    <div className="global-layout">
+      <Header />
+      <main className="global-layout__main">
+        <Outlet />
+      </main>
+      <Footer />
+    </div>
+  );
 };
 export default MainLayout;
