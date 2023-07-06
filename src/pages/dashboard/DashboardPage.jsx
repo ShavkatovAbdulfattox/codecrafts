@@ -1,7 +1,8 @@
-const DashboardPage = () => {
+
+function DashboardPage() {
      return (
-          <div>DashboardPage</div>
-     )
+          <div>Dashboard</div>
+     );
 }
 
-export default DashboardPage
+export default DashboardPage;
