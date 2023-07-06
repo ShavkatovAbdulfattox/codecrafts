@@ -1,6 +1,12 @@
+import Start from "../../components/Start/Start"
+
 const DashboardPage = () => {
      return (
-          <div>DashboardPage</div>
+          <main>
+                    
+               <Start/>
+               DashboardPage
+          </main>
      )
 }
 

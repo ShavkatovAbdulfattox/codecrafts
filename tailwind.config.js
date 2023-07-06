@@ -55,11 +55,11 @@ module.exports = {
         primary: "#f5f3f3",
       },
       fontFamily: {
-        Montserrat700: ['"Montserrat700"', "serif"],
-        Raleway300: ['"Raleway300"', "serif"],
-        Montserrat500: ['"Montserrat500"', "serif"],
-        Junegull: ['"Junegull"', "serif"],
-        Boorsok: ['"Boorsok"', "serif"],
+        LexendPeta: ['Lexend Peta', "sans-serif"],
+        Karla: ['Karla', "sans-serif"],
+        Lexend: ['Lexend', "sans-serif"],
+
+        
       },
       boxShadow: {
         button: "0px 4px 30px 0px",

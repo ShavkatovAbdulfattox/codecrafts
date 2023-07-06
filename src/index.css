@@ -2,14 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-
 /** @format */
 
 :root {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     --color-text: hsl(222deg, 22%, 5%);
-    --color-background: hsl(0deg, 0%, 100%);
-    --color-blurred-background: hsla(0deg, 0%, 100%, 0.85);
+    --color-background: hsl(210deg, 30%, 8%);
+    --color-blurred-background: hsla(210deg, 30%, 8%, 0.85);
     --color-primary: hsl(245deg, 100%, 60%);
     --color-secondary: hsl(333deg, 100%, 45%);
     --color-tertiary: hsl(255deg, 85%, 30%);
@@ -35,7 +34,8 @@
     --color-gray-600: hsl(225deg, 15%, 50%);
     --color-gray-700: hsl(225deg, 12%, 40%);
     --color-gray-900: hsl(225deg, 25%, 20%);
-    --color-gray-1000: hsl(225deg, 15%, 15%);
+    --color-gray-1000: hsl(225deg, 15%, 15%)
+    
 
 }
 
@@ -203,5 +203,5 @@ body,
 #root {
     height: 100%;
     scroll-behavior: smooth;
-    background-color: rgb(229, 231, 235);
+    background: var(--color-background);
 }
