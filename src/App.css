@@ -1,0 +1,9 @@
+/** @format */
+
+* {
+    box-sizing: border-box;
+}
+body {
+    font-size: 0.82em;
+    margin: 0;
+}

@@ -1,0 +1,11 @@
+/** @format */
+
+.global-layout {
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+
+    .global-layout__main {
+        flex-grow: 1;
+    }
+}

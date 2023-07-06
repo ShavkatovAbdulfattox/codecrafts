@@ -1,0 +1,15 @@
+/** @format */
+
+.not-found-page {
+    background-color: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    & > div {
+        margin-top: -150px;
+        display: flex;
+        gap: 30px;
+        flex-direction: column;
+    }
+}
