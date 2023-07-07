@@ -1,0 +1,107 @@
+@font-face {
+  font-family: "InputSans-Regular";
+  src: url(../../../../assets/fonts/InputSans-Regular.ttf);
+}
+
+@font-face {
+  font-family: "IBMPlexSans-Light";
+  src: url(../../../../assets/fonts/IBMPlexSans-Light.ttf);
+}
+
+@mixin fontStyle($size, $font, $color) {
+  font-family: $font;
+  font-size: $size;
+  color: $color;
+}
+
+.s1 {
+  position: relative;
+  padding: 100px 0;
+}
+
+.s1Content {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-auto-flow: row;
+  grid-gap: 1.5rem;
+}
+
+.verticalCard {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  border-radius: 15px;
+}
+
+.relativeImg{
+    margin-top: 40px;
+}
+
+/******/
+
+.horizontalCard {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  border-radius: 15px;
+
+  img[data-main-img] {
+    width: 40%;
+    object-fit: contain;
+  }
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  row-gap: 22px;
+  align-items: flex-start;
+  padding: 65px;
+
+  &[horizontal="true"] {
+    margin-right: 220px;
+  }
+}
+
+.cardIcon {
+  height: 55px;
+}
+
+.cardTitle {
+  @include fontStyle(30px, "InputSans-Regular", white);
+}
+
+.cardText {
+  @include fontStyle((20px), "IBMPlexSans-Light", white);
+  font-weight: 400;
+  line-height: 160%;
+}
+
+.cardLink {
+  border: 1.6px solid white;
+  padding: 0.5rem 1.25rem 0.35rem;
+  @include fontStyle(12px, "InputSans-Regular", white);
+  letter-spacing: 0.04em;
+  font-size: 0.875rem;
+  border-radius: 0.25rem;
+  transition: 0.3s;
+
+  &:hover {
+    color: rgb(167, 167, 167);
+    border-color: rgb(167, 167, 167);
+  }
+}
+
+.cardNoise {
+  position: absolute;
+  background: url(../../../../assets/images/631a5d4631d4c55a475f3e34_noise-50.png);
+  background-position: 0 0, 0 0;
+  background-size: 200px auto;
+  pointer-events: none;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
