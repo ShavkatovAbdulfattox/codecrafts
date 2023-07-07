@@ -10,6 +10,7 @@ import { Provider } from "react-redux";
 import { store } from "./app/store";
 import ProblemPage from "./pages/problemPage/ProblemPage";
 import ProblemsListPage from "./pages/problemListpage/ProblemsListPage";
+import { Qualified } from "./components/Qualified/Qualified";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -26,7 +27,7 @@ const App = () => {
           errorElement: <ErrorBoundary />,
           element: (
             // <PrivateRoute>
-            <h1>Main Page</h1>
+            <Qualified />
             // </PrivateRoute>
           ),
         },
