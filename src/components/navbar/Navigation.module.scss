@@ -14,7 +14,7 @@
   height: auto;
   padding: 15px 0;
   z-index: 100;
-  border-bottom: 1px solid rgb(93, 93, 93)
+  border-bottom: 1px solid rgb(93, 93, 93);
 }
 
 .navContent {
@@ -25,6 +25,7 @@
 .navLeft {
   display: flex;
   column-gap: 40px;
+  position: relative;
 }
 
 .navLogo {
@@ -40,14 +41,20 @@
 }
 
 .navLink {
-  @include fontStyle(18px, rgb(78, 78, 78));
+  @include fontStyle(18px, rgb(191, 191, 191));
   cursor: pointer;
   display: block;
   text-decoration: none;
   text-transform: capitalize;
+  transition: 0.2s;
 
-  &:hover{
-    color: black;
+  &[aria-current="page"] {
+    color: red;
+  }
+
+  &:hover {
+    color: rgb(255, 0, 0);
+    text-shadow: 0 0 5px rgba(255, 0, 0, 0.68);
   }
 }
 
@@ -57,11 +64,12 @@
 }
 
 .navIcon {
-  height: 25px;
+  height: 22px;
   background: none;
   border: none;
   cursor: pointer;
   opacity: 0.6;
+  transition: 0.2s;
 
   &:hover {
     opacity: 1;
@@ -69,5 +77,13 @@
 
   img {
     height: 100%;
+    filter: grayscale(1) invert(1);
   }
+}
+
+.indicator {
+  position: absolute;
+  bottom: 0;
+  background: red;
+  height: 2px;
 }
