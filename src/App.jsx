@@ -9,8 +9,8 @@ import SignUpPage from "./pages/signUpPage/SignUpPage";
 import { Provider } from "react-redux";
 import { store } from "./app/store";
 import ProblemPage from "./pages/problemPage/ProblemPage";
-import ProblemsListPage from "./pages/problemListpage/ProblemsListPage";
 import MainPage from "./pages/mainPage/MainPage";
+import ProblemsListPage from "./pages/problemListPage/ProblemsListPage";
 
 const App = () => {
   const router = createBrowserRouter([
