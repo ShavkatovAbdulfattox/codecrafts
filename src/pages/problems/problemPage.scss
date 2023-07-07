@@ -12,7 +12,7 @@
         border-right: 8px solid #f0f0f0;
         flex-grow: 1;
         border-radius: 6px;
-        
+
         .left-side__header {
             border-bottom: 1px solid #f2f3f4;
             padding: 0 20px;
@@ -42,6 +42,17 @@
             display: flex;
             gap: 20px;
             align-items: center;
+            .ant-switch {
+                background-color: #aaa;
+                .ant-switch-inner > span {
+                    display: flex !important;
+                    align-items: center;
+                    line-height: 1.8em;
+                }
+                &.ant-switch-checked {
+                    background-color: #2e89ff;
+                }
+            }
         }
         border-radius: 6px;
         background-color: #fff;
