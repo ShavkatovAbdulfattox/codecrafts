@@ -1,9 +1,14 @@
 /* eslint-disable react/prop-types */
 import { Editor } from '@monaco-editor/react';
-import { Select, Switch } from 'antd';
+import { Button, Select, Switch } from 'antd';
 import { memo, useRef, useState } from 'react';
+import axios from "axios";
+import { usePostAnswerMutation } from '../../../services/questionApi';
+import Loader from '../../../components/Loader';
 
 const ProblemRightSide = ({ rightWidth, setFileName, file = {} }) => {
+
+     const [postAnswer, { isLoading }] = usePostAnswerMutation()
 
      const [theme, setTheme] = useState("vs-light")
      const editorRef = useRef(null);
@@ -13,19 +18,10 @@ const ProblemRightSide = ({ rightWidth, setFileName, file = {} }) => {
      }
 
      function showValue() {
-          console.log(editorRef.current.getValue());
-          fetch("http://myleetcode-6e7d4e375979.herokuapp.com/question/submit/1", {
-               method: "POST",
-               headers: {
-                    'Access-Control-Allow-Origin': '*'
-               },
-               body: {
-                    "userId": 3,
-                    "console": "public  class Solution{ \n public boolean[] check2(){ \n return new boolean[]{true,false}; }}",
-                    "language": "java"
-               }
-          }).then(res => {
-               console.log({ res });
+          postAnswer({
+               userId: 3,
+               console: editorRef.current.getValue(),
+               language: "java"
           })
      }
 
@@ -45,7 +41,7 @@ const ProblemRightSide = ({ rightWidth, setFileName, file = {} }) => {
      ]
 
      return (
-          <section className="right-side" style={{ width: (1300 - rightWidth) + "px" }}>
+          <section className="right-side" style={{ width: (1300 - rightWidth) + "px", color: "#333" }}>
                <div className="right-side__header">
                     <Select
                          defaultValue="Java"
@@ -60,7 +56,9 @@ const ProblemRightSide = ({ rightWidth, setFileName, file = {} }) => {
                          unCheckedChildren="Light"
                          onChange={onChangeTheme}
                     />
-                    <button onClick={showValue}>Show value</button>
+                    <Button onClick={showValue} loading={isLoading}>
+                         Jo'natish
+                    </Button>
                </div>
                <Editor
                     height="80vh"

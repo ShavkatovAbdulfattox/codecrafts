@@ -8,7 +8,8 @@ import PrivateRoute from "./router/PrivateRoute";
 import SignUpPage from "./pages/signUpPage/SignUpPage";
 import { Provider } from "react-redux";
 import { store } from "./app/store";
-import ProblemPage from "./pages/problems/ProblemPage";
+import ProblemPage from "./pages/problemPage/ProblemPage";
+import ProblemsListPage from "./pages/problemListpage/ProblemsListPage";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -26,6 +27,15 @@ const App = () => {
           element: (
             // <PrivateRoute>
             <h1>Main Page</h1>
+            // </PrivateRoute>
+          ),
+        },
+        {
+          path: "/problemslist",
+          errorElement: <ErrorBoundary />,
+          element: (
+            // <PrivateRoute>
+            <ProblemsListPage />
             // </PrivateRoute>
           ),
         },
