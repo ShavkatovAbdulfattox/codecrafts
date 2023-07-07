@@ -1,0 +1,73 @@
+@mixin fontStyle($font-size, $font-color) {
+  font-size: $font-size;
+  color: $font-color;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+@mixin flex($justify, $align) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+.nav {
+  height: auto;
+  padding: 15px 0;
+  z-index: 100;
+  border-bottom: 1px solid rgb(93, 93, 93)
+}
+
+.navContent {
+  @include flex(space-between, center);
+  width: 100%;
+}
+
+.navLeft {
+  display: flex;
+  column-gap: 40px;
+}
+
+.navLogo {
+  @include fontStyle(30px, rgb(207, 0, 0));
+  text-decoration: none;
+  line-height: 120%;
+}
+
+.navList {
+  @include flex(center, center);
+  list-style: none;
+  column-gap: 30px;
+}
+
+.navLink {
+  @include fontStyle(18px, rgb(78, 78, 78));
+  cursor: pointer;
+  display: block;
+  text-decoration: none;
+  text-transform: capitalize;
+
+  &:hover{
+    color: black;
+  }
+}
+
+.navRight {
+  display: flex;
+  column-gap: 25px;
+}
+
+.navIcon {
+  height: 25px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  opacity: 0.6;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  img {
+    height: 100%;
+  }
+}
