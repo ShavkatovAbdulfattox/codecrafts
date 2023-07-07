@@ -1,11 +1,18 @@
 import React, { useEffect, useRef, useState } from "react";
 import classes from "./Navigation.module.scss";
 
-import { NavLink, useMatch, useResolvedPath } from "react-router-dom";
+import {
+  NavLink,
+  useMatch,
+  useNavigate,
+  useResolvedPath,
+} from "react-router-dom";
 
 import bellPng from "../../assets/icons/notification.png";
 import userPng from "../../assets/icons/user.png";
 import firePng from "../../assets/icons/fire.png";
+
+import { motion } from "framer-motion";
 
 const Navigation = () => {
   const data = {
@@ -21,6 +28,7 @@ const Navigation = () => {
   const navlink = useRef([]);
 
   const indicator = useRef();
+  const navigate = useNavigate();
 
   const setNavlink = (e) => {
     e && !navlink.current.includes(e) ? navlink.current.push(e) : null;
@@ -28,7 +36,9 @@ const Navigation = () => {
 
   const indicateLink = (index) => {
     indicator.current.style.transform = `translateX(${navlink.current[index].offsetLeft}px)`;
-    indicator.current.style.width = `${navlink.current[index].getBoundingClientRect().width}px`;
+    indicator.current.style.width = `${
+      navlink.current[index].getBoundingClientRect().width
+    }px`;
     indicator.current.style.transition = "0.3s";
   };
 
@@ -73,15 +83,25 @@ const Navigation = () => {
           </div>
 
           <div className={classes.navRight}>
-            <button className={classes.navIcon}>
+            <motion.button
+              whileTap={{ scale: 0.8 }}
+              className={classes.navIcon}
+            >
               <img src={firePng} alt="" />
-            </button>
-            <button className={classes.navIcon}>
+            </motion.button>
+            <motion.button
+              whileTap={{ scale: 0.8 }}
+              className={classes.navIcon}
+            >
               <img src={bellPng} alt="" />
-            </button>
-            <button className={classes.navIcon}>
+            </motion.button>
+            <motion.button
+              whileTap={{ scale: 0.8 }}
+              className={classes.navIcon}
+              onClick={() => navigate("/login")}
+            >
               <img src={userPng} alt="" />
-            </button>
+            </motion.button>
           </div>
           {/*  */}
         </div>
