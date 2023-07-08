@@ -1,9 +1,8 @@
-import React from "react";
 import "./Start.scss";
 
 function Start() {
   return (
-    <section className="isolate">
+    <section className="isolate relative h-[80vh]">
       <div className="context flex justify-center flex-grow ">
         <div className="flex flex-col justify-center items-center max-w-5xl w-full gap-9 relative">
           <h1 className="text-7xl text-white font-LexendPeta text-center">
@@ -15,8 +14,8 @@ function Start() {
             kuchaytiradigan kod kata bo'yicha tengdoshlaringiz bilan mashq
             qilish orqali rivojlanish ko'nikmalaringizni yaxshilang.
           </p>
-<div className="shadow"></div>
-          <button className="font-Karla font-bold text-4xl text-white pushable">
+          <div className="shadow"></div>
+          <button className="font-Karla  text-3xl text-white pushable">
             <span className="front upp">Boshlash</span>
           </button>
         </div>

@@ -29,9 +29,10 @@
 }
 
 .navLogo {
-  @include fontStyle(30px, rgb(207, 0, 0));
+  @include fontStyle(30px, rgb(214, 213, 213));
   text-decoration: none;
   line-height: 120%;
+  width: 240px;
 }
 
 .navList {
@@ -49,12 +50,12 @@
   transition: 0.2s;
 
   &[aria-current="page"] {
-    color: red;
+    color: rgb(255, 255, 255);
   }
 
   &:hover {
-    color: rgb(255, 0, 0);
-    text-shadow: 0 0 5px rgba(255, 0, 0, 0.68);
+    color: rgb(255, 255, 255);
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.68);
   }
 }
 
@@ -64,12 +65,11 @@
 }
 
 .navIcon {
-  height: 22px;
+  height: 28px;
   background: none;
   border: none;
   cursor: pointer;
   opacity: 0.6;
-  transition: 0.2s;
 
   &:hover {
     opacity: 1;
@@ -84,6 +84,6 @@
 .indicator {
   position: absolute;
   bottom: 0;
-  background: red;
+  background: rgb(255, 99, 99);
   height: 2px;
 }

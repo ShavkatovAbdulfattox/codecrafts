@@ -17,7 +17,7 @@ function Section1() {
         icon: icon1,
         style: { background: "linear-gradient(to right, #42312c, #452225)", gridColumn: "span 5" },
         alignment: "horizontal",
-        link: { title: "Join the CodeXbirbalo", to: "/" },
+        link: { title: "Join the CodeCrafters", to: "/" },
       },
       {
         title: `Tezkor fikr-mulohaza oling`,
@@ -36,15 +36,6 @@ function Section1() {
         style: { background: "#222326", gridColumn: "span 3" },
         absoluteImg: true,
         alignment: "vertical",
-      },
-      {
-        title: `Darajalar va shon-sharafga ega bo'ling`,
-        text: `Kata kodi muammolari boshlang'ichdan ekspert darajasiga qadar tartiblangan. Yuqori darajali katalarni tugatganingizdan so'ng, siz o'z profilingizni yuqori darajaga ko'tarasiz va dasturiy ta'minotni ishlab chiqish ko'nikmalaringizni eng yuqori potentsialga olib chiqasiz.`,
-        img: img3,
-        icon: icon3,
-        style: { background: "#222326", gridColumn: "span 5" },
-        absoluteImg: true,
-        alignment: "horizontal",
       },
     ],
   };
