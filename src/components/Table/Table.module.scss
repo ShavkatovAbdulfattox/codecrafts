@@ -1,0 +1,105 @@
+.tableWrapper {
+  width: 100%;
+  margin: 100px 0;
+}
+
+.table {
+  width: 100%;
+}
+
+.tableData {
+  display: grid;
+  grid-template-columns: 70px auto 120px;
+  margin: 5px 0;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+
+  &[data-bg="1"] {
+    background: rgba(255, 255, 255, 0.099);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.134);
+    }
+  }
+
+  &[data-bg="0"] {
+    background: rgba(255, 255, 255, 0.237);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.273);
+    }
+  }
+}
+
+.tableColumn {
+  padding: 10px 15px;
+}
+
+.status {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  div {
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+
+    &[data-solved="0"] {
+      background: red;
+    }
+
+    &[data-solved="1"] {
+      background: green;
+    }
+  }
+}
+
+.title {
+  text-overflow: ellipsis;
+  width: 100%;
+  padding: 10px 0;
+  //   white-space: nowrap;
+}
+
+.difficulty {
+  text-transform: capitalize;
+  padding: 10px 15px;
+
+  &[data-diff="0"] {
+    color: green;
+  }
+
+  &[data-diff="1"] {
+    color: orange;
+  }
+
+  &[data-diff="2"] {
+    color: red;
+  }
+}
+
+/******/
+
+.tableSorter {
+  display: grid;
+  grid-template-columns: 70px auto 120px;
+  column-gap: 10px;
+  margin: 5px 0;
+  border-radius: 10px;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.tableInfo {
+  padding: 12px 15px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.276);
+  user-select: none;
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(205, 205, 205, 0.432);
+  }
+}
