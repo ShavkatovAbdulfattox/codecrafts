@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./MainPage.module.scss";
-import Section1 from "./sections/section1/section1";
+import Section1 from "./sections/section1/Section1";
 import { Qualified } from "../../components/Qualified/Qualified";
 
 const MainPage = () => {

@@ -37,6 +37,15 @@ function Section1() {
         absoluteImg: true,
         alignment: "vertical",
       },
+      {
+        title: `Darajalar va shon-sharafga ega bo'ling`,
+        text: `Kata kodi muammolari boshlang'ichdan ekspert darajasiga qadar tartiblangan. Yuqori darajali katalarni tugatganingizdan so'ng, siz o'z profilingizni yuqori darajaga ko'tarasiz va dasturiy ta'minotni ishlab chiqish ko'nikmalaringizni eng yuqori potentsialga olib chiqasiz.`,
+        img: img3,
+        icon: icon3,
+        style: { background: "#222326", gridColumn: "span 5" },
+        absoluteImg: true,
+        alignment: "horizontal",
+      },
     ],
   };
 
