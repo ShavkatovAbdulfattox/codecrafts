@@ -17,7 +17,7 @@ function Section1() {
         icon: icon1,
         style: { background: "linear-gradient(to right, #42312c, #452225)", gridColumn: "span 5" },
         alignment: "horizontal",
-        link: { title: "Join the CodeXbirbalo", to: "/" },
+        link: { title: "Join the CodeCrafters", to: "/" },
       },
       {
         title: `Tezkor fikr-mulohaza oling`,

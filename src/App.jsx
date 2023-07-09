@@ -2,7 +2,6 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import MainLayout from "./layouts/mainLayout/MainLayout";
-import LoginPage from "./pages/loginPage/LoginPage";
 import NotFoundPage from "./pages/notFoundPage/NotFoundPage";
 import PrivateRoute from "./router/PrivateRoute";
 import SignUpPage from "./pages/signUpPage/SignUpPage";
@@ -11,6 +10,7 @@ import { store } from "./app/store";
 import ProblemPage from "./pages/problemPage/ProblemPage";
 import MainPage from "./pages/mainPage/MainPage";
 import ProblemsListPage from "./pages/problemListPage/ProblemsListPage";
+import SignIn from "./components/SignIn/SignIn";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -23,7 +23,7 @@ const App = () => {
       ),
       children: [
         {
-          path: "/",
+          index: true,
           errorElement: <ErrorBoundary />,
           element: (
             // <PrivateRoute>
@@ -62,7 +62,7 @@ const App = () => {
     },
     {
       path: "/login",
-      element: <LoginPage />,
+      element: <SignIn />,
     },
     {
       path: "/signup",

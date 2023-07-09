@@ -49,10 +49,6 @@ const Navigation = () => {
     });
   }, []);
 
-  const activeLink = (idx) => {
-    console.log(idx);
-  };
-
   return (
     <nav className={classes.nav}>
       <div className="container">
