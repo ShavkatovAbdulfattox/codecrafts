@@ -14,7 +14,7 @@
         background-size: 100%;
         background-clip: text;
         -webkit-text-fill-color: transparent;
-        background-color: rgb(255, 178, 62);
+        background-color: rgb(120, 62, 255);
         background-image: linear-gradient(to right, #f29871, #ff4d4d);
     }
 }
@@ -160,11 +160,12 @@
 .pushable:active .front {
     transform: translateY(-2px);
 }
-.shadow{
+
+.shadow {
     position: absolute;
-        width: 600px;
-        height: 300px;
-        background: red;
-        filter: blur(350px);
-        bottom: -10rem;
+    width: 600px;
+    height: 300px;
+    background: red;
+    filter: blur(350px);
+    bottom: -10rem;
 }
