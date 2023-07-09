@@ -1,12 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import classes from "./Navigation.module.scss";
 
-import {
-  NavLink,
-  useMatch,
-  useNavigate,
-  useResolvedPath,
-} from "react-router-dom";
+import { NavLink, useMatch, useNavigate, useResolvedPath } from "react-router-dom";
 
 import bellPng from "../../assets/icons/notification.png";
 import userPng from "../../assets/icons/user.png";
@@ -37,9 +32,7 @@ const Navigation = () => {
 
   const indicateLink = (index) => {
     indicator.current.style.transform = `translateX(${navlink.current[index].offsetLeft}px)`;
-    indicator.current.style.width = `${
-      navlink.current[index].getBoundingClientRect().width
-    }px`;
+    indicator.current.style.width = `${navlink.current[index].getBoundingClientRect().width}px`;
     indicator.current.style.transition = "0.3s";
   };
 
@@ -55,10 +48,7 @@ const Navigation = () => {
         <div className={classes.navContent}>
           {/*  */}
           <div className={classes.navLeft}>
-            <NavLink
-              to="/"
-              className={`${classes.navLogo} font-Lexend flex gap-3 items-center`}
-            >
+            <NavLink onClick={() => indicateLink(0)} to="/" className={`${classes.navLogo} font-Lexend flex gap-3 items-center`}>
               CodeCrafters
               <svg
                 className="h-8"
@@ -124,23 +114,13 @@ const Navigation = () => {
           </div>
 
           <div className={classes.navRight}>
-            <motion.button
-              whileTap={{ scale: 0.8 }}
-              className={classes.navIcon}
-            >
+            <motion.button whileTap={{ scale: 0.8 }} className={classes.navIcon}>
               <img src={firePng} alt="" />
             </motion.button>
-            <motion.button
-              whileTap={{ scale: 0.8 }}
-              className={classes.navIcon}
-            >
+            <motion.button whileTap={{ scale: 0.8 }} className={classes.navIcon}>
               <img src={bellPng} alt="" />
             </motion.button>
-            <motion.button
-              whileTap={{ scale: 0.8 }}
-              className={classes.navIcon}
-              onClick={() => navigate("/login")}
-            >
+            <motion.button whileTap={{ scale: 0.8 }} className={classes.navIcon} onClick={() => navigate("/login")}>
               <img src={userPng} alt="" />
             </motion.button>
           </div>
