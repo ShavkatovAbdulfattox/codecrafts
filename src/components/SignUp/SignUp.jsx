@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function SignUp() {
   const navigate = useNavigate();
@@ -10,6 +11,11 @@ function SignUp() {
   });
 
   const handleSignUp = async (e) => {
+    if (!formData.email && !formData.name && !formData.password) {
+      toast.error("Iltimos bosh joylarni toldiring ?!");
+
+      return
+    }
     e.preventDefault();
 
     try {
@@ -32,9 +38,12 @@ function SignUp() {
       if ((response.status >= 200) & (response.status <= 300)) {
         // Registration successful
         navigate("/login"); // Navigate to the login page
+        toast.success("Regestratsiyadan mufaqiyatli otingiz");
       } else {
         // Registration failed
         console.error("Registration failed:", data.error);
+        toast.error(data.message);
+
         // Handle the error, display a message, etc.
       }
     } catch (error) {
