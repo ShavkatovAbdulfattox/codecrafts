@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function SignIn() {
   const navigate = useNavigate();
@@ -10,6 +11,10 @@ function SignIn() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    if (!formData.email && !formData.password) {
+      toast.error("Iltimos bosh joylarni toldiring ?!");
+      return;
+    }
 
     try {
       const response = await fetch(
@@ -29,15 +34,17 @@ function SignIn() {
       if ((response.status >= 200) & (response.status <= 300)) {
         // Login successful
         // Perform any necessary actions such as setting authentication tokens, user data, etc.
-        navigate("/dashboard"); // Navigate to the dashboard or protected page
+        navigate("/"); // Navigate to the dashboard or protected page
+        toast.success("Akkountizga mufaqiyatli kirdingiz");
       } else {
         // Login failed
         console.error("Login failed:", data.error);
+        toast.error("Server tomondan xato iltimos , boshqattan toldiring ))");
         // Handle the error, display a message, etc.
       }
     } catch (error) {
       console.error("Login failed:", error);
-      // Handle any network errors or other exceptions
+      toast.error("Server tomondan xato iltimos , boshqattan toldiring ))");
     }
   };
 
