@@ -1,18 +1,21 @@
 /** @format */
 
 .global-layout {
-  position: relative;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
 
-  .global-layout__main {
-    flex-grow: 1;
-    color: #fff;
-    // padding: 20px;
-  }
+    .global-layout__main {
+        flex-grow: 1;
+        color: #fff;
+        // padding: 20px;
+    }
 }
 
 .container {
-  max-width: 1410px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 0 15px;
+    max-width: 1410px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 15px;
 }

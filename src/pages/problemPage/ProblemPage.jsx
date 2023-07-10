@@ -4,12 +4,16 @@ import ProblemLeftSide from "./components/ProblemLeftSide";
 import ProblemRightSide from "./components/ProblemRightSide";
 import "./problemPage.scss";
 import files from "../dashboard/files";
+import { useParams } from "react-router-dom";
 
 function ProblemPage() {
      const editorRef = useRef(null);
      const [rightWidth, setRightWidth] = useState(0);
      const [fileName, setFileName] = useState("java");
      const file = files[fileName];
+     const { id } = useParams()
+
+     // const { data: questins = [], isLoading } = getQuestionsByTopic();
 
      useEffect(() => {
           editorRef.current?.focus();

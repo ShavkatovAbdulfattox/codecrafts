@@ -1,16 +1,14 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import classes from "./Navigation.module.scss";
 
 import {
   NavLink,
-  useMatch,
-  useNavigate,
-  useResolvedPath,
+  useNavigate
 } from "react-router-dom";
 
+import firePng from "../../assets/icons/fire.png";
 import bellPng from "../../assets/icons/notification.png";
 import userPng from "../../assets/icons/user.png";
-import firePng from "../../assets/icons/fire.png";
 
 import { motion } from "framer-motion";
 
@@ -18,7 +16,7 @@ const Navigation = () => {
   const data = {
     links: [
       { title: "Explore", linkTo: "/" },
-      { title: "Problem", linkTo: "/problem" },
+      { title: "Problems", linkTo: "/problemslist" },
       { title: "Interview", linkTo: "/p" },
       { title: "Contest", linkTo: "/p" },
       { title: "Discuss", linkTo: "/p" },
@@ -36,9 +34,8 @@ const Navigation = () => {
 
   const indicateLink = (index) => {
     indicator.current.style.transform = `translateX(${navlink.current[index].offsetLeft}px)`;
-    indicator.current.style.width = `${
-      navlink.current[index].getBoundingClientRect().width
-    }px`;
+    indicator.current.style.width = `${navlink.current[index].getBoundingClientRect().width
+      }px`;
     indicator.current.style.transition = "0.3s";
   };
 

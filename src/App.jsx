@@ -41,7 +41,7 @@ const App = () => {
           ),
         },
         {
-          path: "/problem",
+          path: "/problem/:id",
           errorElement: <ErrorBoundary />,
           element: (
             // <PrivateRoute>

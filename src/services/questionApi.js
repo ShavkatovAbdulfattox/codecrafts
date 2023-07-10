@@ -7,10 +7,22 @@ export const problemsApi = createApi({
     //     reducerPath: "problems",
     baseQuery: fetchBaseQuery({ baseUrl: baseURL }),
     endpoints: (builder) => ({
+        // Kategoriyalarni olish
+        getCategories: builder.query({
+            query: () => `/category/list`,
+            transformResponse: (response) => response.data,
+        }),
+
         // Topiclarni olish
         getTopics: builder.query({
             query: () => `/topic/list/${1}`,
             transformResponse: (response) => response.data,
+        }),
+
+        // Topic bo'yicha savollarni olish
+        getQuestionsByTopic: builder.query({
+            query: (topicId) => `/topic/get/${topicId}`,
+            transformResponse: (response) => response.data?.questionList,
         }),
 
         // Javob ni POST qilish
@@ -33,4 +45,9 @@ export const problemsApi = createApi({
     }),
 });
 
-export const { useGetTopicsQuery, usePostAnswerMutation } = problemsApi;
+export const {
+    useGetTopicsQuery,
+    usePostAnswerMutation,
+    useGetQuestionsByTopicQuery,
+    useGetCategoriesQuery,
+} = problemsApi;
