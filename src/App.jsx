@@ -9,8 +9,11 @@ import { Provider } from "react-redux";
 import { store } from "./app/store";
 import ProblemPage from "./pages/problemPage/ProblemPage";
 import MainPage from "./pages/mainPage/MainPage";
-import ProblemsListPage from "./pages/problemListpage/ProblemsListPage";
+import ProblemsListPage from "./pages/problemListPage/ProblemsListPage";
 import SignIn from "./components/SignIn/SignIn";
+import { ConfigProvider, theme } from 'antd';
+import 'antd/dist/reset.css';
+
 
 const App = () => {
   const router = createBrowserRouter([
@@ -76,7 +79,18 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <ConfigProvider
+        theme={{
+          token: {
+            // any theme overirdes
+            colorPrimary: '#7f00ff',
+          },
+          // this line sets it to dark mode
+          algorithm: theme.darkAlgorithm,
+        }}
+      >
+        <RouterProvider router={router} />
+      </ConfigProvider>
     </Provider>
   );
 };

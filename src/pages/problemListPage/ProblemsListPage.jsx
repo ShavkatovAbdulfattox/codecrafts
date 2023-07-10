@@ -1,18 +1,19 @@
 import { Button } from "antd";
+import { useMemo, useState } from "react";
 import Loader from "../../components/Loader";
-import { useGetCategoriesQuery, useGetQuestionsByTopicQuery, useGetTopicsQuery } from "../../services/questionApi";
+import { useGetCategoriesQuery, useGetQuestionsByTopicQuery } from "../../services/questionApi";
+import { default as QuestionsTable } from "./QuestionsTable";
 import "./problemListPage.scss";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 const ProblemsListPage = () => {
      const [topicId, setTopicId] = useState(null);
      const [categoryId, setCategoryId] = useState(1);
-     const navigate = useNavigate();
+
+     // Categoriyalarni olib kelish
      const { data: categories = [] } = useGetCategoriesQuery();
+     // Categoriyalarni ichidagi topiclarni olish
      const topics = categories.find(category => category.id === categoryId)?.topicList || [];
 
-     // const { data: topics = [] } = useGetTopicsQuery();
      const { data: questions = [], isFetching, } = useGetQuestionsByTopicQuery(topicId, {
           skip: !topicId
      });
@@ -21,9 +22,31 @@ const ProblemsListPage = () => {
           setTopicId(id)
      }
 
-     const onSolveQuestion = (id) => {
-          navigate("/problem/" + id)
+     const Categories = () => {
+          const className = (category) => category.id === categoryId ? "category-button-active" : "category-button"
+          return categories.map((category) => (
+               <div key={category.id}>
+                    <Button
+                         className={className(category)}
+                         type="primary"
+                         onClick={() => setCategoryId(category.id)}
+                    >
+                         {category.name}
+                    </Button>
+               </div>
+          ))
      }
+
+     const Topics = () => useMemo(() => {
+          const className = (topic) => topic.id === topicId ? "topic-button-active" : "topic-button"
+          return topics.map((topic) => (
+               <div key={topic.id}>
+                    <Button className={className(topic)} onClick={() => getQuestions(topic.id)}>
+                         {topic.name}
+                    </Button>
+               </div>
+          ))
+     }, [topics])
 
      return (
           <section className="problems-list-page">
@@ -32,44 +55,13 @@ const ProblemsListPage = () => {
                          Savollar <Loader show={isFetching} />
                     </h1>
                     <div className="flex gap-[8px] text-[#ccc] py-2">
-                         {categories.map((category) => (
-                              <div key={category.id}>
-                                   <Button
-                                        style={{
-                                             backgroundColor: category.id === categoryId ? "blue" : "",
-                                             borderColor: category.id === categoryId ? "blue" : "#4096FF"
-                                        }}
-                                        type="primary"
-                                        onClick={() => setCategoryId(category.id)}
-                                   >
-                                        {category.name}
-                                   </Button>
-                              </div>
-                         ))}
+                         <Categories />
                     </div>
                     <div className="flex gap-[8px] text-[#ccc] text-[.85em]">
-                         {topics.map((topic) => (
-                              <div key={topic.id}>
-                                   <Button onClick={() => getQuestions(topic.id)} className="problem-category-item">{topic.name}</Button>
-                              </div>
-                         ))}
+                         <Topics />
                     </div>
                     <div className="flex flex-col gap-[8px] text-[#ccc] py-4">
-                         {questions.map((question) => (
-                              <div key={question.id} className="flex gap-2 border-1 border-[#666]">
-                                   <div>{question.name}</div>
-                                   <div>{question.level}</div>
-                                   <div>{question.like1}</div>
-                                   <div>{question.dislike}</div>
-                                   <div>{question.solved}</div>
-                                   <Button
-                                        className="problem-category-item"
-                                        onClick={() => onSolveQuestion(question.id)}>
-                                        Ishlash
-                                   </Button>
-                              </div>
-                         ))}
-                         {questions.length === 0 ? <div className="py-3">Bu topikda savollar yo'q</div> : ''}
+                         <QuestionsTable questions={questions} />
                     </div>
                </div>
           </section>

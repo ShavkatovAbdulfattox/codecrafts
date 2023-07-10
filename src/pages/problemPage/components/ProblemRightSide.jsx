@@ -2,9 +2,7 @@
 import { Editor } from '@monaco-editor/react';
 import { Button, Select, Switch } from 'antd';
 import { memo, useRef, useState } from 'react';
-import axios from "axios";
 import { usePostAnswerMutation } from '../../../services/questionApi';
-import Loader from '../../../components/Loader';
 
 const ProblemRightSide = ({ rightWidth, setFileName, file = {} }) => {
 

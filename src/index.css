@@ -1,3 +1,5 @@
+/** @format */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,6 +10,8 @@
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     --color-text: hsl(222deg, 22%, 5%);
     --color-background: hsl(210deg, 30%, 8%);
+    --color-bg-secondary: #222a33;
+    --color-active-primary: #0000ff;
     --color-blurred-background: hsla(210deg, 30%, 8%, 0.85);
     --color-primary: hsl(245deg, 100%, 60%);
     --color-secondary: hsl(333deg, 100%, 45%);
@@ -34,11 +38,8 @@
     --color-gray-600: hsl(225deg, 15%, 50%);
     --color-gray-700: hsl(225deg, 12%, 40%);
     --color-gray-900: hsl(225deg, 25%, 20%);
-    --color-gray-1000: hsl(225deg, 15%, 15%)
-    
-
+    --color-gray-1000: hsl(225deg, 15%, 15%);
 }
-
 
 body,
 div,
@@ -156,7 +157,7 @@ blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-    content: '';
+    content: "";
     content: none;
 }
 
@@ -174,7 +175,7 @@ img {
     display: block;
 }
 
-ul>li {
+ul > li {
     list-style: none;
 }
 
@@ -184,7 +185,7 @@ ul>li {
 *:after {
     box-sizing: border-box;
     line-height: 1.45;
-    font-family: 'Nunito', sans-serif;
+    font-family: "Nunito", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: auto;
 }
