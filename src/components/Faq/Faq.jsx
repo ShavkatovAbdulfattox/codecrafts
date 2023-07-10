@@ -1,4 +1,3 @@
-import React from "react";
 import { AiFillEye } from "react-icons/ai";
 import { FiFlag } from "react-icons/fi";
 import { BsPersonWorkspace } from "react-icons/bs";

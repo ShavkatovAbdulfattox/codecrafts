@@ -1,12 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import classes from "./Navigation.module.scss";
 
-import { NavLink, useMatch, useNavigate, useResolvedPath } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
+import firePng from "../../assets/icons/fire.png";
 import bellPng from "../../assets/icons/notification.png";
 import userPng from "../../assets/icons/user.png";
-import firePng from "../../assets/icons/fire.png";
-import Code from "../../assets/images/code.png";
 
 import { motion } from "framer-motion";
 
@@ -14,7 +13,7 @@ const Navigation = () => {
   const data = {
     links: [
       { title: "Explore", linkTo: "/" },
-      { title: "Problem", linkTo: "/problem" },
+      { title: "Problems", linkTo: "/problemslist" },
       { title: "Interview", linkTo: "/p" },
       { title: "Contest", linkTo: "/p" },
       { title: "Discuss", linkTo: "/p" },
