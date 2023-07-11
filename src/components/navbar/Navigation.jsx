@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import classes from "./Navigation.module.scss";
 
 import { NavLink, useNavigate } from "react-router-dom";
@@ -8,8 +8,19 @@ import bellPng from "../../assets/icons/notification.png";
 import userPng from "../../assets/icons/user.png";
 
 import { motion } from "framer-motion";
+import { useSelector } from "react-redux";
+import { CgProfile } from "react-icons/cg";
+import {
+  RiLogoutCircleRLine,
+  RiProfileLine,
+  RiUserSettingsLine,
+} from "react-icons/ri";
+// import {RiUserSettingsLine}
 
 const Navigation = () => {
+  const isLogged = useSelector((state) => state.user.isLogged);
+  const [isHover, setIsHover] = useState(false);
+  const [isNestedHover, setIsNestedHover] = useState(false);
   const data = {
     links: [
       { title: "Explore", linkTo: "/" },
@@ -31,7 +42,9 @@ const Navigation = () => {
 
   const indicateLink = (index) => {
     indicator.current.style.transform = `translateX(${navlink.current[index].offsetLeft}px)`;
-    indicator.current.style.width = `${navlink.current[index].getBoundingClientRect().width}px`;
+    indicator.current.style.width = `${
+      navlink.current[index].getBoundingClientRect().width
+    }px`;
     indicator.current.style.transition = "0.3s";
   };
 
@@ -47,7 +60,11 @@ const Navigation = () => {
         <div className={classes.navContent}>
           {/*  */}
           <div className={classes.navLeft}>
-            <NavLink onClick={() => indicateLink(0)} to="/" className={`${classes.navLogo} font-Lexend flex gap-3 items-center`}>
+            <NavLink
+              onClick={() => indicateLink(0)}
+              to="/"
+              className={`${classes.navLogo} font-Lexend flex gap-3 items-center`}
+            >
               CodeCrafters
               <svg
                 className="h-8"
@@ -112,18 +129,55 @@ const Navigation = () => {
             <div className={classes.indicator} ref={indicator}></div>
           </div>
 
-          <div className={classes.navRight}>
-            <motion.button whileTap={{ scale: 0.8 }} className={classes.navIcon}>
+          <div
+            className={`${classes.navRight} hover:bg-slate-950 p-2 -m-2 rounded-t-3xl`}
+            onMouseLeave={() => setIsHover(false)}
+          >
+            <motion.button
+              whileTap={{ scale: 0.8 }}
+              className={`${classes.navIcon}`}
+            >
               <img src={firePng} alt="" />
             </motion.button>
-            <motion.button whileTap={{ scale: 0.8 }} className={classes.navIcon}>
+            <motion.button
+              whileTap={{ scale: 0.8 }}
+              className={classes.navIcon}
+            >
               <img src={bellPng} alt="" />
             </motion.button>
-            <motion.button whileTap={{ scale: 0.8 }} className={classes.navIcon} onClick={() => navigate("/login")}>
-              <img src={userPng} alt="" />
-            </motion.button>
+            <div className="relative">
+              <motion.button
+                whileTap={{ scale: 0.8 }}
+                className={classes.navIcon}
+                onClick={() => {
+                  if (isLogged) {
+                    return;
+                  }
+                  navigate("/login");
+                }}
+                onMouseEnter={() => setIsHover(true)}
+              >
+                <img src={userPng} alt="" />
+              </motion.button>
+              {isHover && (
+                <div
+                  className="absolute top-10 -right-2  w-52"
+                  onMouseEnter={() => setIsHover(true)}
+                  onMouseLeave={() => setIsHover(false)}
+                >
+                  <p className="text-white font-Lexend flex items-center gap-2 text-sm cursor-pointer bg-slate-950 rounded-tl-xl hover:bg-slate-900 w-full p-3">
+                    <RiProfileLine className="text-xl" /> View profile
+                  </p>
+                  <p className="text-white font-Lexend flex items-center gap-2 text-sm cursor-pointer bg-slate-950 hover:bg-slate-900 w-full p-3">
+                    <RiLogoutCircleRLine className="text-xl" /> Sign out
+                  </p>
+                  <p className="text-white font-Lexend flex items-center gap-2 text-sm cursor-pointer bg-slate-950 hover:bg-slate-900 w-full p-3">
+                    <RiUserSettingsLine className="text-xl" /> Profile settings
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
-          {/*  */}
         </div>
       </div>
     </nav>

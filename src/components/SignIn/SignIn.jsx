@@ -1,8 +1,12 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { logIn } from "../../app/features/user/userSlice";
 
 function SignIn() {
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
@@ -36,6 +40,7 @@ function SignIn() {
         // Perform any necessary actions such as setting authentication tokens, user data, etc.
         navigate("/"); // Navigate to the dashboard or protected page
         toast.success("Akkountizga mufaqiyatli kirdingiz");
+        dispatch(logIn(data));
       } else {
         // Login failed
         console.error("Login failed:", data.error);
