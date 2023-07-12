@@ -20,7 +20,9 @@ import {
 const Navigation = () => {
   const isLogged = useSelector((state) => state.user.isLogged);
   const [isHover, setIsHover] = useState(false);
-  const [isNestedHover, setIsNestedHover] = useState(false);
+
+  const naigate = useNavigate();
+
   const data = {
     links: [
       { title: "Explore", linkTo: "/" },
@@ -129,10 +131,7 @@ const Navigation = () => {
             <div className={classes.indicator} ref={indicator}></div>
           </div>
 
-          <div
-            className={`${classes.navRight} hover:bg-slate-950 p-2 -m-2 rounded-t-3xl`}
-            onMouseLeave={() => setIsHover(false)}
-          >
+          <div className={`${classes.navRight} `}>
             <motion.button
               whileTap={{ scale: 0.8 }}
               className={`${classes.navIcon}`}
@@ -145,35 +144,52 @@ const Navigation = () => {
             >
               <img src={bellPng} alt="" />
             </motion.button>
-            <div className="relative">
+            <div
+              className="relative hover:bg-slate-950 p-3 -m-3  rounded-t-3xl"
+              onClick={() => {
+                // if (!isLogged) {
+                //   // navigate("/login");
+                //   return;
+                // }
+                setIsHover(!isHover);
+              }}
+            >
               <motion.button
                 whileTap={{ scale: 0.8 }}
-                className={classes.navIcon}
-                onClick={() => {
-                  if (isLogged) {
-                    return;
-                  }
-                  navigate("/login");
-                }}
-                onMouseEnter={() => setIsHover(true)}
+                className={`${classes.navIcon}`}
               >
                 <img src={userPng} alt="" />
               </motion.button>
               {isHover && (
-                <div
-                  className="absolute top-10 -right-2  w-52"
-                  onMouseEnter={() => setIsHover(true)}
-                  onMouseLeave={() => setIsHover(false)}
-                >
-                  <p className="text-white font-Lexend flex items-center gap-2 text-sm cursor-pointer bg-slate-950 rounded-tl-xl hover:bg-slate-900 w-full p-3">
+                <div className="absolute top-10 right-0  w-52 ">
+                  <motion.p
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => {
+                      navigate("/profile");
+                      setIsHover(false);
+                    }}
+                    className="text-white font-Lexend flex items-center gap-2 text-sm cursor-pointer bg-slate-950 rounded-tl-xl hover:bg-slate-900 w-full p-3"
+                  >
                     <RiProfileLine className="text-xl" /> View profile
-                  </p>
-                  <p className="text-white font-Lexend flex items-center gap-2 text-sm cursor-pointer bg-slate-950 hover:bg-slate-900 w-full p-3">
-                    <RiLogoutCircleRLine className="text-xl" /> Sign out
-                  </p>
-                  <p className="text-white font-Lexend flex items-center gap-2 text-sm cursor-pointer bg-slate-950 hover:bg-slate-900 w-full p-3">
+                  </motion.p>
+
+                  <motion.p
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => {
+                      navigate("/profilesettings");
+                      setIsHover(false);
+                    }}
+                    className="text-white font-Lexend flex items-center gap-2 text-sm cursor-pointer bg-slate-950 hover:bg-slate-900 w-full p-3"
+                  >
                     <RiUserSettingsLine className="text-xl" /> Profile settings
-                  </p>
+                  </motion.p>
+                  <motion.p
+                    whileTap={{ scale: 0.95 }}
+                    className="text-white font-Lexend flex items-center gap-2 text-sm cursor-pointer bg-slate-950 hover:bg-slate-900 w-full p-3"
+                    //  onClick={()=> }2
+                  >
+                    <RiLogoutCircleRLine className="text-xl" /> Sign out
+                  </motion.p>
                 </div>
               )}
             </div>

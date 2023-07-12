@@ -11,9 +11,10 @@ import ProblemPage from "./pages/problemPage/ProblemPage";
 import MainPage from "./pages/mainPage/MainPage";
 import ProblemsListPage from "./pages/problemListPage/ProblemsListPage";
 import SignIn from "./components/SignIn/SignIn";
-import { ConfigProvider, theme } from 'antd';
-import 'antd/dist/reset.css';
-
+import { ConfigProvider, theme } from "antd";
+import "antd/dist/reset.css";
+import ProfileSettings from "./pages/ProfileSettings/ProfileSettings";
+import Profile from "./pages/Profile/Profile";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -51,6 +52,15 @@ const App = () => {
             <ProblemPage />
             // </PrivateRoute>
           ),
+    
+        },
+        {
+          path: "/profile",
+          element: <Profile />,
+        },
+        {
+          path: "/profileSettings",
+          element: <ProfileSettings />,
         },
       ],
     },
@@ -71,6 +81,7 @@ const App = () => {
       path: "/signup",
       element: <SignUpPage />,
     },
+
     {
       path: "*",
       element: <NotFoundPage />,
@@ -83,7 +94,7 @@ const App = () => {
         theme={{
           token: {
             // any theme overirdes
-            colorPrimary: '#7f00ff',
+            colorPrimary: "#7f00ff",
           },
           // this line sets it to dark mode
           algorithm: theme.darkAlgorithm,
