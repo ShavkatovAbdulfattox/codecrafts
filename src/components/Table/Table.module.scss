@@ -1,3 +1,13 @@
+@font-face {
+  font-family: "InputSans400";
+  src: url(../../assets/fonts/InputSans-Regular.ttf);
+}
+
+@font-face {
+  font-family: "IBM400";
+  src: url(../../assets/fonts/IBMPlexSans-Regular.ttf);
+}
+
 .tableWrapper {
   width: 100%;
   margin: 100px 0;
@@ -9,11 +19,15 @@
 
 .tableData {
   display: grid;
-  grid-template-columns: 70px auto 100px 150px;
+  grid-template-columns: 70px auto 100px 180px;
   margin: 5px 0;
   border-radius: 10px;
   font-size: 16px;
-  cursor: pointer;
+  // cursor: pointer;
+
+  p {
+    font-family: "IBM400";
+  }
 
   &[data-bg="1"] {
     background: rgba(255, 255, 255, 0.099);
@@ -34,6 +48,8 @@
 
 .tableColumn {
   padding: 10px 15px;
+  display: flex;
+  align-items: center;
 }
 
 .status {
@@ -53,6 +69,10 @@
     &[data-solved="yes"] {
       background: green;
     }
+
+    &[data-solved="tried"] {
+      background: orange;
+    }
   }
 }
 
@@ -60,12 +80,17 @@
   text-overflow: ellipsis;
   width: 100%;
   padding: 10px 0;
+
+  p {
+    cursor: pointer;
+  }
   //   white-space: nowrap;
 }
 
 .difficulty {
   text-transform: capitalize;
   padding: 10px 15px;
+  font-size: 15px;
 
   &[data-diff="easy"] {
     color: green;
@@ -84,7 +109,7 @@
 
 .tableSorter {
   display: grid;
-  grid-template-columns: 70px auto 120px 150px;
+  grid-template-columns: 70px auto 120px 180px;
   column-gap: 10px;
   margin: 5px 0;
   border-radius: 10px;
@@ -112,6 +137,12 @@
   align-items: center;
   justify-content: flex-start;
   column-gap: 10px;
+  font-size: 12px;
+
+  span {
+    display: flex;
+    align-items: center;
+  }
 
   img {
     height: 20px;
@@ -130,10 +161,32 @@
   column-gap: 5px;
   padding: 0 5px;
   user-select: none;
+  width: 70px;
+
+  img {
+    cursor: pointer;
+  }
 
   &[data-dislike] {
     img {
       rotate: 180deg;
+    }
+  }
+
+  &[data-like] {
+    img[data-pressed="true"] {
+      opacity: 0.9;
+      filter: invert(21%) sepia(100%) saturate(2414%) hue-rotate(359deg) brightness(94%) contrast(100%);
+      animation: like 0.5s forwards;
+
+      @keyframes like {
+        50% {
+          transform: rotate(-20deg) scale(1.2); 
+        }
+        100% {
+          transform: rotate(0) scale(1);
+        }
+      }
     }
   }
 }
