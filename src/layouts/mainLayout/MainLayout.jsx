@@ -6,7 +6,6 @@ import Navigation from "../../components/navbar/Navigation";
 import "./mainLayout.scss";
 
 const MainLayout = () => {
-
   return (
     <div className="global-layout">
       <Navigation />
