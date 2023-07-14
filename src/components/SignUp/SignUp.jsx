@@ -14,21 +14,18 @@ function SignUp() {
     if (!formData.email && !formData.name && !formData.password) {
       toast.error("Iltimos bosh joylarni toldiring ?!");
 
-      return
+      return;
     }
     e.preventDefault();
 
     try {
-      const response = await fetch(
-        "https://myleetcode-6e7d4e375979.herokuapp.com/api/auth/register",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
+      const response = await fetch("http://localhost:8080/api/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
       const data = await response.json();
       console.log(response.status);
