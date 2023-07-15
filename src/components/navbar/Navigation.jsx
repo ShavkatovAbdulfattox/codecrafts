@@ -131,83 +131,85 @@ const Navigation = () => {
             <div className={classes.indicator} ref={indicator}></div>
           </div>
 
-          <div className="flex">
-            <button
-              className="text-white font-Karla text-lg border border-solid py-1 px-4"
-              onClick={() => navigate("/login")}
-            >
-          Kirish
-            </button>
-            <button
-              className="text-white font-Karla text-lg border border-red-400  border-l-0 border-solid py-1 px-4"
-              onClick={() => navigate("/signup")}
-            >
-             Regestratsiya
-            </button>
-          </div>
-          {/* 
-          <div className={`${classes.navRight} `}>
-            <motion.button
-              whileTap={{ scale: 0.8 }}
-              className={`${classes.navIcon}`}
-            >
-              <img src={firePng} alt="" />
-            </motion.button>
-            <motion.button
-              whileTap={{ scale: 0.8 }}
-              className={classes.navIcon}
-            >
-              <img src={bellPng} alt="" />
-            </motion.button>
-            <div
-              className={`relative ${
-                isHover ? "bg-slate-950" : ""
-              }  p-3 -m-3  rounded-t-3xl`}
-              onClick={() => {
-
-                setIsHover(!isHover);
-              }}
-            >
+          {isLogged ? (
+            <div className={`${classes.navRight} `}>
               <motion.button
                 whileTap={{ scale: 0.8 }}
                 className={`${classes.navIcon}`}
               >
-                <img src={userPng} alt="" />
+                <img src={firePng} alt="" />
               </motion.button>
-              {isHover && (
-                <div className="absolute top-10 right-0  w-52 ">
-                  <motion.p
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() => {
-                      navigate("/profile");
-                      setIsHover(false);
-                    }}
-                    className="text-white font-Lexend flex items-center gap-2 text-sm cursor-pointer bg-slate-950 rounded-tl-xl hover:bg-slate-900 w-full p-3"
-                  >
-                    <RiProfileLine className="text-xl" /> View profile
-                  </motion.p>
+              <motion.button
+                whileTap={{ scale: 0.8 }}
+                className={classes.navIcon}
+              >
+                <img src={bellPng} alt="" />
+              </motion.button>
+              <div
+                className={`relative ${
+                  isHover ? "bg-slate-950" : ""
+                }  p-3 -m-3  rounded-t-3xl`}
+                onClick={() => {
+                  setIsHover(!isHover);
+                }}
+              >
+                <motion.button
+                  whileTap={{ scale: 0.8 }}
+                  className={`${classes.navIcon}`}
+                >
+                  <img src={userPng} alt="" />
+                </motion.button>
+                {isHover && (
+                  <div className="absolute top-10 right-0  w-52 ">
+                    <motion.p
+                      whileTap={{ scale: 0.95 }}
+                      onClick={() => {
+                        navigate("/profile");
+                        setIsHover(false);
+                      }}
+                      className="text-white font-Lexend flex items-center gap-2 text-sm cursor-pointer bg-slate-950 rounded-tl-xl hover:bg-slate-900 w-full p-3"
+                    >
+                      <RiProfileLine className="text-xl" /> Profilni korish
+                    </motion.p>
 
-                  <motion.p
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() => {
-                      navigate("/profilesettings");
-                      setIsHover(false);
-                    }}
-                    className="text-white font-Lexend flex items-center gap-2 text-sm cursor-pointer bg-slate-950 hover:bg-slate-900 w-full p-3"
-                  >
-                    <RiUserSettingsLine className="text-xl" /> Profile settings
-                  </motion.p>
-                  <motion.p
-                    whileTap={{ scale: 0.95 }}
-                    className="text-white font-Lexend flex items-center gap-2 text-sm cursor-pointer bg-slate-950 hover:bg-slate-900 w-full p-3"
-                    //  onClick={()=> }2
-                  >
-                    <RiLogoutCircleRLine className="text-xl" /> Sign out
-                  </motion.p>
-                </div>
-              )}
+                    <motion.p
+                      whileTap={{ scale: 0.95 }}
+                      onClick={() => {
+                        navigate("/profilesettings");
+                        setIsHover(false);
+                      }}
+                      className="text-white font-Lexend flex items-center gap-2 text-sm cursor-pointer bg-slate-950 hover:bg-slate-900 w-full p-3"
+                    >
+                      <RiUserSettingsLine className="text-xl" /> Profil
+                      sozlamalari
+                    </motion.p>
+                    <motion.p
+                      whileTap={{ scale: 0.95 }}
+                      className="text-white font-Lexend flex items-center gap-2 text-sm cursor-pointer bg-slate-950 hover:bg-slate-900 w-full p-3"
+                      //  onClick={()=> }2
+                    >
+                      <RiLogoutCircleRLine className="text-xl" /> Chiqish
+                    </motion.p>
+                  </div>
+                )}
+              </div>
             </div>
-          </div> */}
+          ) : (
+            <div className="flex">
+              <button
+                className="text-white font-Karla text-lg border border-solid py-1 px-4"
+                onClick={() => navigate("/login")}
+              >
+                Kirish
+              </button>
+              <button
+                className="text-white font-Karla text-lg border border-red-400  border-l-0 border-solid py-1 px-4"
+                onClick={() => navigate("/signup")}
+              >
+                Regestratsiya
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </nav>
