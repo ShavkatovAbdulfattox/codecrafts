@@ -16,7 +16,7 @@ function SignIn() {
   const handleLogin = async (e) => {
     e.preventDefault();
     if (!formData.email && !formData.password) {
-      toast.error("Iltimos bosh joylarni toldiring ?!");
+      toast.error("Iltimos bosh joylarni toldiring ?!",{ theme: "dark",});
       return;
     }
 
@@ -39,17 +39,17 @@ function SignIn() {
         // Login successful
         // Perform any necessary actions such as setting authentication tokens, user data, etc.
         navigate("/"); // Navigate to the dashboard or protected page
-        toast.success("Akkountizga mufaqiyatli kirdingiz");
+        toast.success("Akkountizga mufaqiyatli kirdingiz",{ theme: "dark",});
         dispatch(logIn(data));
       } else {
         // Login failed
         console.error("Login failed:", data.error);
-        toast.error("Server tomondan xato iltimos , boshqattan toldiring ))");
+        toast.error("Server tomondan xato iltimos , boshqattan toldiring ))",{ theme: "dark",});
         // Handle the error, display a message, etc.
       }
     } catch (error) {
       console.error("Login failed:", error);
-      toast.error("Server tomondan xato iltimos , boshqattan toldiring ))");
+      toast.error("Server tomondan xato iltimos , boshqattan toldiring ))",{ theme: "dark",});
     }
   };
 

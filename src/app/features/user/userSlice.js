@@ -1,7 +1,6 @@
 /** @format */
 
 import { createSlice } from "@reduxjs/toolkit";
-import { data } from "autoprefixer";
 
 const userSlice = createSlice({
   name: "user",
