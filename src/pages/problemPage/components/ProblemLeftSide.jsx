@@ -5,6 +5,7 @@ const ProblemLeftSide = () => {
 
      const onChangeTab = () => {
      }
+
      const items = [
           {
                key: '1',
@@ -28,7 +29,7 @@ const ProblemLeftSide = () => {
                     <Tabs size="small" defaultActiveKey="1" items={items} onChange={onChangeTab} />
                </div>
                <div className="left-side__body">
-                    <h2>209. Misol maksimal sonni topish</h2>
+                    <h1>209. Misol maksimal sonni topish</h1>
                     <Tag color="orange" style={{ borderRadius: "50px", padding: "2px 15px" }}>Oson</Tag>
                     <div className="left-problem__text">
                          Savolni ozi birnimalar birnimalar birnimalar birnimalar birnimalar birnimalar birnimalar

@@ -5,24 +5,36 @@
     display: flex;
     width: 100%;
     overflow: hidden;
-    background-color: #f0f0f0;
+    background-color: #1a1a1a;
+
     .left-side {
         height: 100%;
-        background-color: #fff;
+        background-color: #282828;
         border-right: 8px solid #f0f0f0;
         flex-grow: 1;
         border-radius: 6px;
 
         .left-side__header {
-            border-bottom: 1px solid #f2f3f4;
+            border-bottom: 1px solid #777;
             padding: 0 20px;
+            font-weight: 500;
+            background-color: #333;
+            color: #beb1b4;
 
             .ant-tabs {
                 padding-top: 5px;
                 margin: 0 0 -17px 0;
-
-                .ant-tabs-nav:before {
-                    border: none !important;
+                border: none !important;
+                .ant-tabs-nav {
+                    .ant-tabs-tab {
+                        .ant-tabs-tab-btn {
+                            border: none !important;
+                            color: #fff;
+                        }
+                    }
+                    .ant-tabs-ink-bar {
+                        background-color: #ccc;
+                    }
                 }
             }
         }
@@ -51,7 +63,7 @@
                 }
                 &.ant-switch-checked {
                     background-color: #2e89ff;
-                }   
+                }
             }
         }
         border-radius: 6px;
