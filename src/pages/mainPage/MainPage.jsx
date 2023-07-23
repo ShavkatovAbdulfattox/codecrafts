@@ -7,7 +7,7 @@ import Table from "../../components/Table/Table";
 
 const MainPage = () => {
   return (
-    <div>
+    <div className="main-page">
       <Start />
       <Section1 />
       {/* <div className={classes.noiseBg}></div> */}
