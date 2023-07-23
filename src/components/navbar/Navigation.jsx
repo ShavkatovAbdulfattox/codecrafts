@@ -166,7 +166,7 @@ const Navigation = () => {
                     <motion.p
                       whileTap={{ scale: 0.95 }}
                       className="text-white font-Lexend flex items-center gap-2 text-sm cursor-pointer bg-slate-950 hover:bg-slate-900 w-full p-3"
-                      //  onClick={()=> }2
+                    //  onClick={()=> }2
                     >
                       <RiLogoutCircleRLine className="text-xl" /> Chiqish
                     </motion.p>
@@ -192,8 +192,8 @@ const Navigation = () => {
         {/* *********************************** */}
 
         <div className={classes.navContentMobile}>
-          <svg viewBox="0 0 24 24" class={classes.burgerIcon} onClick={() => setMenu(true)}>
-            <path fill-rule="evenodd" d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path>
+          <svg viewBox="0 0 24 24" className={classes.burgerIcon} onClick={() => setMenu(true)}>
+            <path fillRule="evenodd" d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path>
           </svg>
 
           <NavLink onClick={() => indicateLink(0)} to="/" className={`${classes.navLogo} font-Lexend flex gap-3 items-center`}>
@@ -241,9 +241,9 @@ const Navigation = () => {
             </svg>
           </NavLink>
 
-          <svg viewBox="0 0 24 24" class={classes.userIcon}>
+          <svg viewBox="0 0 24 24" className={classes.userIcon}>
             <path
-              fill-rule="evenodd"
+              fillRule="evenodd"
               d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2a7.2 7.2 0 0 1-6-3.22c.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08a7.2 7.2 0 0 1-6 3.22z"
             ></path>
           </svg>

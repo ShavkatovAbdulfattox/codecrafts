@@ -1,6 +1,6 @@
+/* eslint-disable react/prop-types */
 import { Table } from "antd";
 import { memo } from "react";
-import { IconContext } from "react-icons";
 import { Link, useNavigate } from "react-router-dom";
 
 const QuestionTable = ({ questions }) => {

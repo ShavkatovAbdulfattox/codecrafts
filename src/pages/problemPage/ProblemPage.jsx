@@ -23,11 +23,19 @@ function ProblemPage() {
           setRightWidth(a.screenX)
      }
 
-
      return (
           <div className="playground-body">
                <Resizable
-                    enable={{ top: false, right: true, bottom: false, left: false, topRight: false, bottomRight: false, bottomLeft: false, topLeft: false }}
+                    enable={{
+                         top: false,
+                         right: true,
+                         bottom: false,
+                         left: false,
+                         topRight: false,
+                         bottomRight: false,
+                         bottomLeft: false,
+                         topLeft: false
+                    }}
                     maxWidth="70%"
                     onResize={onResize}
                     defaultSize={{
