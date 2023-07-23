@@ -8,7 +8,7 @@ const ProblemRightSide = ({ rightWidth, setFileName, file = {} }) => {
 
      const [postAnswer, { isLoading }] = usePostAnswerMutation()
 
-     const [theme, setTheme] = useState("vs-light")
+     const [theme, setTheme] = useState("vs-dark")
      const editorRef = useRef(null);
 
      function handleEditorDidMount(editor, monaco) {
@@ -51,6 +51,7 @@ const ProblemRightSide = ({ rightWidth, setFileName, file = {} }) => {
                     />
                     <Switch
                          checkedChildren="Dark"
+                         defaultChecked={true}
                          unCheckedChildren="Light"
                          onChange={onChangeTheme}
                     />
