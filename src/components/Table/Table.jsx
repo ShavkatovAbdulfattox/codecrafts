@@ -4,8 +4,6 @@ import axios from "axios";
 import likePng from "../../assets/icons/thumb-up.png";
 import chevronPng from "../../assets/icons/down-arrow.png";
 
-const baseURL = "https://myleetcode-6e7d4e375979.herokuapp.com/topic/get/user/1/3";
-
 const Table = () => {
   const [data, setData] = useState([]);
   const [tableData, setTableData] = useState([]);
@@ -154,7 +152,7 @@ const Table = () => {
                 </div>
               );
             })
-          : null}
+          : null} 
       </div>
     </div>
   );

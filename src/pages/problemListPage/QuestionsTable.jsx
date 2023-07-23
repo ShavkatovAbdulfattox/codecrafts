@@ -31,7 +31,7 @@ const QuestionTable = ({ questions }) => {
                dataIndex: "name",
                key: "name",
                render: (name, question) => {
-                    return <Link to={"/problem/" + question.id}>{name}</Link>;
+                    return <Link to={"/problem/" + question.id} state={question}>{name}</Link>;
                },
           },
           {

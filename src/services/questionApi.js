@@ -25,6 +25,13 @@ export const problemsApi = createApi({
             transformResponse: (response) => response.data?.questionList,
         }),
 
+        // Id bo'yicha savolni olish
+        getQuestion: builder.query({
+            query: ({ questionId, userId }) =>
+                `question/get/${questionId}/${userId}`,
+            transformResponse: (response) => response.data,
+        }),
+
         // Javob ni POST qilish
         postAnswer: builder.mutation({
             query: (answer) => ({
@@ -47,6 +54,7 @@ export const problemsApi = createApi({
 
 export const {
     useGetTopicsQuery,
+    useGetQuestionQuery,
     usePostAnswerMutation,
     useGetQuestionsByTopicQuery,
     useGetCategoriesQuery,
