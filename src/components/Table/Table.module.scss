@@ -20,8 +20,8 @@
 .tableData {
   display: grid;
   grid-template-columns: 70px auto 100px 180px;
-  margin: 5px 0;
-  border-radius: 10px;
+  // margin: 5px 0;
+  // border-radius: 10px;
   font-size: 16px;
   // cursor: pointer;
 
@@ -30,18 +30,24 @@
   }
 
   &[data-bg="1"] {
-    background: rgba(255, 255, 255, 0.099);
-
+    background: #2A2A2A;
+    transition: all 0.3s;
+    
     &:hover {
-      background: rgba(255, 255, 255, 0.134);
+      transition: all 0.3s;
+      background: #2d2e2e;
+      color: #0A84FF;
     }
   }
-
+  
   &[data-bg="0"] {
-    background: rgba(255, 255, 255, 0.237);
-
+    transition: all 0.3s;
+    background: #0E141B;
+    
     &:hover {
-      background: rgba(255, 255, 255, 0.273);
+      transition: all 0.3s;
+      color: #0A84FF;
+      background: #1a1b1b;
     }
   }
 }
@@ -110,8 +116,8 @@
 .tableSorter {
   display: grid;
   grid-template-columns: 70px auto 120px 180px;
-  column-gap: 10px;
-  margin: 5px 0;
+  // column-gap: 10px;
+  // margin: 5px 0;
   border-radius: 10px;
   font-size: 16px;
   margin-bottom: 10px;
@@ -119,16 +125,19 @@
 
 .tableInfo {
   padding: 12px 15px;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.276);
+  // border-radius: 10px;
+  // border-left: 1px solid rgba(255, 255, 255, 0.276) ;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.276) ;
+  // background: rgba(255, 255, 255, 0.276);
   user-select: none;
   display: flex;
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
+  background: rgba(205, 205, 205, 0.077);
 
   &:hover {
-    background: rgba(205, 205, 205, 0.432);
+    background: rgba(205, 205, 205, 0.116);
   }
 }
 
