@@ -46,8 +46,10 @@ function ProblemPage() {
                     <ProblemLeftSide question={question} />
                </Resizable>
                <ProblemRightSide
+                    question={question}
                     rightWidth={rightWidth}
                     setFileName={setFileName}
+                    fileName={fileName}
                     file={file}
                />
           </div>

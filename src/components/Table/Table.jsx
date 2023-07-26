@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
-import classes from "./Table.module.scss";
-import axios from "axios";
-import likePng from "../../assets/icons/thumb-up.png";
+import React, { useEffect, useState } from "react";
 import chevronPng from "../../assets/icons/down-arrow.png";
+import likePng from "../../assets/icons/thumb-up.png";
+import classes from "./Table.module.scss";
 
 const Table = () => {
   const [data, setData] = useState([]);
@@ -107,52 +106,52 @@ const Table = () => {
       <div className={classes.table}>
         {tableData
           ? tableData.map((item, index) => {
-              return (
-                <div key={index} className={classes.tableData} data-bg={index % 2 == 0 ? "0" : "1"}>
-                  {/*  */}
-                  <div className={`${classes.tableColumn} ${classes.status}`}>
-                    <div data-solved={item.solved}></div>
-                  </div>
-
-                  <div className={`${classes.tableColumn} ${classes.title}`}>
-                    <p>{`${item.id}. ${item.name}`}</p>
-                  </div>
-
-                  <div className={`${classes.tableColumn} ${classes.difficulty}`} data-diff={item.level}>
-                    <span>{item.level}</span>
-                  </div>
-
-                  <div className={`${classes.tableColumn} ${classes.likesWrapper}`}>
-                    <div className={classes.likeBtn} data-like="true">
-                      <img
-                        src={likePng}
-                        alt=""
-                        draggable="false"
-                        data-pressed={item.likeStatus == "liked" ? "true" : "false"}
-                        onClick={() => {
-                          setItemLike(item.id);
-                        }}
-                      />
-                      <span>{item.likeStatus == "liked" ? item.like1 + 1 : item.like1}</span>
-                    </div>
-                    <div className={classes.likeBtn} data-dislike="true">
-                      <img
-                        src={likePng}
-                        alt=""
-                        draggable="false"
-                        data-pressed={item.likeStatus == "disliked" ? "true" : "false"}
-                        onClick={() => {
-                          setItemDislike(item.id);
-                        }}
-                      />
-                      <span>{item.likeStatus == "disliked" ? item.dislike + 1 : item.dislike}</span>
-                    </div>
-                  </div>
-                  {/*  */}
+            return (
+              <div key={index} className={classes.tableData} data-bg={index % 2 == 0 ? "0" : "1"}>
+                {/*  */}
+                <div className={`${classes.tableColumn} ${classes.status}`}>
+                  <div data-solved={item.solved}></div>
                 </div>
-              );
-            })
-          : null} 
+
+                <div className={`${classes.tableColumn} ${classes.title}`}>
+                  <p>{`${item.id}. ${item.name}`}</p>
+                </div>
+
+                <div className={`${classes.tableColumn} ${classes.difficulty}`} data-diff={item.level}>
+                  <span>{item.level}</span>
+                </div>
+
+                <div className={`${classes.tableColumn} ${classes.likesWrapper}`}>
+                  <div className={classes.likeBtn} data-like="true">
+                    <img
+                      src={likePng}
+                      alt=""
+                      draggable="false"
+                      data-pressed={item.likeStatus == "liked" ? "true" : "false"}
+                      onClick={() => {
+                        setItemLike(item.id);
+                      }}
+                    />
+                    <span>{item.likeStatus == "liked" ? item.like1 + 1 : item.like1}</span>
+                  </div>
+                  <div className={classes.likeBtn} data-dislike="true">
+                    <img
+                      src={likePng}
+                      alt=""
+                      draggable="false"
+                      data-pressed={item.likeStatus == "disliked" ? "true" : "false"}
+                      onClick={() => {
+                        setItemDislike(item.id);
+                      }}
+                    />
+                    <span>{item.likeStatus == "disliked" ? item.dislike + 1 : item.dislike}</span>
+                  </div>
+                </div>
+                {/*  */}
+              </div>
+            );
+          })
+          : null}
       </div>
     </div>
   );

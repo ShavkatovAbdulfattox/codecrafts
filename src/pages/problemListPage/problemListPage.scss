@@ -35,6 +35,21 @@
 
     // Question Table
     .question-table {
+        .quesiton-link-button {
+            transition: 0.05s !important;
+            &:hover {
+                color: var(--color-active-primary);
+            }
+        }
+        .question-table-likes {
+            display: flex;
+            gap: 27px;
+
+            & > div {
+                display: flex;
+                gap: 8px;
+            }
+        }
         .table-row-light {
             .ant-table-cell {
                 color: #fff;

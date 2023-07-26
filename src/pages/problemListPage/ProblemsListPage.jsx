@@ -1,3 +1,5 @@
+/** @format */
+
 import { Button } from "antd";
 import { useEffect, useMemo, useState } from "react";
 import Loader from "../../components/Loader";
@@ -19,19 +21,18 @@ const ProblemsListPage = () => {
   // Categoriyalarni ichidagi topiclarni olish
   const topics = useMemo(
     () =>
-      categories.find((category) => category.id === categoryId)?.topicList ||
-      [],
-    [categories]
+      categories.find((category) => category.id === categoryId)
+        ?.topicList || [],
+    [categories, categoryId]
   );
 
   useEffect(() => {
     setTopicId(topics[0]?.id);
   }, [topics]);
 
-  const { data: questions = [], isFetching: isFetchingQuestions } =
-    useGetQuestionsByTopicQuery(topicId, {
-      skip: !topicId,
-    });
+  const { data: questions = [] } = useGetQuestionsByTopicQuery(topicId, {
+    skip: !topicId,
+  });
 
   const getQuestions = (id) => {
     setTopicId(id);
@@ -39,7 +40,9 @@ const ProblemsListPage = () => {
 
   const Categories = () => {
     const className = (category) =>
-      category.id === categoryId ? "category-button-active" : "category-button";
+      category.id === categoryId
+        ? "category-button-active"
+        : "category-button";
     return categories.map((category) => (
       <div key={category.id}>
         <Button
@@ -71,21 +74,20 @@ const ProblemsListPage = () => {
 
   return (
     <section className="problems-list-page container">
-      <Table />
-      {/* <div className="problems-list__head">
-                    <h1 className="text-[1.3em]">
-                         Savollar <Loader show={isLoading} />
-                    </h1>
-                    <div className="flex gap-[8px] text-[#ccc] py-2">
-                         <Categories />
-                    </div>
-                    <div className="flex gap-[8px] text-[#ccc] text-[.85em]">
-                         <Topics />
-                    </div>
-                    <div className="flex flex-col gap-[8px] text-[#ccc] py-4">
-                         <QuestionsTable questions={questions} />
-                    </div>
-               </div> */}
+      <div className="problems-list__head">
+        <h1 className="text-[1.3em]">
+          Savollar <Loader show={isLoading} />
+        </h1>
+        <div className="flex gap-[8px] text-[#ccc] py-2">
+          <Categories />
+        </div>
+        <div className="flex gap-[8px] text-[#ccc] text-[.85em]">
+          <Topics />
+        </div>
+        <div className="flex flex-col gap-[8px] text-[#ccc] py-4">
+          <QuestionsTable questions={questions} />
+        </div>
+      </div>
     </section>
   );
 };

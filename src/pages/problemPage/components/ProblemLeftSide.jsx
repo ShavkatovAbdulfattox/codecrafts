@@ -2,6 +2,8 @@
 import { Tabs, Tag } from 'antd';
 import { memo } from 'react';
 import { CorrectIcon, DislikeButton, LikeButton } from '../../../utils/icons';
+import { getQuestionDifficulty } from '../../../utils/functions';
+import ProblemLeftExampleCard from './ProblemLeftExampleCard';
 
 const ProblemLeftSide = ({ question }) => {
 
@@ -24,11 +26,6 @@ const ProblemLeftSide = ({ question }) => {
      ];
 
 
-     const level = {
-          "easy": "Oson",
-          undefined: "",
-     }[question.level] ?? ''
-
      return (
           <section className="left-side">
                <div className="left-side__header">
@@ -37,7 +34,7 @@ const ProblemLeftSide = ({ question }) => {
                <div className="left-side__body">
                     <h1>{question.name}</h1>
                     <div className="left-side__info">
-                         <Tag color="orange" style={{ borderRadius: "50px", padding: "2px 15px" }}>{level}</Tag>
+                         <Tag color="orange" style={{ borderRadius: "50px", padding: "2px 15px" }}>{getQuestionDifficulty(question.level)}</Tag>
                          <CorrectIcon />
                          <button className="left-side__like">
                               <LikeButton />
@@ -49,11 +46,12 @@ const ProblemLeftSide = ({ question }) => {
                          </button>
                     </div>
                     <div className="left-problem__text">
-                         Savolni ozi birnimalar birnimalar birnimalar birnimalar birnimalar birnimalar birnimalar
-                         Savolni ozi birnimalar birnimalar birnimalar birnimalar birnimalar birnimalar birnimalar
-                         Savolni ozi birnimalar birnimalar birnimalar birnimalar birnimalar birnimalar birnimalar
-                         Savolni ozi birnimalar birnimalar birnimalar birnimalar birnimalar birnimalar birnimalar
-                         Savolni ozi birnimalar birnimalar birnimalar birnimalar birnimalar birnimalar birnimalar
+                         {question.definition}
+                    </div>
+                    <div className="left-problem__examples">
+                         {question.exampleList?.map((example, index) => {
+                              return <ProblemLeftExampleCard key={index} example={example} index={index} />
+                         })}
                     </div>
                </div>
           </section>
