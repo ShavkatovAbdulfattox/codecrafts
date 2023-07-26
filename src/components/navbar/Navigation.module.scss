@@ -87,3 +87,117 @@
   background: rgb(255, 99, 99);
   height: 2px;
 }
+
+
+/******************************************/
+
+.navContentMobile {
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+
+  @media screen and (max-width: 1128px) {
+    display: flex;
+  }
+}
+
+.burgerIcon {
+  fill: white;
+  height: 25px;
+}
+
+.userIcon {
+  fill: transparent;
+  stroke: white;
+  height: 25px;
+}
+
+.menu {
+  position: fixed;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background: hsl(225deg, 15%, 15%);
+  width: 220px;
+  transform: translateX(-100%);
+  transition: 0.5s;
+
+  &[data-menu-open="true"] {
+    transform: translate(0);
+  }
+}
+
+.menuBg {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: -1;
+  background: rgba(0, 0, 0, 0.334);
+  visibility: hidden;
+  pointer-events: none;
+  opacity: 0;
+  transition: 0.4s;
+
+  &[data-menu-open="true"] {
+    visibility: visible;
+    pointer-events: all;
+    opacity: 1;
+  }
+}
+
+.menuUser {
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.513);
+
+  img {
+    height: 40px;
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+  }
+
+  p {
+    @include fontStyle(17px, white);
+  }
+}
+
+.menuList {
+  padding: 15px;
+
+  p {
+    @include fontStyle(16px, rgb(238, 95, 0));
+  }
+}
+
+.menuLink {
+  @include fontStyle(18px, rgb(186, 186, 186));
+  position: relative;
+  padding: 7px 0;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: rgb(255, 98, 0);
+    opacity: 0;
+    transition: 0.3s;
+  }
+
+  &[aria-current="page"] {
+    color: white;
+
+    &::after {
+      opacity: 1;
+    }
+  }
+}

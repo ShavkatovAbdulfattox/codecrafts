@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { AiFillEdit, AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { MdKeyboardReturn, MdOutlineDownloadDone } from "react-icons/md";
@@ -7,18 +7,75 @@ import { motion } from "framer-motion";
 
 function ProfileSettings() {
   const userData = useSelector((state) => state.user.data);
-  const [name, setName] = useState(userData.data.name);
-  const [email, setEmail] = useState(userData.data.email);
-  const [selectedFile, setSelectedFile] = useState(null);
 
   const [isVisiblePassword, setIsVisiblePassword] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
 
-  console.log(userData);
+  const [name, setName] = useState(userData.data.name);
+  const [email, setEmail] = useState(userData.data.email);
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  // ! The function below is choosing the picture and setting it to the state
 
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
   };
+
+  async function updateUserPhoto(e, userId) {
+    e.preventDefault();
+    // Get the selected file from the file inpu
+
+    if (!selectedFile) {
+      console.error("No file selected!");
+      toast.error("Iltimos rasm tanlang", {
+        position: "top-right",
+        autoClose: 3965,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      return;
+    }
+
+    // Create a FormData object to send the file as part of the request
+    const formData = new FormData();
+    formData.append("photo", selectedFile);
+    console.log(formData);
+
+    try {
+      const response = await fetch(
+        `http://localhost:8080/user/v1/update/${userId}`,
+        {
+          method: "PUT",
+          body: formData,
+        }
+      );
+
+      if (!(response.status >= 200) & (response.status <= 300)) {
+        throw new Error("Network response was not ok");
+      }else{
+        toast.success("Sizning suratingiz  yuklandi ", {
+          position: "top-right",
+          autoClose: 3965,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      }
+
+      const data = await response.json();
+      console.log("Photo update successful:", data);
+    } catch (error) {
+      toast.error("Xato iltimos qaytadan yuklang", { theme: "dark" });
+      console.error("Error updating photo:", error);
+    }
+  }
   return (
     <>
       <header className="mt-10 container">
@@ -71,6 +128,9 @@ function ProfileSettings() {
               <motion.div
                 whileTap={{ scale: 0.8 }}
                 onClick={() => {
+                  if (!isEditMode) {
+                    return;
+                  }
                   toast.success("Malumotlaringiz mofaqiyatli ozgartirildi!", {
                     position: "top-right",
                     autoClose: 3965,
@@ -154,18 +214,23 @@ function ProfileSettings() {
             </div>
             <div className="flex justify-between gap-5 mt-10">
               <div className="flex justify-between items-center w-[50%]">
-                <label htmlFor="" className="font-Lexend text-lg flex gap-5">
+                <label htmlFor="" className="font-Lexend text-sm flex gap-5">
                   Rasmingizni yuklang
                   <input
                     type="file"
                     accept="image/*"
-                    onChange={() => {
-                      handleFileChange;
+                    className="cursor-pointer"
+                    onChange={(e) => {
+                      handleFileChange(e);
                     }}
-                    // style={{ display: "none" }}
                   />
                 </label>
-                <button className="text-lg bg-orange-400 font-Lexend py-1 px-5 rounded-lg">
+                <button
+                  className="text bg-orange-400 font-Lexend py-1 px-5 rounded-lg"
+                  onClick={(e) => {
+                    updateUserPhoto(e, 2);
+                  }}
+                >
                   submit
                 </button>
               </div>

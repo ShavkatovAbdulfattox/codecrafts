@@ -13,9 +13,6 @@ const MainPage = () => {
       <div className={classes.noiseBg}></div>
       <Faq />
       <Qualified />
-      <div className="container">
-        <Table data={tableData} />
-      </div>
     </div>
   );
 };
