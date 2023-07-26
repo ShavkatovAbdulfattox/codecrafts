@@ -7,11 +7,11 @@ import "./notFoundPage.scss";
 const NotFoundPage = () => {
     const navigate = useNavigate();
 
-    useEffect(() => {
-        setTimeout(() => {
-            navigate("/");
-        }, 2000);
-    }, []);
+    // useEffect(() => {
+    //     setTimeout(() => {
+    //         navigate("/");
+    //     }, 2000);
+    // }, []);
 
     return (
         <div className="not-found-page">

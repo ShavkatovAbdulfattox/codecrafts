@@ -4,9 +4,7 @@ import axios from "axios";
 import likePng from "../../assets/icons/thumb-up.png";
 import chevronPng from "../../assets/icons/down-arrow.png";
 
-const baseURL = "https://myleetcode-6e7d4e375979.herokuapp.com/topic/get/user/1/3";
-
-const Table = (props) => {
+const Table = () => {
   const [data, setData] = useState([]);
   const [tableData, setTableData] = useState([]);
 
@@ -14,17 +12,15 @@ const Table = (props) => {
   const [diffState, setDiffState] = useState(false);
   const [likesState, setLikesState] = useState(false);
 
-  const [likes, setLikes] = useState([]);
-  const [dislikes, setDislikes] = useState([]);
+  const fetchData = async () => {
+    // const response = await axios.get(baseURL);
+    // const responseData = await response.data.data.questionList;
+    // console.log(response);
+    setData([...tempData]);
+    setTableData([...tempData]);
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await axios.get(baseURL);
-      const responseData = await response.data.data.questionList;
-      setData(responseData);
-      setTableData(responseData);
-    };
-
     try {
       fetchData();
     } catch (error) {
@@ -48,6 +44,22 @@ const Table = (props) => {
       const ul = obj ? cloneData.sort((a, b) => obj[b[key]] - obj[a[key]]) : cloneData.sort((a, b) => b[key] - a[key]);
       setTableData(ul);
     }
+  }
+
+  function setItemDislike(i) {
+    const indexOfItem = tableData.findIndex((item) => item.id == i);
+    const copyTableData = [...tableData];
+    const foundItem = copyTableData[indexOfItem];
+    foundItem.likeStatus == "disliked" ? (foundItem.likeStatus = "") : (foundItem.likeStatus = "disliked");
+    setTableData(copyTableData);
+  }
+
+  function setItemLike(i) {
+    const indexOfItem = tableData.findIndex((item) => item.id == i);
+    const copyTableData = [...tableData];
+    const foundItem = copyTableData[indexOfItem];
+    foundItem.likeStatus == "liked" ? (foundItem.likeStatus = "") : (foundItem.likeStatus = "liked");
+    setTableData(copyTableData);
   }
 
   return (
@@ -116,38 +128,253 @@ const Table = (props) => {
                         src={likePng}
                         alt=""
                         draggable="false"
-                        data-pressed={likes.includes(index) ? "true" : "false"}
+                        data-pressed={item.likeStatus == "liked" ? "true" : "false"}
                         onClick={() => {
-                          !likes.includes(index)
-                            ? (setLikes([...likes, index]), setDislikes(dislikes.filter((e) => e !== index)))
-                            : setLikes(likes.filter((e) => e !== index));
+                          setItemLike(item.id);
                         }}
                       />
-                      <span>{!likes.includes(index) ? item.like1 : item.like1 + 1}</span>
+                      <span>{item.likeStatus == "liked" ? item.like1 + 1 : item.like1}</span>
                     </div>
                     <div className={classes.likeBtn} data-dislike="true">
                       <img
                         src={likePng}
                         alt=""
                         draggable="false"
-                        data-pressed={dislikes.includes(index) ? "true" : "false"}
+                        data-pressed={item.likeStatus == "disliked" ? "true" : "false"}
                         onClick={() => {
-                          !dislikes.includes(index)
-                            ? (setDislikes([...dislikes, index]), setLikes(likes.filter((e) => e !== index)))
-                            : setDislikes(dislikes.filter((e) => e !== index));
+                          setItemDislike(item.id);
                         }}
                       />
-                      <span>{!dislikes.includes(index) ? item.dislike : item.dislike + 1}</span>
+                      <span>{item.likeStatus == "disliked" ? item.dislike + 1 : item.dislike}</span>
                     </div>
                   </div>
                   {/*  */}
                 </div>
               );
             })
-          : null}
+          : null} 
       </div>
     </div>
   );
 };
 
 export default Table;
+
+const tempData = [
+  {
+    id: 1,
+    solved: "yes",
+    name: "Write a function that makes you a web developer",
+    level: "easy",
+    like1: 2433,
+    dislike: 100,
+    likeStatus: "liked",
+  },
+  {
+    id: 2,
+    solved: "no",
+    name: "Write a function that makes you a web developer",
+    level: "medium",
+    like1: 5466,
+    dislike: 1026,
+    likeStatus: "liked",
+  },
+  {
+    id: 3,
+    solved: "tried",
+    name: "Write a function that makes you a web developer",
+    level: "easy",
+    like1: 6544,
+    dislike: 850,
+    likeStatus: "disliked",
+  },
+  {
+    id: 4,
+    solved: "tried",
+    name: "Write a function that makes you a web developer",
+    level: "hard",
+    like1: 556,
+    dislike: 286,
+    likeStatus: "liked",
+  },
+  {
+    id: 5,
+    solved: "yes",
+    name: "Write a function that makes you a web developer",
+    level: "easy",
+    like1: 4685,
+    dislike: 456,
+    likeStatus: "disliked",
+  },
+  {
+    id: 6,
+    solved: "tried",
+    name: "Write a function that makes you a web developer",
+    level: "easy",
+    like1: 3220,
+    dislike: 233,
+    likeStatus: "liked",
+  },
+  {
+    id: 7,
+    solved: "no",
+    name: "Write a function that makes you a web developer",
+    level: "medium",
+    like1: 3554,
+    dislike: 875,
+    likeStatus: "",
+  },
+  {
+    id: 8,
+    solved: "yes",
+    name: "Write a function that makes you a web developer",
+    level: "hard",
+    like1: 816,
+    dislike: 180,
+    likeStatus: "liked",
+  },
+  {
+    id: 9,
+    solved: "yes",
+    name: "Write a function that makes you a web developer",
+    level: "easy",
+    like1: 4236,
+    dislike: 329,
+    likeStatus: "liked",
+  },
+  {
+    id: 10,
+    solved: "no",
+    name: "Write a function that makes you a web developer",
+    level: "hard",
+    like1: 1210,
+    dislike: 2653,
+    likeStatus: "disliked",
+  },
+  {
+    id: 11,
+    solved: "yes",
+    name: "Write a function that makes you a web developer",
+    level: "easy",
+    like1: 686,
+    dislike: 52,
+    likeStatus: "liked",
+  },
+  {
+    id: 12,
+    solved: "no",
+    name: "Write a function that makes you a web developer",
+    level: "medium",
+    like1: 2255,
+    dislike: 300,
+    likeStatus: "",
+  },
+  {
+    id: 13,
+    solved: "tried",
+    name: "Write a function that makes you a web developer",
+    level: "easy",
+    like1: 8569,
+    dislike: 1216,
+    likeStatus: "liked",
+  },
+  {
+    id: 14,
+    solved: "no",
+    name: "Write a function that makes you a web developer",
+    level: "easy",
+    like1: 6573,
+    dislike: 896,
+    likeStatus: "liked",
+  },
+  {
+    id: 15,
+    solved: "yes",
+    name: "Write a function that makes you a web developer",
+    level: "hard",
+    like1: 421,
+    dislike: 325,
+    likeStatus: "liked",
+  },
+  {
+    id: 16,
+    solved: "no",
+    name: "Write a function that makes you a web developer",
+    level: "medium",
+    like1: 3555,
+    dislike: 322,
+    likeStatus: "disliked",
+  },
+  {
+    id: 17,
+    solved: "yes",
+    name: "Write a function that makes you a web developer",
+    level: "easy",
+    like1: 3748,
+    dislike: 650,
+    likeStatus: "",
+  },
+  {
+    id: 18,
+    solved: "no",
+    name: "Write a function that makes you a web developer",
+    level: "medium",
+    like1: 2512,
+    dislike: 400,
+    likeStatus: "liked",
+  },
+  {
+    id: 19,
+    solved: "yes",
+    name: "Write a function that makes you a web developer",
+    level: "easy",
+    like1: 7522,
+    dislike: 1562,
+    likeStatus: "disliked",
+  },
+  {
+    id: 20,
+    solved: "tried",
+    name: "Write a function that makes you a web developer",
+    level: "medium",
+    like1: 1856,
+    dislike: 365,
+    likeStatus: "liked",
+  },
+  {
+    id: 21,
+    solved: "yes",
+    name: "Write a function that makes you a web developer",
+    level: "easy",
+    like1: 5542,
+    dislike: 500,
+    likeStatus: "",
+  },
+  {
+    id: 22,
+    solved: "yes",
+    name: "Write a function that makes you a web developer",
+    level: "hard",
+    like1: 755,
+    dislike: 202,
+    likeStatus: "",
+  },
+  {
+    id: 23,
+    solved: "no",
+    name: "Write a function that makes you a web developer",
+    level: "hard",
+    like1: 844,
+    dislike: 488,
+    likeStatus: "liked",
+  },
+  {
+    id: 24,
+    solved: "yes",
+    name: "Write a function that makes you a web developer",
+    level: "easy",
+    like1: 2865,
+    dislike: 120,
+    likeStatus: "liked",
+  },
+];

@@ -10,16 +10,13 @@ import userPng from "../../assets/icons/user.png";
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 import { CgProfile } from "react-icons/cg";
-import {
-  RiLogoutCircleRLine,
-  RiProfileLine,
-  RiUserSettingsLine,
-} from "react-icons/ri";
+import { RiLogoutCircleRLine, RiProfileLine, RiUserSettingsLine } from "react-icons/ri";
 // import {RiUserSettingsLine}
 
 const Navigation = () => {
   const isLogged = useSelector((state) => state.user.isLogged);
   const [isHover, setIsHover] = useState(false);
+  const [menu, setMenu] = useState(false);
 
   const naigate = useNavigate();
 
@@ -44,9 +41,7 @@ const Navigation = () => {
 
   const indicateLink = (index) => {
     indicator.current.style.transform = `translateX(${navlink.current[index].offsetLeft}px)`;
-    indicator.current.style.width = `${
-      navlink.current[index].getBoundingClientRect().width
-    }px`;
+    indicator.current.style.width = `${navlink.current[index].getBoundingClientRect().width}px`;
     indicator.current.style.transition = "0.3s";
   };
 
@@ -62,11 +57,7 @@ const Navigation = () => {
         <div className={classes.navContent}>
           {/*  */}
           <div className={classes.navLeft}>
-            <NavLink
-              onClick={() => indicateLink(0)}
-              to="/"
-              className={`${classes.navLogo} font-Lexend flex gap-3 items-center`}
-            >
+            <NavLink onClick={() => indicateLink(0)} to="/" className={`${classes.navLogo} font-Lexend flex gap-3 items-center`}>
               CodeCrafters
               <svg
                 className="h-8"
@@ -110,53 +101,43 @@ const Navigation = () => {
                 </g>
               </svg>
             </NavLink>
-            <ul className={classes.navList}>
-              {data.links.map((elem, index) => {
-                return (
-                  <li key={index}>
-                    <NavLink
-                      to={elem.linkTo}
-                      className={classes.navLink}
-                      draggable="false"
-                      ref={setNavlink}
-                      onClick={() => indicateLink(index)}
-                    >
-                      {elem.title}
-                    </NavLink>
-                  </li>
-                );
-              })}
-            </ul>
-
-            <div className={classes.indicator} ref={indicator}></div>
+            <div className={classes.navListWrapper}>
+              <ul className={classes.navList}>
+                {data.links.map((elem, index) => {
+                  return (
+                    <li key={index}>
+                      <NavLink
+                        to={elem.linkTo}
+                        className={classes.navLink}
+                        draggable="false"
+                        ref={setNavlink}
+                        onClick={() => indicateLink(index)}
+                      >
+                        {elem.title}
+                      </NavLink>
+                    </li>
+                  );
+                })}
+              </ul>
+              <div className={classes.indicator} ref={indicator}></div>
+            </div>
           </div>
 
           {isLogged ? (
             <div className={`${classes.navRight} `}>
-              <motion.button
-                whileTap={{ scale: 0.8 }}
-                className={`${classes.navIcon}`}
-              >
+              <motion.button whileTap={{ scale: 0.8 }} className={`${classes.navIcon}`}>
                 <img src={firePng} alt="" />
               </motion.button>
-              <motion.button
-                whileTap={{ scale: 0.8 }}
-                className={classes.navIcon}
-              >
+              <motion.button whileTap={{ scale: 0.8 }} className={classes.navIcon}>
                 <img src={bellPng} alt="" />
               </motion.button>
               <div
-                className={`relative ${
-                  isHover ? "bg-slate-950" : ""
-                }  p-3 -m-3  rounded-t-3xl`}
+                className={`relative ${isHover ? "bg-slate-950" : ""}  p-3 -m-3  rounded-t-3xl`}
                 onClick={() => {
                   setIsHover(!isHover);
                 }}
               >
-                <motion.button
-                  whileTap={{ scale: 0.8 }}
-                  className={`${classes.navIcon}`}
-                >
+                <motion.button whileTap={{ scale: 0.8 }} className={`${classes.navIcon}`}>
                   <img src={userPng} alt="" />
                 </motion.button>
                 {isHover && (
@@ -180,13 +161,12 @@ const Navigation = () => {
                       }}
                       className="text-white font-Lexend flex items-center gap-2 text-sm cursor-pointer bg-slate-950 hover:bg-slate-900 w-full p-3"
                     >
-                      <RiUserSettingsLine className="text-xl" /> Profil
-                      sozlamalari
+                      <RiUserSettingsLine className="text-xl" /> Profil sozlamalari
                     </motion.p>
                     <motion.p
                       whileTap={{ scale: 0.95 }}
                       className="text-white font-Lexend flex items-center gap-2 text-sm cursor-pointer bg-slate-950 hover:bg-slate-900 w-full p-3"
-                      //  onClick={()=> }2
+                    //  onClick={()=> }2
                     >
                       <RiLogoutCircleRLine className="text-xl" /> Chiqish
                     </motion.p>
@@ -196,10 +176,7 @@ const Navigation = () => {
             </div>
           ) : (
             <div className="flex">
-              <button
-                className="text-white font-Karla text-lg border border-solid py-1 px-4"
-                onClick={() => navigate("/login")}
-              >
+              <button className="text-white font-Karla text-lg border border-solid py-1 px-4" onClick={() => navigate("/login")}>
                 Kirish
               </button>
               <button
@@ -215,22 +192,11 @@ const Navigation = () => {
         {/* *********************************** */}
 
         <div className={classes.navContentMobile}>
-          <svg
-            viewBox="0 0 24 24"
-            className={classes.burgerIcon}
-            onClick={() => setMenu(true)}
-          >
-            <path
-              fillRule="evenodd"
-              d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
-            ></path>
+          <svg viewBox="0 0 24 24" className={classes.burgerIcon} onClick={() => setMenu(true)}>
+            <path fillRule="evenodd" d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path>
           </svg>
 
-          <NavLink
-            onClick={() => indicateLink(0)}
-            to="/"
-            className={`${classes.navLogo} font-Lexend flex gap-3 items-center`}
-          >
+          <NavLink onClick={() => indicateLink(0)} to="/" className={`${classes.navLogo} font-Lexend flex gap-3 items-center`}>
             CodeCrafters
             <svg
               className="h-8 max-[1128px]:h-5"
@@ -284,15 +250,9 @@ const Navigation = () => {
 
           {/* ****** */}
 
-          <div
-            className={classes.menu}
-            data-menu-open={menu ? "true" : "false"}
-          >
+          <div className={classes.menu} data-menu-open={menu ? "true" : "false"}>
             <div className={classes.menuUser}>
-              <img
-                src="https://s3-us-west-1.amazonaws.com/s3-lc-upload/assets/default_avatar.jpg"
-                alt=""
-              />
+              <img src="https://s3-us-west-1.amazonaws.com/s3-lc-upload/assets/default_avatar.jpg" alt="" />
               <p>Anonymous</p>
             </div>
 
@@ -317,13 +277,8 @@ const Navigation = () => {
             </div>
           </div>
 
-          <div
-            className={classes.menuBg}
-            onClick={() => setMenu(false)}
-            data-menu-open={menu ? "true" : "false"}
-          ></div>
+          <div className={classes.menuBg} onClick={() => setMenu(false)} data-menu-open={menu ? "true" : "false"}></div>
         </div>
-
       </div>
     </nav>
   );

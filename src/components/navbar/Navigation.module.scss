@@ -15,11 +15,24 @@
   padding: 15px 0;
   z-index: 100;
   border-bottom: 1px solid rgb(93, 93, 93);
+
+  @media screen and (max-width: 1128px) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.286);
+    backdrop-filter: blur(20px);
+  }
 }
 
 .navContent {
   @include flex(space-between, center);
   width: 100%;
+
+  @media screen and (max-width: 1128px) {
+    display: none;
+  }
 }
 
 .navLeft {
@@ -32,7 +45,16 @@
   @include fontStyle(30px, rgb(214, 213, 213));
   text-decoration: none;
   line-height: 120%;
-  width: 240px;
+
+  @media screen and (max-width: 1128px) {
+    font-size: 18px;
+  }
+}
+
+.navListWrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
 }
 
 .navList {
@@ -87,7 +109,6 @@
   background: rgb(255, 99, 99);
   height: 2px;
 }
-
 
 /******************************************/
 

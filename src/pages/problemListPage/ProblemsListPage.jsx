@@ -1,16 +1,15 @@
 import { Button } from "antd";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Loader from "../../components/Loader";
-import Table from "../../components/Table/Table"
 import {
   useGetCategoriesQuery,
   useGetQuestionsByTopicQuery,
 } from "../../services/questionApi";
 import { default as QuestionsTable } from "./QuestionsTable";
 import "./problemListPage.scss";
+import Table from "../../components/Table/Table";
 
 const ProblemsListPage = () => {
-
   const [topicId, setTopicId] = useState(null);
   const [categoryId, setCategoryId] = useState(2);
 
@@ -33,7 +32,6 @@ const ProblemsListPage = () => {
     useGetQuestionsByTopicQuery(topicId, {
       skip: !topicId,
     });
-
 
   const getQuestions = (id) => {
     setTopicId(id);
@@ -73,24 +71,23 @@ const ProblemsListPage = () => {
 
   return (
     <section className="problems-list-page container">
-      {/* <div className="problems-list__head">
-        <h1 className="text-[1.3em]">
-          Savollar <Loader show={isLoading} />
-        </h1>
-        <div className="flex gap-[8px] text-[#ccc] py-2">
-          <Categories />
-        </div>
-        <div className="flex gap-[8px] text-[#ccc] text-[.85em]">
-          <Topics />
-        </div>
-        <div className="flex flex-col gap-[8px] text-[#ccc] py-4">
-          <QuestionsTable questions={questions} />
-        </div>
-      </div> */}
       <Table />
+      {/* <div className="problems-list__head">
+                    <h1 className="text-[1.3em]">
+                         Savollar <Loader show={isLoading} />
+                    </h1>
+                    <div className="flex gap-[8px] text-[#ccc] py-2">
+                         <Categories />
+                    </div>
+                    <div className="flex gap-[8px] text-[#ccc] text-[.85em]">
+                         <Topics />
+                    </div>
+                    <div className="flex flex-col gap-[8px] text-[#ccc] py-4">
+                         <QuestionsTable questions={questions} />
+                    </div>
+               </div> */}
     </section>
   );
-
 };
 
 export default ProblemsListPage;

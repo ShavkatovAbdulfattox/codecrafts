@@ -1,10 +1,13 @@
+/* eslint-disable react/prop-types */
 import { Tabs, Tag } from 'antd';
 import { memo } from 'react';
+import { CorrectIcon, DislikeButton, LikeButton } from '../../../utils/icons';
 
-const ProblemLeftSide = () => {
+const ProblemLeftSide = ({ question }) => {
 
      const onChangeTab = () => {
      }
+
      const items = [
           {
                key: '1',
@@ -13,14 +16,18 @@ const ProblemLeftSide = () => {
           {
                key: '2',
                label: `Boshqa yechimlar`,
-               children: `Content of Tab Pane 2`,
           },
           {
                key: '3',
                label: `Yuborigan javoblar`,
-               children: `Content of Tab Pane 3`,
           },
      ];
+
+
+     const level = {
+          "easy": "Oson",
+          undefined: "",
+     }[question.level] ?? ''
 
      return (
           <section className="left-side">
@@ -28,8 +35,19 @@ const ProblemLeftSide = () => {
                     <Tabs size="small" defaultActiveKey="1" items={items} onChange={onChangeTab} />
                </div>
                <div className="left-side__body">
-                    <h2>209. Misol maksimal sonni topish</h2>
-                    <Tag color="orange" style={{ borderRadius: "50px", padding: "2px 15px" }}>Oson</Tag>
+                    <h1>{question.name}</h1>
+                    <div className="left-side__info">
+                         <Tag color="orange" style={{ borderRadius: "50px", padding: "2px 15px" }}>{level}</Tag>
+                         <CorrectIcon />
+                         <button className="left-side__like">
+                              <LikeButton />
+                              <span>{question.like1}</span>
+                         </button>
+                         <button className="left-side__dislike">
+                              <DislikeButton />
+                              <span>{question.dislike}</span>
+                         </button>
+                    </div>
                     <div className="left-problem__text">
                          Savolni ozi birnimalar birnimalar birnimalar birnimalar birnimalar birnimalar birnimalar
                          Savolni ozi birnimalar birnimalar birnimalar birnimalar birnimalar birnimalar birnimalar
