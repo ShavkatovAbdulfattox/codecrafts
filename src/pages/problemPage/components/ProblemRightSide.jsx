@@ -4,7 +4,7 @@ import { Button, Select, Switch } from 'antd';
 import { memo, useRef, useState } from 'react';
 import { usePostAnswerMutation } from '../../../services/questionApi';
 
-const ProblemRightSide = ({ rightWidth, setFileName, file = {} }) => {
+const ProblemRightSide = ({ question, rightWidth, setFileName, fileName, file = {} }) => {
 
      const [postAnswer, { isLoading }] = usePostAnswerMutation()
 
@@ -66,7 +66,7 @@ const ProblemRightSide = ({ rightWidth, setFileName, file = {} }) => {
                     language={file.language}
                     onMount={handleEditorDidMount}
                     defaultLanguage={file.language}
-                    defaultValue={file.value}
+                    defaultValue={question.console?.[fileName]}
                />
           </section>
      )
