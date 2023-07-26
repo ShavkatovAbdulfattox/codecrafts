@@ -24,13 +24,14 @@
   // border-radius: 10px;
   font-size: 16px;
   // cursor: pointer;
-
+  
   p {
     font-family: "IBM400";
   }
-
+  
   &[data-bg="1"] {
-    background: #2A2A2A;
+    background: rgba(205, 205, 205, 0.077);
+    // background: #2A2A2A;
     transition: all 0.3s;
     
     &:hover {
