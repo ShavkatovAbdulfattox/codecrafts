@@ -60,6 +60,8 @@ const Table = () => {
     foundItem.likeStatus == "liked" ? (foundItem.likeStatus = "") : (foundItem.likeStatus = "liked");
     setTableData(copyTableData);
   }
+  
+  console.log(tableData, 'bu nima')
 
   return (
     <div className={classes.tableWrapper}>
