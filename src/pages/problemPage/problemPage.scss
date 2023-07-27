@@ -74,10 +74,37 @@
                 padding: 20px 0;
                 font-size: 1em;
             }
+
+            .left-problem__examples {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                font-size: 0.87em;
+                font-weight: 500;
+                .left-problem_example-container {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                    .left-problem_example-card {
+                        border-radius: 9px;
+                        padding: 17px;
+                        background-color: #444;
+                        & > div {
+                            display: flex;
+                            gap: 13px;
+                            letter-spacing: 0.5px;
+
+                            & > span {
+                                color: #ccc;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
     .right-side {
-        background-color: #282828;
+        background-color: #282828 !important;
         .right-side__header {
             background-color: #333333;
             border-bottom: 1px solid #f2f3f4;

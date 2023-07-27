@@ -14,16 +14,16 @@ class Solution:
 `;
 
 const files = {
-    java: {
-        name: "java",
-        language: "java",
-        value: javaDefaultCode,
-    },
-    python: {
-        name: "python",
-        language: "python",
-        value: pythonDefaultCode,
-    },
+  java: {
+    name: "java",
+    language: "java",
+    value: javaDefaultCode,
+  },
+  python: {
+    name: "python",
+    language: "python",
+    value: pythonDefaultCode,
+  },
 };
 
 export default files;
