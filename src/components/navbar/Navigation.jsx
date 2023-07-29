@@ -180,7 +180,7 @@ const Navigation = () => {
                 Kirish
               </button>
               <button
-                className="text-white font-Karla text-lg rounded bg-red-400 border-solid py-1 px-4 ml-3 hover:opacity-80"
+                className="text-white font-Karla text-base rounded bg-red-400 border-solid py-1 px-4 ml-3 hover:opacity-80"
                 onClick={() => navigate("/signup")}
               >
                 Regestratsiya
