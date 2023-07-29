@@ -12,7 +12,7 @@ function ProblemPage() {
      const [rightWidth, setRightWidth] = useState(0);
      const [fileName, setFileName] = useState("java");
      const file = files[fileName];
-     const { id } = useParams()
+     const { id } = useParams();
 
      const { data: question = {}, isLoading } = useGetQuestionQuery({ questionId: id, userId: 1 });
      console.log({ question });
