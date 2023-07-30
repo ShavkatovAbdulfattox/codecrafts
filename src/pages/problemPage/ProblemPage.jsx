@@ -27,6 +27,7 @@ function ProblemPage() {
      return (
           <div className="playground-body">
                <Resizable
+                    className="playground-resizer"
                     enable={{
                          top: false,
                          right: true,

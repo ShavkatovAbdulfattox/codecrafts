@@ -1,11 +1,15 @@
 /** @format */
 
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery, retry } from "@reduxjs/toolkit/query/react";
 import { baseURL } from "../constants/apiConstants";
+
+const staggeredBaseQuery = retry(fetchBaseQuery({ baseUrl: baseURL }), {
+    maxRetries: 5,
+});
 
 export const problemsApi = createApi({
     //     reducerPath: "problems",
-    baseQuery: fetchBaseQuery({ baseUrl: baseURL }),
+    baseQuery: staggeredBaseQuery,
     endpoints: (builder) => ({
         // Kategoriyalarni olish
         getCategories: builder.query({
@@ -35,17 +39,18 @@ export const problemsApi = createApi({
         // Javob ni POST qilish
         postAnswer: builder.mutation({
             query: (answer) => ({
-                url: `/question/submit/${1}`,
+                url: `/question/submit/${9}`,
                 method: "POST",
                 body: answer,
-                prepareHeaders: (headers, { getState }) => {
-                    // headers.set("Access-Control-Allow-Origin", "*");
-                    headers.set(
-                        "Authorization",
-                        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmJvc0BnbWFpbC5jb20iLCJpYXQiOjE2ODg3MTA1MDMsImV4cCI6MTY4ODc5NjkwM30.ddpgGAhkz8iXCXJ8VVPojEJirkzV4DXaIg6ZieEVY9U"
-                    );
-                    return headers;
-                },
+                // prepareHeaders: (headers, { getState }) => {
+                //     console.log({ answer });
+                //     // headers.set("Access-Control-Allow-Origin", "*");
+                //     // headers.set(
+                //     //     "Authorization",
+                //     //     "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmJvc0BnbWFpbC5jb20iLCJpYXQiOjE2ODg3MTA1MDMsImV4cCI6MTY4ODc5NjkwM30.ddpgGAhkz8iXCXJ8VVPojEJirkzV4DXaIg6ZieEVY9U"
+                //     // );
+                //     return headers;
+                // },
             }),
             transformResponse: (response) => response.data,
         }),
