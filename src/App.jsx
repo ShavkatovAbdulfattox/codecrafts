@@ -23,7 +23,7 @@ const App = () => {
       element: (
         // <PrivateRoute>
         <MainLayout />
-        // </PrivateRoute>
+        // {/* </PrivateRoute> */}
       ),
       children: [
         {
@@ -39,9 +39,9 @@ const App = () => {
           path: "/problemslist",
           errorElement: <ErrorBoundary />,
           element: (
-            // <PrivateRoute>
-            <ProblemsListPage />
-            // </PrivateRoute>
+            <PrivateRoute>
+              <ProblemsListPage />
+            </PrivateRoute>
           ),
         },
         {
@@ -52,7 +52,6 @@ const App = () => {
             <ProblemPage />
             // </PrivateRoute>
           ),
-    
         },
         {
           path: "/profile",

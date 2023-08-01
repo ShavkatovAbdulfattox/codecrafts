@@ -37,10 +37,14 @@ const Table = () => {
     const cloneData = [...data];
 
     if (bool) {
-      const ol = obj ? cloneData.sort((a, b) => obj[a[key]] - obj[b[key]]) : cloneData.sort((a, b) => a[key] - b[key]);
+      const ol = obj
+        ? cloneData.sort((a, b) => obj[a[key]] - obj[b[key]])
+        : cloneData.sort((a, b) => a[key] - b[key]);
       setTableData(ol);
     } else {
-      const ul = obj ? cloneData.sort((a, b) => obj[b[key]] - obj[a[key]]) : cloneData.sort((a, b) => b[key] - a[key]);
+      const ul = obj
+        ? cloneData.sort((a, b) => obj[b[key]] - obj[a[key]])
+        : cloneData.sort((a, b) => b[key] - a[key]);
       setTableData(ul);
     }
   }
@@ -49,7 +53,9 @@ const Table = () => {
     const indexOfItem = tableData.findIndex((item) => item.id == i);
     const copyTableData = [...tableData];
     const foundItem = copyTableData[indexOfItem];
-    foundItem.likeStatus == "disliked" ? (foundItem.likeStatus = "") : (foundItem.likeStatus = "disliked");
+    foundItem.likeStatus == "disliked"
+      ? (foundItem.likeStatus = "")
+      : (foundItem.likeStatus = "disliked");
     setTableData(copyTableData);
   }
 
@@ -57,14 +63,18 @@ const Table = () => {
     const indexOfItem = tableData.findIndex((item) => item.id == i);
     const copyTableData = [...tableData];
     const foundItem = copyTableData[indexOfItem];
-    foundItem.likeStatus == "liked" ? (foundItem.likeStatus = "") : (foundItem.likeStatus = "liked");
+    foundItem.likeStatus == "liked"
+      ? (foundItem.likeStatus = "")
+      : (foundItem.likeStatus = "liked");
     setTableData(copyTableData);
   }
 
   return (
     <div className={classes.tableWrapper}>
       <div className={classes.tableSorter}>
-        <div className={`${classes.tableInfo} ${classes.tableStatus}`}>Status</div>
+        <div className={`${classes.tableInfo} ${classes.tableStatus}`}>
+          Status
+        </div>
         <div
           className={`${classes.tableInfo} ${classes.tableTitle}`}
           onClick={() => {
@@ -75,7 +85,13 @@ const Table = () => {
           }}
         >
           Title
-          <img src={chevronPng} alt="" className={classes.chevron} draggable="false" data-selected={nameState} />
+          <img
+            src={chevronPng}
+            alt=""
+            className={classes.chevron}
+            draggable="false"
+            data-selected={nameState}
+          />
         </div>
         <div
           className={`${classes.tableInfo} ${classes.tableDifficulty}`}
@@ -87,7 +103,13 @@ const Table = () => {
           }}
         >
           Difficulty
-          <img src={chevronPng} alt="" className={classes.chevron} draggable="false" data-selected={diffState} />
+          <img
+            src={chevronPng}
+            alt=""
+            className={classes.chevron}
+            draggable="false"
+            data-selected={diffState}
+          />
         </div>
         <div
           className={`${classes.tableInfo} ${classes.tableLiked}`}
@@ -99,58 +121,85 @@ const Table = () => {
           }}
         >
           Likes
-          <img src={chevronPng} alt="" className={classes.chevron} draggable="false" data-selected={likesState} />
+          <img
+            src={chevronPng}
+            alt=""
+            className={classes.chevron}
+            draggable="false"
+            data-selected={likesState}
+          />
         </div>
       </div>
 
       <div className={classes.table}>
         {tableData
           ? tableData.map((item, index) => {
-            return (
-              <div key={index} className={classes.tableData} data-bg={index % 2 == 0 ? "0" : "1"}>
-                {/*  */}
-                <div className={`${classes.tableColumn} ${classes.status}`}>
-                  <div data-solved={item.solved}></div>
-                </div>
-
-                <div className={`${classes.tableColumn} ${classes.title}`}>
-                  <p>{`${item.id}. ${item.name}`}</p>
-                </div>
-
-                <div className={`${classes.tableColumn} ${classes.difficulty}`} data-diff={item.level}>
-                  <span>{item.level}</span>
-                </div>
-
-                <div className={`${classes.tableColumn} ${classes.likesWrapper}`}>
-                  <div className={classes.likeBtn} data-like="true">
-                    <img
-                      src={likePng}
-                      alt=""
-                      draggable="false"
-                      data-pressed={item.likeStatus == "liked" ? "true" : "false"}
-                      onClick={() => {
-                        setItemLike(item.id);
-                      }}
-                    />
-                    <span>{item.likeStatus == "liked" ? item.like1 + 1 : item.like1}</span>
+              return (
+                <div
+                  key={index}
+                  className={classes.tableData}
+                  data-bg={index % 2 == 0 ? "0" : "1"}
+                >
+                  {/*  */}
+                  <div className={`${classes.tableColumn} ${classes.status}`}>
+                    <div data-solved={item.solved}></div>
                   </div>
-                  <div className={classes.likeBtn} data-dislike="true">
-                    <img
-                      src={likePng}
-                      alt=""
-                      draggable="false"
-                      data-pressed={item.likeStatus == "disliked" ? "true" : "false"}
-                      onClick={() => {
-                        setItemDislike(item.id);
-                      }}
-                    />
-                    <span>{item.likeStatus == "disliked" ? item.dislike + 1 : item.dislike}</span>
+
+                  <div className={`${classes.tableColumn} ${classes.title}`}>
+                    <p>{`${item.id}. ${item.name}`}</p>
                   </div>
+
+                  <div
+                    className={`${classes.tableColumn} ${classes.difficulty}`}
+                    data-diff={item.level}
+                  >
+                    <span>{item.level}</span>
+                  </div>
+
+                  <div
+                    className={`${classes.tableColumn} ${classes.likesWrapper}`}
+                  >
+                    <div className={classes.likeBtn} data-like="true">
+                      <img
+                        src={likePng}
+                        alt=""
+                        draggable="false"
+                        data-pressed={
+                          item.likeStatus == "liked" ? "true" : "false"
+                        }
+                        onClick={() => {
+                          setItemLike(item.id);
+                        }}
+                      />
+                      <span>
+                        {item.likeStatus == "liked"
+                          ? item.like1 + 1
+                          : item.like1}
+                      </span>
+                    </div>
+                    <div className={classes.likeBtn} data-dislike="true">
+                      <img
+                        src={likePng}
+                        alt=""
+                        draggable="false"
+                        data-pressed={
+                          item.likeStatus == "disliked" ? "true" : "false"
+                        }
+                        onClick={() => {
+                          setItemDislike(item.id);
+                        }}
+                      />
+                      <span>
+                        {item.likeStatus == "disliked"
+                          ? item.dislike + 1
+                          : item.dislike}
+                      </span>
+                    </div>
+                  </div>
+                  {/*  */}
                 </div>
-                {/*  */}
-              </div>
-            );
-          })
+              );
+            })
           : null}
       </div>
     </div>
