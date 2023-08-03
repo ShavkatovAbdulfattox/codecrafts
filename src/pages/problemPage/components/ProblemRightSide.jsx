@@ -17,7 +17,7 @@ const ProblemRightSide = ({ question, rightWidth, setFileName, fileName, file = 
 
      function showValue() {
           postAnswer({
-               userId: 3,
+               userId: 1,
                console: editorRef.current.getValue(),
                language: "java"
           })

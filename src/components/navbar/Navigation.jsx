@@ -176,11 +176,11 @@ const Navigation = () => {
             </div>
           ) : (
             <div className="flex">
-              <button className="text-white font-Karla text-lg border border-solid py-1 px-4" onClick={() => navigate("/login")}>
+              <button className="text-black font-Karla text-base rounded bg-white border-solid py-1 px-4" onClick={() => navigate("/login")}>
                 Kirish
               </button>
               <button
-                className="text-white font-Karla text-lg border border-red-400  border-l-0 border-solid py-1 px-4"
+                className="text-white font-Karla text-base rounded bg-red-400 border-solid py-1 px-4 ml-3 hover:opacity-80"
                 onClick={() => navigate("/signup")}
               >
                 Regestratsiya
