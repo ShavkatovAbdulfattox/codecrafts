@@ -21,7 +21,7 @@ function SignUp() {
     }
 
     try {
-      const response = await fetch("http://localhost:8080/api/auth/register", {
+      const response = await fetch("https://akhror-leetcode.azurewebsites.net/api/auth/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
