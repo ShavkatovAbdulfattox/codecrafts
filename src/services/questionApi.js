@@ -1,15 +1,11 @@
 /** @format */
 
-import { createApi, fetchBaseQuery, retry } from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { baseURL } from "../constants/apiConstants";
-
-const staggeredBaseQuery = retry(fetchBaseQuery({ baseUrl: baseURL }), {
-    maxRetries: 5,
-});
 
 export const problemsApi = createApi({
     //     reducerPath: "problems",
-    baseQuery: staggeredBaseQuery,
+    baseQuery: fetchBaseQuery({ baseUrl: baseURL }),
     endpoints: (builder) => ({
         // Kategoriyalarni olish
         getCategories: builder.query({
