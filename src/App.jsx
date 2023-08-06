@@ -15,6 +15,7 @@ import { ConfigProvider, theme } from "antd";
 import "antd/dist/reset.css";
 import ProfileSettings from "./pages/ProfileSettings/ProfileSettings";
 import Profile from "./pages/Profile/Profile";
+import PostSolution from "./pages/postSolution/PostSolution";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -39,9 +40,9 @@ const App = () => {
           path: "/problemslist",
           errorElement: <ErrorBoundary />,
           element: (
-            <PrivateRoute>
+            // <PrivateRoute>
               <ProblemsListPage />
-            </PrivateRoute>
+            // </PrivateRoute>
           ),
         },
         {
@@ -61,6 +62,10 @@ const App = () => {
           path: "/profileSettings",
           element: <ProfileSettings />,
         },
+        {
+          path: "/post-solution",
+          element: <PostSolution/>
+        }
       ],
     },
     {

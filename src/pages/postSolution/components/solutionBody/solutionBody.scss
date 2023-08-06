@@ -1,0 +1,17 @@
+.ck-editor__editable {
+  height: 400px;
+  color: #000;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    background: rgba(23, 78, 140, 0.3);
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
