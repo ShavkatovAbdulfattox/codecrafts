@@ -1,20 +1,21 @@
-import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
-import {ErrorBoundary} from "./components/ErrorBoundary";
+import { ErrorBoundary } from "./components/ErrorBoundary";
 import MainLayout from "./layouts/mainLayout/MainLayout";
 import NotFoundPage from "./pages/notFoundPage/NotFoundPage";
 import PrivateRoute from "./router/PrivateRoute";
 import SignUpPage from "./pages/signUpPage/SignUpPage";
-import {Provider} from "react-redux";
-import {store} from "./app/store";
+import { Provider } from "react-redux";
+import { store } from "./app/store";
 import ProblemPage from "./pages/problemPage/ProblemPage";
 import MainPage from "./pages/mainPage/MainPage";
 import ProblemsListPage from "./pages/problemListPage/ProblemsListPage";
 import SignIn from "./components/SignIn/SignIn";
-import {ConfigProvider, theme} from "antd";
+import { ConfigProvider, theme } from "antd";
 import "antd/dist/reset.css";
 import ProfileSettings from "./pages/ProfileSettings/ProfileSettings";
 import Profile from "./pages/Profile/Profile";
+import PostSolution from "./pages/postSolution/PostSolution";
 
 const App = () => {
     const router = createBrowserRouter([
@@ -22,54 +23,54 @@ const App = () => {
             path: "/",
             element: (
                 <PrivateRoute>
-                    <MainLayout/>
+                    <MainLayout />
                 </PrivateRoute>
             ),
             children: [
                 {
                     path: "/",
-                    errorElement: <ErrorBoundary/>,
+                    errorElement: <ErrorBoundary />,
                     element: (
                         // <PrivateRoute>
-                        <MainPage/>
+                        <MainPage />
                         // </PrivateRoute>
                     ),
                 },
                 {
                     path: "/problemslist",
-                    errorElement: <ErrorBoundary/>,
+                    errorElement: <ErrorBoundary />,
                     element: (
                         // <PrivateRoute>
-                        <ProblemsListPage/>
+                        <ProblemsListPage />
                         // </PrivateRoute>
                     ),
                 },
                 {
                     path: "/problem/:id",
-                    errorElement: <ErrorBoundary/>,
+                    errorElement: <ErrorBoundary />,
                     element: (
                         // <PrivateRoute>
-                        <ProblemPage/>
+                        <ProblemPage />
                         // </PrivateRoute>
                     ),
                 },
                 {
                     path: "/profile",
-                    element: <Profile/>,
+                    element: <Profile />,
                 },
                 {
                     path: "/profileSettings",
-                    element: <ProfileSettings/>,
+                    element: <ProfileSettings />,
                 },
                 {
                     path: "*",
-                    element: <MainPage/>,
+                    element: <MainPage />,
                 },
             ],
         },
         {
             path: "/m",
-            errorElement: <ErrorBoundary/>,
+            errorElement: <ErrorBoundary />,
             element: (
                 <PrivateRoute>
                     <h1>MMMM</h1>
@@ -77,17 +78,21 @@ const App = () => {
             ),
         },
         {
+            path: "/post-solution",
+            element: <PostSolution />
+        },
+        {
             path: "/login",
-            element: <SignIn/>,
+            element: <SignIn />,
         },
         {
             path: "/signup",
-            element: <SignUpPage/>,
+            element: <SignUpPage />,
         },
 
         {
             path: "*",
-            element: <NotFoundPage/>,
+            element: <NotFoundPage />,
         },
     ]);
 
@@ -103,7 +108,7 @@ const App = () => {
                     algorithm: theme.darkAlgorithm,
                 }}
             >
-                <RouterProvider router={router}/>
+                <RouterProvider router={router} />
             </ConfigProvider>
         </Provider>
     );

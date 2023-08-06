@@ -4,6 +4,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { baseURL } from "../constants/apiConstants";
 
 export const problemsApi = createApi({
+    // reducerPath: "problems",
     baseQuery: fetchBaseQuery({ baseUrl: baseURL }),
     endpoints: (builder) => ({
         // Kategoriyalarni olish
@@ -49,12 +50,23 @@ export const problemsApi = createApi({
             }),
             transformResponse: (response) => response.data,
         }),
+
+        // Yechimni qo'shish
+        postSolution: builder.mutation({
+            query: (answer) => ({
+                url: `/solution/create`,
+                method: "POST",
+                body: answer,
+            }),
+            transformResponse: (response) => response.data,
+        }),
     }),
 });
 
 export const {
     useGetTopicsQuery,
     useGetQuestionQuery,
+    usePostSolutionMutation,
     usePostAnswerMutation,
     useGetQuestionsByTopicQuery,
     useGetCategoriesQuery,
