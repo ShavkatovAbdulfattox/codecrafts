@@ -47,7 +47,7 @@ function ProfileSettings() {
 
     try {
       const response = await fetch(
-        `http://localhost:8080/user/v1/update/${userId}`,
+        `https://akhror-leetcode.azurewebsites.net/user/v1/update/${userId}`,
         {
           method: "PUT",
           body: formData,
