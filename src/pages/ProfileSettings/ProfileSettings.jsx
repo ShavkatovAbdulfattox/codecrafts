@@ -47,7 +47,7 @@ function ProfileSettings() {
 
     try {
       const response = await fetch(
-        `https://akhror-leetcode.azurewebsites.net/user/v1/update/${userId}`,
+        `https://edubinplatform-a01d5146e549.herokuapp.com/user/v1/update/${userId}`,
         {
           method: "PUT",
           body: formData,

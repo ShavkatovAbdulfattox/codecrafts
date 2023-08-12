@@ -5,7 +5,7 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import "./solutionBody.scss";
 
 const SolutionBody = ({ setResponse, response }) => {
-  const API_URL = "https://akhror-leetcode.azurewebsites.net";
+  const API_URL = "https://edubinplatform-a01d5146e549.herokuapp.com/";
   const UPLOAD_ENDPOINT = "api/image/create";
 
   function uploadAdapter(loader) {
