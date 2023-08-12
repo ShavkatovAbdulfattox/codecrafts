@@ -16,9 +16,63 @@ import "antd/dist/reset.css";
 import ProfileSettings from "./pages/ProfileSettings/ProfileSettings";
 import Profile from "./pages/Profile/Profile";
 import PostSolution from "./pages/postSolution/PostSolution";
+import { Footer } from "./components/footer/Footer";
+import { Fragment } from "react";
 
 const App = () => {
     const router = createBrowserRouter([
+        {
+            path: "/",
+            element: (
+                <PrivateRoute>
+                    <MainLayout />
+                </PrivateRoute>
+            ),
+            children: [
+                {
+                    path: "/",
+                    errorElement: <ErrorBoundary />,
+                    element: (
+                        <Fragment>
+                            <MainPage />
+                            <Footer />
+                        </Fragment>
+
+                    ),
+                },
+                {
+                    path: "/problemslist",
+                    errorElement: <ErrorBoundary />,
+                    element: (
+                        <Fragment>
+                            <ProblemsListPage />
+                            {/* <Footer /> */}
+                        </Fragment>
+                    ),
+                },
+                {
+                    path: "/problem/:id",
+                    errorElement: <ErrorBoundary />,
+                    element: (
+                        // <PrivateRoute>
+                        <ProblemPage />
+                        // </PrivateRoute>
+                    ),
+                },
+                {
+                    path: "/profile",
+                    element: <Profile />,
+                },
+                {
+                    path: "/profileSettings",
+                    element: <ProfileSettings />,
+                },
+                {
+                    path: "*",
+                    element: <MainPage />,
+                },
+            ],
+        },
         {
             path: "/",
             element: (
@@ -67,15 +121,6 @@ const App = () => {
                     element: <MainPage />,
                 },
             ],
-        },
-        {
-            path: "/m",
-            errorElement: <ErrorBoundary />,
-            element: (
-                <PrivateRoute>
-                    <h1>MMMM</h1>
-                </PrivateRoute>
-            ),
         },
         {
             path: "/post-solution",

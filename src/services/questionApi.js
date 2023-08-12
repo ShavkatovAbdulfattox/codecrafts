@@ -34,20 +34,23 @@ export const problemsApi = createApi({
 
         // Javob ni POST qilish
         postAnswer: builder.mutation({
-            query: (answer) => ({
-                url: `/question/submit/${9}`,
-                method: "POST",
-                body: answer,
-                // prepareHeaders: (headers, { getState }) => {
-                //     console.log({ answer });
-                //     // headers.set("Access-Control-Allow-Origin", "*");
-                //     // headers.set(
-                //     //     "Authorization",
-                //     //     "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmJvc0BnbWFpbC5jb20iLCJpYXQiOjE2ODg3MTA1MDMsImV4cCI6MTY4ODc5NjkwM30.ddpgGAhkz8iXCXJ8VVPojEJirkzV4DXaIg6ZieEVY9U"
-                //     // );
-                //     return headers;
-                // },
-            }),
+            query: (data) => {
+                const { questionId, ...body } = data;
+                return {
+                    url: `/question/submit/${questionId}`,
+                    method: "POST",
+                    body,
+                    // prepareHeaders: (headers, { getState }) => {
+                    //     console.log({ answer });
+                    //     // headers.set("Access-Control-Allow-Origin", "*");
+                    //     // headers.set(
+                    //     //     "Authorization",
+                    //     //     "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmJvc0BnbWFpbC5jb20iLCJpYXQiOjE2ODg3MTA1MDMsImV4cCI6MTY4ODc5NjkwM30.ddpgGAhkz8iXCXJ8VVPojEJirkzV4DXaIg6ZieEVY9U"
+                    //     // );
+                    //     return headers;
+                    // },
+                };
+            },
             transformResponse: (response) => response.data,
         }),
 

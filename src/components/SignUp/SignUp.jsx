@@ -1,10 +1,10 @@
-import {useState} from "react";
-import {useNavigate} from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./signUp.scss";
-import {useRegisterMutation} from "../../services/authApi.js";
-import {message} from "antd";
-import {logIn} from "../../app/features/user/userSlice.js";
-import {useDispatch} from "react-redux";
+import { useRegisterMutation } from "../../services/authApi.js";
+import { message } from "antd";
+import { logIn } from "../../app/features/user/userSlice.js";
+import { useDispatch } from "react-redux";
 
 
 function SignUp() {
@@ -17,8 +17,8 @@ function SignUp() {
         password: "",
     });
 
-    const [registrate, {isLoading}] = useRegisterMutation();
-    
+    const [registrate, { isLoading }] = useRegisterMutation();
+
     const handleSignUp = async (e) => {
         e.preventDefault();
 
@@ -30,10 +30,10 @@ function SignUp() {
                 message.success("Muvaffaqiyatli o'tdingiz")
                 dispatch(logIn(res.data));
             }).then(() => {
-            navigate("/")
-        }).catch(error => {
-            message.error(error.data?.message);
-        })
+                navigate("/")
+            }).catch(error => {
+                message.error(error.data?.message);
+            })
     };
 
     function handleSignClick() {
@@ -65,7 +65,7 @@ function SignUp() {
                                 placeholder="Axror"
                                 value={formData.name}
                                 onChange={(e) =>
-                                    setFormData({...formData, name: e.target.value})
+                                    setFormData({ ...formData, name: e.target.value })
                                 }
                                 required
                             />
@@ -85,7 +85,7 @@ function SignUp() {
                                 placeholder="name@gmail.com"
                                 value={formData.email}
                                 onChange={(e) =>
-                                    setFormData({...formData, email: e.target.value})
+                                    setFormData({ ...formData, email: e.target.value })
                                 }
                                 required=""
                             />
@@ -105,7 +105,7 @@ function SignUp() {
                                 className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 value={formData.password}
                                 onChange={(e) =>
-                                    setFormData({...formData, password: e.target.value})
+                                    setFormData({ ...formData, password: e.target.value })
                                 }
                             />
                         </div>
