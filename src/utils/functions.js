@@ -1,5 +1,5 @@
 /** @format */
-import {message} from "antd";
+import { message } from "antd";
 
 export function getQuestionDifficulty(level) {
     switch (level) {
@@ -14,38 +14,64 @@ export function getQuestionDifficulty(level) {
     }
 }
 
+// UserData and Token Functions
+const UNIQUE_STORAGE_TOKEN_KEY = "codecrafters_user_token";
+const UNIQUE_STORAGE_USER_KEY = "codecrafters_user_data";
 
-// Token Functions
-export function setToken(token) {
-    localStorage.setItem("codecrafters_user_token", JSON.stringify(token));
+// UserData
+export function getUserData() {
+    return getFromLocalStorage(UNIQUE_STORAGE_USER_KEY);
 }
 
+export function saveUserData(userData) {
+    saveToLocalStorage(UNIQUE_STORAGE_USER_KEY, userData);
+}
+
+export function removeUserData() {
+    removeFromLocalStorage(UNIQUE_STORAGE_USER_KEY);
+}
+
+// Token
 export function getToken() {
-    return JSON.parse(localStorage.getItem("codecrafters_user_token"))
+    return getFromLocalStorage(UNIQUE_STORAGE_TOKEN_KEY);
+}
+export function saveToken(token) {
+    saveToLocalStorage(UNIQUE_STORAGE_TOKEN_KEY, token);
 }
 
 export function removeToken() {
-    return localStorage.removeItem("codecrafters_user_token")
+    removeFromLocalStorage(UNIQUE_STORAGE_TOKEN_KEY);
+}
+
+// LocalStorage
+export function getFromLocalStorage(key) {
+    return JSON.parse(localStorage.getItem(key));
+}
+export function saveToLocalStorage(key, data) {
+    localStorage.setItem(key, JSON.stringify(data));
+}
+export function removeFromLocalStorage(key) {
+    localStorage.removeItem(key);
 }
 
 // Deafult Error Catcher
 // Statuslarga qarab habar chiqaradi
 export function ErrorCatcher(errorResponse) {
-    const errorMessage = errorResponse.data?.error;
+    const errorMessage = errorResponse.data?.error || "";
     switch (errorResponse.status) {
         case 404: {
-            message.error(`"${errorMessage}" ushbu yo'l topilmadi!`)
+            message.error(`${errorMessage} ushbu yo'l topilmadi!`);
             break;
         }
         case 500: {
-            message.error(`Serverdan xatolik ${errorMessage}`)
+            message.error(`Serverdan xatolik ${errorMessage}`);
             break;
         }
         case 401: {
-            message.error(`Iltimos avtorizatsiya qiling!`)
+            message.error(`Iltimos avtorizatsiya qiling!`);
             break;
         }
         default:
-            message.error(`Xatolik! "${errorMessage}"`)
+            message.error(`Xatolik! ${errorMessage}`);
     }
 }
