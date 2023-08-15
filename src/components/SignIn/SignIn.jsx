@@ -1,10 +1,10 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import { logIn } from "../../app/features/user/userSlice";
-import { useLoginMutation } from "../../services/authApi";
-import { message } from "antd";
+import {useState} from "react";
+import {useDispatch} from "react-redux";
+import {useNavigate} from "react-router-dom";
+import {toast} from "react-toastify";
+import {logIn} from "../../app/features/user/userSlice";
+import {useLoginMutation} from "../../services/authApi";
+import {message, Spin} from "antd";
 import "./signIn.scss";
 
 function SignIn() {
@@ -15,28 +15,37 @@ function SignIn() {
         email: "",
         password: "",
     });
-    const [login, { isLoading }] = useLoginMutation();
+    const [login, {isLoading}] = useLoginMutation();
 
     const handleLogin = async (e) => {
         e.preventDefault();
 
-        if (!formData.email && !formData.password) {
-            toast.error("Iltimos bosh joylarni toldiring ?!", { theme: "dark", });
+        if (!formData.email || !formData.password) {
+            message.error("Iltimos ma'lumotlarni kiriting!");
             return;
-        }
-
-        login(formData).unwrap()
-            .then(res => {
-                // Login successful
-                // Perform any necessary actions such as setting authentication tokens, user data, etc.
-                message.success("Hush kelibsiz!")
-                dispatch(logIn(res.data));
-            }).then(() => {
+        } else {
+            login(formData).unwrap()
+                .then(res => {
+                    // Login successful
+                    // Perform any necessary actions such as setting authentication tokens, user data, etc.
+                    message.success("Hush kelibsiz!")
+                    dispatch(logIn(res.data));
+                }).then(() => {
                 navigate("/"); // Navigate to the dashboard or protected page
             }).catch(error => {
                 // Login failed
-                message.error(error.data?.message);
+                switch (error.status) {
+                    case 403: {
+                        message.error("Login yoki parol xato!");
+                        break;
+                    }
+                    default: {
+                        message.error(error.data?.message)
+                    }
+                }
             })
+        }
+
     };
 
     const handleSignUpClick = () => {
@@ -46,7 +55,8 @@ function SignIn() {
         <article className="sign-in-page text-white">
             <div className="sign-in-page-backimage"></div>
             <div className="w-full flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-                <div className="sign-in-page__form-container rounded-3xl dark:bg-gray-900 max-w-md w-full p-6 space-y-4 md:space-y-6 sm:p-8">
+                <div
+                    className="sign-in-page__form-container rounded-3xl dark:bg-gray-900 max-w-md w-full p-6 space-y-4 md:space-y-6 sm:p-8">
                     <h1 className="text-center sign-in__title text-xl tracking-wider leading-tight  text-white md:text-2xl dark:text-white font-Lexend">
                         Akkauntga kirish
                     </h1>
@@ -66,7 +76,7 @@ function SignIn() {
                                 placeholder="name@company.com"
                                 value={formData.email}
                                 onChange={(e) =>
-                                    setFormData({ ...formData, email: e.target.value })
+                                    setFormData({...formData, email: e.target.value})
                                 }
                                 required=""
                             />
@@ -86,7 +96,7 @@ function SignIn() {
                                 className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 value={formData.password}
                                 onChange={(e) =>
-                                    setFormData({ ...formData, password: e.target.value })
+                                    setFormData({...formData, password: e.target.value})
                                 }
                                 required=""
                             />
@@ -103,6 +113,7 @@ function SignIn() {
                             onClick={(e) => handleLogin(e)}
                         >
                             Kirish
+                            {isLoading ? <Spin/> : ""}
                         </button>
                         <p className="sign-in-page__form-footer text-sm font-light text-gray-500 dark:text-gray-400 flex gap-5 font-Karla">
                             Akkaunt yoqmi
