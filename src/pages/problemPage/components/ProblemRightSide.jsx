@@ -26,7 +26,7 @@ const ProblemRightSide = ({question, rightWidth, setFileName, fileName, file = {
         postAnswer({
             userId: 1,
             console: editorRef.current.getValue(),
-            language: "java"
+            language: fileName
         }).unwrap().then(res => {
             if (res.passed) {
                 message.success("Javob qabul qilindi!")
@@ -48,6 +48,10 @@ const ProblemRightSide = ({question, rightWidth, setFileName, fileName, file = {
         {
             value: 'python',
             label: 'Python',
+        },
+        {
+            value: 'kotlin',
+            label: 'Kotlin',
         },
     ]
 

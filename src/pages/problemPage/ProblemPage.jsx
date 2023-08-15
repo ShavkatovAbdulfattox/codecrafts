@@ -15,7 +15,7 @@ function ProblemPage() {
      const { id } = useParams()
 
      const { data: question = {}, isLoading } = useGetQuestionQuery({ questionId: id, userId: 1 });
-     console.log({ question });
+
      useEffect(() => {
           editorRef.current?.focus();
      }, [file.name]);
