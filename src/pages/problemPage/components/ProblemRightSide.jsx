@@ -30,7 +30,7 @@ const languageOptions = {
 
 
 
-const ProblemRightSide = ({ isQueryPage, question, rightWidth, editorLanguage, setEditorLanguage, file = {} }) => {
+const ProblemRightSide = ({ isLoading, isQueryPage, question, rightWidth, editorLanguage, setEditorLanguage, file = {} }) => {
 
     const [theme, setTheme] = useState("vs-dark")
     const [editorValue, setEditorValue] = useState("")
@@ -41,7 +41,7 @@ const ProblemRightSide = ({ isQueryPage, question, rightWidth, editorLanguage, s
         setEditorValue(question.console?.[editorLanguage])
     }, [question, editorLanguage])
 
-    const [postAnswer, { isLoading }] = usePostAnswerMutation()
+    const [postAnswer, { isLoadingAnswer }] = usePostAnswerMutation()
     const editorRef = useRef(null);
 
     function handleEditorDidMount(editor) {
@@ -79,6 +79,8 @@ const ProblemRightSide = ({ isQueryPage, question, rightWidth, editorLanguage, s
                 <Select
                     defaultValue={isQueryPage ? "postgres" : "Java"}
                     onChange={setEditorLanguage}
+                    loading={isLoading}
+                    disabled={isLoading}
                     options={isQueryPage ? languageOptions.databaseLanguages : languageOptions.defaultLanguages}
                     style={{
                         width: 120,
@@ -90,10 +92,10 @@ const ProblemRightSide = ({ isQueryPage, question, rightWidth, editorLanguage, s
                     unCheckedChildren="Light"
                     onChange={onChangeTheme}
                 />
-                <Button size='small' onClick={showValue} loading={isLoading}>
+                <Button size='small' onClick={showValue} loading={isLoadingAnswer}>
                     Tekshirish
                 </Button>
-                <Button size='small' onClick={showValue} loading={isLoading}>
+                <Button size='small' onClick={showValue} loading={isLoadingAnswer}>
                     Javobni yuborish
                 </Button>
             </div>

@@ -45,8 +45,7 @@ const ProblemLeftSide = ({ question }) => {
                               <span>{question.dislike}</span>
                          </button>
                     </div>
-                    <div className="left-problem__text">
-                         {question.definition}
+                    <div className="left-problem__text" dangerouslySetInnerHTML={{ __html: question?.definition }}>
                     </div>
                     <div className="left-problem__examples">
                          {question.exampleList?.map((example, index) => {
