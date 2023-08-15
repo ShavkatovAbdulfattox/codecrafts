@@ -16,7 +16,7 @@ function ProblemPage() {
 
      const { data: question = {}, isLoading } = useGetQuestionQuery({
           urlPart: isQueryPage ? "query" : "question",
-          questionId: 1,
+          questionId: id,
           userId: getUserData()?.id
      });
 
@@ -53,6 +53,7 @@ function ProblemPage() {
                <ProblemRightSide
                     question={question}
                     rightWidth={rightWidth}
+                    isLoading={isLoading}
                     setEditorLanguage={setEditorLanguage}
                     editorLanguage={editorLanguage}
                     isQueryPage={isQueryPage}
