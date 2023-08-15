@@ -1,7 +1,7 @@
 /** @format */
 
 const javaDefaultCode = `
-class Main {
+class Solution {
      public int main(int target, int[] nums) {
          
      }
@@ -9,6 +9,11 @@ class Main {
 `;
 
 const pythonDefaultCode = `
+class Solution:
+    def minSubArrayLen(self, target: int, nums: List[int]) -> int:
+`;
+
+const kotlinDefaultCode = `
 class Solution:
     def minSubArrayLen(self, target: int, nums: List[int]) -> int:
 `;
@@ -22,6 +27,11 @@ const files = {
   python: {
     name: "python",
     language: "python",
+    value: kotlinDefaultCode,
+  },
+  kotlin: {
+    name: "kotlin",
+    language: "kotlin",
     value: pythonDefaultCode,
   },
 };

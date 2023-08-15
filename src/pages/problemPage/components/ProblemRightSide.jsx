@@ -19,7 +19,7 @@ const ProblemRightSide = ({ question, rightWidth, setFileName, fileName, file = 
     const [postAnswer, { isLoading }] = usePostAnswerMutation()
     const editorRef = useRef(null);
 
-    function handleEditorDidMount(editor, monaco) {
+    function handleEditorDidMount(editor) {
         editorRef.current = editor;
     }
 
@@ -27,7 +27,7 @@ const ProblemRightSide = ({ question, rightWidth, setFileName, fileName, file = 
         postAnswer({
             userId: getUserData()?.id,
             console: editorRef.current.getValue(),
-            language: "java",
+            language: fileName,
             questionId: question.id,
         }).unwrap().then(res => {
             if (res.passed) {
@@ -52,9 +52,13 @@ const ProblemRightSide = ({ question, rightWidth, setFileName, fileName, file = 
             value: 'python',
             label: 'Python',
         },
+        {
+            value: 'kotlin',
+            label: 'Kotlin',
+        },
     ]
 
-    function handleEditorChange(value, event) {
+    function handleEditorChange(value) {
         setEditorValue(value)
     }
 
