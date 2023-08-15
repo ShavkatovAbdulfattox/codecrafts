@@ -60,6 +60,15 @@ const App = () => {
                     ),
                 },
                 {
+                    path: "/problem/:query/:id",
+                    errorElement: <ErrorBoundary />,
+                    element: (
+                        // <PrivateRoute>
+                        <ProblemPage />
+                        // </PrivateRoute>
+                    ),
+                },
+                {
                     path: "/profile",
                     element: <Profile />,
                 },

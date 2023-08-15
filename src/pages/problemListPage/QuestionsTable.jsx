@@ -6,11 +6,14 @@ import { getQuestionDifficulty } from "../../utils/functions";
 import { DislikeButton, LikeButton } from "../../utils/icons";
 
 const QuestionTable = ({ questions }) => {
-     const navigate = useNavigate();
 
-     const solveQuestion = (id) => {
-          navigate("/problem/" + id);
-     };
+     const gotoPath = (question) => {
+          if (question.query) {
+               console.log({ question });
+          }
+          const path = question.query ? "/problem/query/" : "/problem/"
+          return path + question.id
+     }
 
      const columns = [
           {
@@ -34,7 +37,7 @@ const QuestionTable = ({ questions }) => {
                dataIndex: "name",
                key: "name",
                render: (name, question) => {
-                    return <Link className="quesiton-link-button" to={"/problem/" + question.id}>{name}</Link>;
+                    return <Link className="quesiton-link-button" to={gotoPath(question)}>{name}</Link>;
                },
           },
           {
