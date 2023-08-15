@@ -27,8 +27,8 @@ export const problemsApi = createApi({
 
         // Id bo'yicha savolni olish
         getQuestion: builder.query({
-            query: ({ questionId, userId }) =>
-                `question/get/${questionId}/${userId}`,
+            query: ({ urlPart, questionId, userId }) =>
+                `${urlPart}/get/${questionId}/${userId}`,
             transformResponse: (response) => response.data,
         }),
 

@@ -1,21 +1,24 @@
 import { Resizable } from "re-resizable";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useGetQuestionQuery } from "../../services/questionApi";
-import files from "../dashboard/files";
+import { getUserData } from "../../utils/functions";
 import ProblemLeftSide from "./components/ProblemLeftSide";
 import ProblemRightSide from "./components/ProblemRightSide";
 import "./problemPage.scss";
-import { getUserData } from "../../utils/functions";
 
 function ProblemPage() {
      // const editorRef = useRef(null);
      const [rightWidth, setRightWidth] = useState(0);
      const [editorLanguage, setEditorLanguage] = useState("java");
-     const file = files[editorLanguage];
-     const { id } = useParams()
+     const { id, query } = useParams()
+     const isQueryPage = query === "query";
 
-     const { data: question = {}, isLoading } = useGetQuestionQuery({ questionId: id, userId: getUserData()?.id });
+     const { data: question = {}, isLoading } = useGetQuestionQuery({
+          urlPart: isQueryPage ? "query" : "question",
+          questionId: 1,
+          userId: getUserData()?.id
+     });
 
      // useEffect(() => {
      //      editorRef.current?.focus();
@@ -45,14 +48,14 @@ function ProblemPage() {
                          width: "40%",
                     }}
                >
-                    <ProblemLeftSide question={question} />
+                    <ProblemLeftSide question={question} isQueryPage={isQueryPage} />
                </Resizable>
                <ProblemRightSide
                     question={question}
                     rightWidth={rightWidth}
                     setEditorLanguage={setEditorLanguage}
                     editorLanguage={editorLanguage}
-                    // file={file}
+                    isQueryPage={isQueryPage}
                />
           </div>
      );

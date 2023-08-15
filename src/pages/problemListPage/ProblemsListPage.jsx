@@ -9,7 +9,6 @@ import {
 } from "../../services/questionApi";
 import { default as QuestionsTable } from "./QuestionsTable";
 import "./problemListPage.scss";
-import Table from "../../components/Table/Table";
 
 const ProblemsListPage = () => {
   const [topicId, setTopicId] = useState(null);
