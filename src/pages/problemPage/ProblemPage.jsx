@@ -9,17 +9,17 @@ import "./problemPage.scss";
 import { getUserData } from "../../utils/functions";
 
 function ProblemPage() {
-     const editorRef = useRef(null);
+     // const editorRef = useRef(null);
      const [rightWidth, setRightWidth] = useState(0);
-     const [fileName, setFileName] = useState("java");
-     const file = files[fileName];
+     const [editorLanguage, setEditorLanguage] = useState("java");
+     const file = files[editorLanguage];
      const { id } = useParams()
 
      const { data: question = {}, isLoading } = useGetQuestionQuery({ questionId: id, userId: getUserData()?.id });
 
-     useEffect(() => {
-          editorRef.current?.focus();
-     }, [file.name]);
+     // useEffect(() => {
+     //      editorRef.current?.focus();
+     // }, [file.name]);
 
      const onResize = (a) => {
           setRightWidth(a.screenX)
@@ -50,9 +50,9 @@ function ProblemPage() {
                <ProblemRightSide
                     question={question}
                     rightWidth={rightWidth}
-                    setFileName={setFileName}
-                    fileName={fileName}
-                    file={file}
+                    setEditorLanguage={setEditorLanguage}
+                    editorLanguage={editorLanguage}
+                    // file={file}
                />
           </div>
      );

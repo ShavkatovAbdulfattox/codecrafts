@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
-import { Editor } from '@monaco-editor/react';
-import { Button, message, Select, Switch } from 'antd';
-import { memo, useEffect, useRef, useState } from 'react';
-import { usePostAnswerMutation } from '../../../services/questionApi';
-import { ErrorCatcher, getUserData } from "../../../utils/functions.js";
+import {Editor} from '@monaco-editor/react';
+import {Button, message, Select, Switch} from 'antd';
+import {memo, useEffect, useRef, useState} from 'react';
+import {usePostAnswerMutation} from '../../../services/questionApi';
+import {ErrorCatcher, getUserData} from "../../../utils/functions.js";
 
-const ProblemRightSide = ({ question, rightWidth, setFileName, fileName, file = {} }) => {
+const ProblemRightSide = ({question, rightWidth, editorLanguage, setEditorLanguage, file = {}}) => {
 
     const [theme, setTheme] = useState("vs-dark")
     const [editorValue, setEditorValue] = useState("")
@@ -13,10 +13,10 @@ const ProblemRightSide = ({ question, rightWidth, setFileName, fileName, file = 
     const [defaultValue, setDefaultValue] = useState("")
 
     useEffect(() => {
-        setDefaultValue(question.console?.[fileName])
-    }, [question])
+        setEditorValue(question.console?.[editorLanguage])
+    }, [question, editorLanguage])
 
-    const [postAnswer, { isLoading }] = usePostAnswerMutation()
+    const [postAnswer, {isLoading}] = usePostAnswerMutation()
     const editorRef = useRef(null);
 
     function handleEditorDidMount(editor) {
@@ -64,11 +64,11 @@ const ProblemRightSide = ({ question, rightWidth, setFileName, fileName, file = 
 
 
     return (
-        <section className="right-side" style={{ width: (1300 - rightWidth) + "px", color: "#333" }}>
+        <section className="right-side" style={{width: (1300 - rightWidth) + "px", color: "#333"}}>
             <div className="right-side__header">
                 <Select
                     defaultValue="Java"
-                    onChange={(value) => setFileName(value)}
+                    onChange={setEditorLanguage}
                     options={languageOptions}
                     style={{
                         width: 120,
@@ -90,11 +90,11 @@ const ProblemRightSide = ({ question, rightWidth, setFileName, fileName, file = 
             <Editor
                 height="80vh"
                 theme={theme}
-                path={file.name}
-                language={file.language}
+                // path={file.name}
+                language={editorLanguage}
                 onChange={handleEditorChange}
                 onMount={handleEditorDidMount}
-                defaultLanguage={file.language}
+                // defaultLanguage={editorLanguage}
                 defaultValue={defaultValue}
                 value={editorValue}
             />
