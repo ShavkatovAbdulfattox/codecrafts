@@ -5,7 +5,7 @@ import {Navigate} from "react-router";
 
 const PrivateRoute = ({children}) => {
     const user = useSelector((state) => state.user);
-    console.log({user})
+
     if (!user?.isLogged) {
         // Navigate to /login if user is not logged in
         return <Navigate to="/signup"/>;

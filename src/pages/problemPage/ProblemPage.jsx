@@ -1,11 +1,12 @@
 import { Resizable } from "re-resizable";
 import { useEffect, useRef, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useGetQuestionQuery } from "../../services/questionApi";
 import files from "../dashboard/files";
 import ProblemLeftSide from "./components/ProblemLeftSide";
 import ProblemRightSide from "./components/ProblemRightSide";
 import "./problemPage.scss";
+import { getUserData } from "../../utils/functions";
 
 function ProblemPage() {
      const editorRef = useRef(null);
@@ -14,7 +15,7 @@ function ProblemPage() {
      const file = files[fileName];
      const { id } = useParams()
 
-     const { data: question = {}, isLoading } = useGetQuestionQuery({ questionId: id, userId: 1 });
+     const { data: question = {}, isLoading } = useGetQuestionQuery({ questionId: id, userId: getUserData()?.id });
 
      useEffect(() => {
           editorRef.current?.focus();

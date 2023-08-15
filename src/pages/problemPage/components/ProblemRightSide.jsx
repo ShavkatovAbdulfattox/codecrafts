@@ -1,37 +1,40 @@
 /* eslint-disable react/prop-types */
-import {Editor} from '@monaco-editor/react';
-import {Button, message, Select, Switch} from 'antd';
-import {memo, useEffect, useRef, useState} from 'react';
-import {usePostAnswerMutation} from '../../../services/questionApi';
-import {ErrorCatcher} from "../../../utils/functions.js";
+import { Editor } from '@monaco-editor/react';
+import { Button, message, Select, Switch } from 'antd';
+import { memo, useEffect, useRef, useState } from 'react';
+import { usePostAnswerMutation } from '../../../services/questionApi';
+import { ErrorCatcher, getUserData } from "../../../utils/functions.js";
 
-const ProblemRightSide = ({question, rightWidth, setFileName, fileName, file = {}}) => {
-
+const ProblemRightSide = ({ question, rightWidth, setFileName, fileName, file = {} }) => {
 
     const [theme, setTheme] = useState("vs-dark")
+    const [editorValue, setEditorValue] = useState("")
+    const [answerError, setAnswerError] = useState('')
     const [defaultValue, setDefaultValue] = useState("")
 
     useEffect(() => {
         setDefaultValue(question.console?.[fileName])
     }, [question])
 
-    const [postAnswer, {isLoading}] = usePostAnswerMutation()
+    const [postAnswer, { isLoading }] = usePostAnswerMutation()
     const editorRef = useRef(null);
 
-    function handleEditorDidMount(editor, monaco) {
+    function handleEditorDidMount(editor) {
         editorRef.current = editor;
     }
 
     function showValue() {
         postAnswer({
-            userId: 1,
+            userId: getUserData()?.id,
             console: editorRef.current.getValue(),
-            language: fileName
+            language: fileName,
+            questionId: question.id,
         }).unwrap().then(res => {
             if (res.passed) {
                 message.success("Javob qabul qilindi!")
             } else {
-                message.error("Qabul qilinmadi!")
+                setAnswerError(res.error)
+                // message.error("Qabul qilinmadi! res.error")
             }
         }).catch(ErrorCatcher)
     }
@@ -55,19 +58,13 @@ const ProblemRightSide = ({question, rightWidth, setFileName, fileName, file = {
         },
     ]
 
-    const CodeEditor = () => {
-        return <Editor
-            height="80vh"
-            theme={theme}
-            path={file.name}
-            language={file.language}
-            onMount={handleEditorDidMount}
-            defaultLanguage={file.language}
-            defaultValue={defaultValue}
-        />
+    function handleEditorChange(value) {
+        setEditorValue(value)
     }
+
+
     return (
-        <section className="right-side" style={{width: (1300 - rightWidth) + "px", color: "#333"}}>
+        <section className="right-side" style={{ width: (1300 - rightWidth) + "px", color: "#333" }}>
             <div className="right-side__header">
                 <Select
                     defaultValue="Java"
@@ -83,11 +80,29 @@ const ProblemRightSide = ({question, rightWidth, setFileName, fileName, file = {
                     unCheckedChildren="Light"
                     onChange={onChangeTheme}
                 />
-                <Button onClick={showValue} loading={isLoading}>
-                    Jo'natish
+                <Button size='small' onClick={showValue} loading={isLoading}>
+                    Tekshirish
+                </Button>
+                <Button size='small' onClick={showValue} loading={isLoading}>
+                    Javobni yuborish
                 </Button>
             </div>
-            <CodeEditor/>
+            <Editor
+                height="80vh"
+                theme={theme}
+                path={file.name}
+                language={file.language}
+                onChange={handleEditorChange}
+                onMount={handleEditorDidMount}
+                defaultLanguage={file.language}
+                defaultValue={defaultValue}
+                value={editorValue}
+            />
+            <div className='text-white right-side__test-case'>
+                {
+                    answerError
+                }
+            </div>
         </section>
     )
 }

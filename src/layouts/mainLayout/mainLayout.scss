@@ -9,6 +9,7 @@
     .global-layout__main {
         flex-grow: 1;
         color: #fff;
+        overflow: auto;
         // padding: 20px;
     }
 }
