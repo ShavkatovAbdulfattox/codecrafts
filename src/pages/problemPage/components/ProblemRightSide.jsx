@@ -1,11 +1,36 @@
 /* eslint-disable react/prop-types */
-import {Editor} from '@monaco-editor/react';
-import {Button, message, Select, Switch} from 'antd';
-import {memo, useEffect, useRef, useState} from 'react';
-import {usePostAnswerMutation} from '../../../services/questionApi';
-import {ErrorCatcher, getUserData} from "../../../utils/functions.js";
+import { Editor } from '@monaco-editor/react';
+import { Button, message, Select, Switch } from 'antd';
+import { memo, useEffect, useRef, useState } from 'react';
+import { usePostAnswerMutation } from '../../../services/questionApi';
+import { ErrorCatcher, getUserData } from "../../../utils/functions.js";
 
-const ProblemRightSide = ({question, rightWidth, editorLanguage, setEditorLanguage, file = {}}) => {
+const languageOptions = {
+    defaultLanguages: [
+        {
+            value: 'java',
+            label: 'Java',
+        },
+        {
+            value: 'python',
+            label: 'Python',
+        },
+        {
+            value: 'kotlin',
+            label: 'Kotlin',
+        },
+    ],
+    databaseLanguages: [
+        {
+            value: "postgres",
+            label: "postgres",
+        }
+    ]
+}
+
+
+
+const ProblemRightSide = ({ isLoading, isQueryPage, question, rightWidth, editorLanguage, setEditorLanguage, file = {} }) => {
 
     const [theme, setTheme] = useState("vs-dark")
     const [editorValue, setEditorValue] = useState("")
@@ -16,7 +41,7 @@ const ProblemRightSide = ({question, rightWidth, editorLanguage, setEditorLangua
         setEditorValue(question.console?.[editorLanguage])
     }, [question, editorLanguage])
 
-    const [postAnswer, {isLoading}] = usePostAnswerMutation()
+    const [postAnswer, { isLoadingAnswer }] = usePostAnswerMutation()
     const editorRef = useRef(null);
 
     function handleEditorDidMount(editor) {
@@ -43,33 +68,20 @@ const ProblemRightSide = ({question, rightWidth, editorLanguage, setEditorLangua
         setTheme((prev) => prev === "vs-light" ? "vs-dark" : "vs-light")
     }
 
-    const languageOptions = [
-        {
-            value: 'java',
-            label: 'Java',
-        },
-        {
-            value: 'python',
-            label: 'Python',
-        },
-        {
-            value: 'kotlin',
-            label: 'Kotlin',
-        },
-    ]
-
     function handleEditorChange(value) {
         setEditorValue(value)
     }
 
 
     return (
-        <section className="right-side" style={{width: (1300 - rightWidth) + "px", color: "#333"}}>
+        <section className="right-side" style={{ width: (1300 - rightWidth) + "px", color: "#333" }}>
             <div className="right-side__header">
                 <Select
-                    defaultValue="Java"
+                    defaultValue={isQueryPage ? "postgres" : "Java"}
                     onChange={setEditorLanguage}
-                    options={languageOptions}
+                    loading={isLoading}
+                    disabled={isLoading}
+                    options={isQueryPage ? languageOptions.databaseLanguages : languageOptions.defaultLanguages}
                     style={{
                         width: 120,
                     }}
@@ -80,10 +92,10 @@ const ProblemRightSide = ({question, rightWidth, editorLanguage, setEditorLangua
                     unCheckedChildren="Light"
                     onChange={onChangeTheme}
                 />
-                <Button size='small' onClick={showValue} loading={isLoading}>
+                <Button size='small' onClick={showValue} loading={isLoadingAnswer}>
                     Tekshirish
                 </Button>
-                <Button size='small' onClick={showValue} loading={isLoading}>
+                <Button size='small' onClick={showValue} loading={isLoadingAnswer}>
                     Javobni yuborish
                 </Button>
             </div>
@@ -99,9 +111,7 @@ const ProblemRightSide = ({question, rightWidth, editorLanguage, setEditorLangua
                 value={editorValue}
             />
             <div className='text-white right-side__test-case'>
-                {
-                    answerError
-                }
+                {answerError}
             </div>
         </section>
     )
