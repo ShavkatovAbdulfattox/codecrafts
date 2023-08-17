@@ -3,7 +3,6 @@ import { Select } from "antd";
 import { useState, useEffect, memo } from "react";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
-import { Link as RouterLink } from "react-router-dom";
 import {
   Table,
   TableBody,
@@ -13,10 +12,11 @@ import {
   TableRow,
   Paper,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const Tab3 = () => {
   const [data, setData] = useState([]);
-
+  const navigate = useNavigate();
   useEffect(() => {
     axios({
       method: "post",
@@ -41,6 +41,10 @@ const Tab3 = () => {
       });
   }, []);
 
+  const handleRowClick = (id) => {
+    navigate(`/problem/2/${id}`)
+  };
+
   const [status, setStatus] = useState("");
   const handleChange = (value) => {
     setStatus(value);
@@ -59,97 +63,6 @@ const Tab3 = () => {
 
   return (
     <>
-      {/* <div className="">
-        <ul className="flex justify-between items-center">
-          <li>
-            <Select
-              defaultValue={{
-                value: "status",
-                label: "Status",
-              }}
-              onChange={handleChange}
-              options={uniqueStatusValues.map((status) => ({
-                value: status, 
-                label: status,
-              }))}
-              style={{
-                width: 90,
-              }}
-            />
-          </li>
-          <li>
-            <Select
-              defaultValue={{
-                value: "langauge",
-                label: "Language",
-              }}
-              onChange={handleChangeLang}
-              options={uniqueStatusValuesLang.map((lang) => ({
-                value: lang, 
-                label: lang,
-              }))}
-              style={{
-                width: 90,
-              }}
-            />
-          </li>
-          <li className="w-[90px]">
-            <button>Runtime</button>
-          </li>
-          <li className="w-[90px]">
-            <button>Time</button>
-          </li>
-        </ul>
-        <ul className="flex justify-between items-center">
-          <Link>
-            <div className="flex flex-col py-[9px]">
-              {data.map((el) => (
-                <div
-                  key={el.id}
-                  className={
-                    el.status === "ERROR"
-                      ? `text-sm font-medium px-2 text-red-600 py-[9px]`
-                      : `text-sm font-medium px-2 text-green-600 py-[9px]`
-                  }
-                >
-                  {el.status}
-                </div>
-              ))}
-            </div>
-          </Link>
-          <Link>
-            <div className="lang flex flex-col py-[9px]">
-              {data.map((el) => (
-                <div key={el.id} className="px-2 py-[9px]">
-                  {el.language}
-                </div>
-              ))}
-            </div>
-          </Link>
-          <Link className="pt-2 hover:bg-[#ffffff12]">
-            <div className="runtime py-[9px]">
-              {data.map((el) => (
-                <div key={el.id} className="px-2 py-[9px]">
-                  {`${el.runtime} ms`}
-                </div>
-              ))}
-            </div>
-          </Link>
-          <Link className="pt-2 hover:bg-[#ffffff12]">
-            <div className="time py-[9px]">
-              {data.map((el) => (
-                <div key={el.id} className="px-2 py-[9px]">
-                  {`${new Date(el.time)
-                    .toLocaleString("en-US", { month: "short" })
-                    .toLowerCase()} ${new Date(el.time).getDate()}, 
-                  ${new Date(el.time).getFullYear()}`}
-                </div>
-              ))}
-            </div>
-          </Link>
-        </ul>
-      </div> */}
-      {/* <CustomTable /> */}
       <TableContainer
         component={Paper}
         sx={{
@@ -199,7 +112,7 @@ const Tab3 = () => {
               <TableCell
                 sx={{
                   borderBottomColor: "#f7faff2e",
-                   color: '#eff1f6bf'
+                  color: "#eff1f6bf",
                 }}
               >
                 <button>Runtime</button>
@@ -207,7 +120,7 @@ const Tab3 = () => {
               <TableCell
                 sx={{
                   borderBottomColor: "#f7faff2e",
-                   color: '#eff1f6bf'
+                  color: "#eff1f6bf",
                 }}
               >
                 <button>Time</button>
@@ -218,12 +131,13 @@ const Tab3 = () => {
             {data.map((el) => (
               <TableRow
                 key={el.id}
-                component={RouterLink}
+                onClick={() => handleRowClick(el.id)}
                 to={`/problem/2/${el.id}`} // Replace with your route structure
                 sx={{
                   textDecoration: "none",
                   "&:hover": { backgroundColor: "#ffffff12" },
                 }}
+                style={{ cursor: "pointer" }}
               >
                 <TableCell
                   component="th"
@@ -241,7 +155,7 @@ const Tab3 = () => {
                 <TableCell
                   sx={{
                     borderBottom: "none",
-                    color: '#eff1f6bf'
+                    color: "#eff1f6bf",
                   }}
                 >
                   {el.language}
@@ -249,7 +163,7 @@ const Tab3 = () => {
                 <TableCell
                   sx={{
                     borderBottom: "none",
-                     color: '#eff1f6bf'
+                    color: "#eff1f6bf",
                   }}
                 >
                   {" "}
@@ -258,7 +172,7 @@ const Tab3 = () => {
                 <TableCell
                   sx={{
                     borderBottom: "none",
-                     color: '#eff1f6bf'
+                    color: "#eff1f6bf",
                   }}
                 >
                   {`${new Date(el.time)
@@ -275,4 +189,4 @@ const Tab3 = () => {
   );
 };
 
-export default memo(Tab3);
+export default Tab3;
