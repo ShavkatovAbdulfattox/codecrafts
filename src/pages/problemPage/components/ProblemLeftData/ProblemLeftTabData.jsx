@@ -1,8 +1,10 @@
 /* eslint-disable react/prop-types */
+import React from "react";
 import { Select } from "antd";
-import { useState, useEffect, memo } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
+
 import {
   Table,
   TableBody,
@@ -17,6 +19,9 @@ import { useNavigate } from "react-router-dom";
 const Tab3 = () => {
   const [data, setData] = useState([]);
   const navigate = useNavigate();
+  const [selectedId, setSelectedId] = useState(null);
+
+
   useEffect(() => {
     axios({
       method: "post",
@@ -33,7 +38,7 @@ const Tab3 = () => {
           ...item,
           id: uuidv4(),
         }));
-        console.log(dataWithIds);
+        // console.log(dataWithIds);
         setData(dataWithIds);
       })
       .catch((error) => {
@@ -42,10 +47,12 @@ const Tab3 = () => {
   }, []);
 
   const handleRowClick = (id) => {
-    navigate(`/problem/2/${id}`)
+    setSelectedId(id);
+    navigate(`/problem/2/${id}`);
   };
 
   const [status, setStatus] = useState("");
+
   const handleChange = (value) => {
     setStatus(value);
   };

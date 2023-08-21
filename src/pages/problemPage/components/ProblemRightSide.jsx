@@ -1,9 +1,12 @@
 /* eslint-disable react/prop-types */
+import React from "react";
 import { Editor } from "@monaco-editor/react";
 import { Button, message, Select, Switch } from "antd";
 import { memo, useEffect, useRef, useState } from "react";
 import { usePostAnswerMutation } from "../../../services/questionApi";
 import { ErrorCatcher, getUserData } from "../../../utils/functions.js";
+import User from "./RightUser";
+import Tab3 from "./ProblemLeftData/ProblemLeftTabData";
 
 const languageOptions = {
   defaultLanguages: [
@@ -81,52 +84,55 @@ const ProblemRightSide = ({
   }
 
   return (
-    <section
-      className="right-side"
-      style={{ width: 1300 - rightWidth + "px", color: "#333" }}
-    >
-      <div className="right-side__header">
-        <Select
-          defaultValue={isQueryPage ? "postgres" : "Java"}
-          onChange={setEditorLanguage}
-          loading={isLoading}
-          disabled={isLoading}
-          options={
-            isQueryPage
-              ? languageOptions.databaseLanguages
-              : languageOptions.defaultLanguages
-          }
-          style={{
-            width: 120,
-          }}
-        />
-        <Switch
-          checkedChildren="Dark"
-          defaultChecked={true}
-          unCheckedChildren="Light"
-          onChange={onChangeTheme}
-        />
-        <Button size="small" onClick={showValue} loading={isLoadingAnswer}>
-          Tekshirish
-        </Button>
-        <Button size="small" onClick={showValue} loading={isLoadingAnswer}>
-          Javobni yuborish
-        </Button>
-      </div>
-      <Editor
-        height="80vh"
-        theme={theme}
-        // path={file.name}
-        language={editorLanguage}
-        onChange={handleEditorChange}
-        onMount={handleEditorDidMount}
-        // defaultLanguage={editorLanguage}
-        defaultValue={defaultValue}
-        value={editorValue}
-      />
-      <div className="text-white right-side__test-case">{answerError}</div>
-    </section>
-    // <div>salom</div>
+    <>
+      {/* <section
+          className="right-side"
+          style={{ width: 1300 - rightWidth + "px", color: "#333" }}
+        >
+          <div className="right-side__header">
+            <Select
+              defaultValue={isQueryPage ? "postgres" : "Java"}
+              onChange={setEditorLanguage}
+              loading={isLoading}
+              disabled={isLoading}
+              options={
+                isQueryPage
+                  ? languageOptions.databaseLanguages
+                  : languageOptions.defaultLanguages
+              }
+              style={{
+                width: 120,
+              }}
+            />
+            <Switch
+              checkedChildren="Dark"
+              defaultChecked={true}
+              unCheckedChildren="Light"
+              onChange={onChangeTheme}
+            />
+            <Button size="small" onClick={showValue} loading={isLoadingAnswer}>
+              Tekshirish
+            </Button>
+            <Button size="small" onClick={showValue} loading={isLoadingAnswer}>
+              Javobni yuborish
+            </Button>
+          </div>
+          <Editor
+            height="80vh"
+            theme={theme}
+            // path={file.name}
+            language={editorLanguage}
+            onChange={handleEditorChange}
+            onMount={handleEditorDidMount}
+            // defaultLanguage={editorLanguage}
+            defaultValue={defaultValue}
+            value={editorValue}
+          />
+          <div className="text-white right-side__test-case">{answerError}</div>
+        </section> */}
+
+      <User />
+    </>
   );
 };
 
