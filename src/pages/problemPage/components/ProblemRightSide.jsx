@@ -6,7 +6,7 @@ import { memo, useEffect, useRef, useState } from "react";
 import { usePostAnswerMutation } from "../../../services/questionApi";
 import { ErrorCatcher, getUserData } from "../../../utils/functions.js";
 import User from "./RightUser";
-import Tab3 from "./ProblemLeftData/ProblemLeftTabData";
+import { useSelector } from "react-redux/es/hooks/useSelector";
 
 const languageOptions = {
   defaultLanguages: [
@@ -40,6 +40,9 @@ const ProblemRightSide = ({
   setEditorLanguage,
   file = {},
 }) => {
+  const state = useSelector((state) => state.leftSide.selectedId);
+  console.log(state, "store"); // null,
+
   const [theme, setTheme] = useState("vs-dark");
   const [editorValue, setEditorValue] = useState("");
   const [answerError, setAnswerError] = useState("");
@@ -85,7 +88,10 @@ const ProblemRightSide = ({
 
   return (
     <>
-      {/* <section
+      {state ? (
+        <User />
+      ) : (
+        <section
           className="right-side"
           style={{ width: 1300 - rightWidth + "px", color: "#333" }}
         >
@@ -129,9 +135,8 @@ const ProblemRightSide = ({
             value={editorValue}
           />
           <div className="text-white right-side__test-case">{answerError}</div>
-        </section> */}
-
-      <User />
+        </section>
+      )}
     </>
   );
 };

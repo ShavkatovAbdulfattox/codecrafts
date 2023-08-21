@@ -1,10 +1,8 @@
-/* eslint-disable react/prop-types */
 import React from "react";
 import { Select } from "antd";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
-
 import {
   Table,
   TableBody,
@@ -15,12 +13,13 @@ import {
   Paper,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
+import { setSelectedId } from "../../../../app/features/rightSide/leftSideSlice";
 const Tab3 = () => {
+  const dispatch = useDispatch();
+
   const [data, setData] = useState([]);
   const navigate = useNavigate();
-  const [selectedId, setSelectedId] = useState(null);
-
 
   useEffect(() => {
     axios({
@@ -47,7 +46,7 @@ const Tab3 = () => {
   }, []);
 
   const handleRowClick = (id) => {
-    setSelectedId(id);
+    dispatch(setSelectedId(id))
     navigate(`/problem/2/${id}`);
   };
 
