@@ -14,6 +14,6 @@ export const leftSideSlice = createSlice({
   },
 });
 
-export const { setSelectedId } = leftSideSlice.actions;
+export const { setSelectedId, resetState } = leftSideSlice.actions;
 
 export default leftSideSlice.reducer;

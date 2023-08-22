@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useId } from "react";
 import { Select } from "antd";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -12,9 +12,10 @@ import {
   TableRow,
   Paper,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setSelectedId } from "../../../../app/features/rightSide/leftSideSlice";
+
 const Tab3 = () => {
   const dispatch = useDispatch();
 
@@ -46,8 +47,8 @@ const Tab3 = () => {
   }, []);
 
   const handleRowClick = (id) => {
-    dispatch(setSelectedId(id))
-    navigate(`/problem/2/${id}`);
+    navigate(`problem/2/${id}`)
+    dispatch(setSelectedId(id));
   };
 
   const [status, setStatus] = useState("");
