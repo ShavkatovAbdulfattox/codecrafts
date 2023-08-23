@@ -4,7 +4,7 @@
  * @format
  */
 
-import { Tabs, Tag } from "antd";
+import { Button, Tabs, Tag } from "antd";
 import { memo, useState } from "react";
 import { CorrectIcon, DislikeButton, LikeButton } from "../../../utils/icons";
 import { getQuestionDifficulty } from "../../../utils/functions";
@@ -15,14 +15,15 @@ import Tab3 from "./ProblemLeftData/ProblemLeftTabData";
 import { Resizable } from "re-resizable";
 
 const ProblemLeftSide = ({ question = {} }) => {
-    const [rightWidth, setRightWidth] = useState(0);
+    const [elementHeight, setHeight] = useState(0);
 
     const onChangeTab = (key) => {
         // console.log(key);
     };
 
     const onResize = (a) => {
-        setRightWidth(a.screenX);
+        console.log(a.screenX);
+        setHeight(a.screenX);
     };
 
     const items = [
@@ -31,87 +32,62 @@ const ProblemLeftSide = ({ question = {} }) => {
             label: `Izoh`,
             children: (
                 <div className="left-side__body">
-                    <div className="left-side__body--container">
-                        <div className="left-side__body--box">
-                            <h1>{question.name}</h1>
-                            <div className="left-side__info">
-                                <Tag
-                                    color="orange"
-                                    style={{
-                                        borderRadius: "50px",
-                                        padding: "2px 15px",
-                                    }}
-                                >
-                                    {getQuestionDifficulty(question.level)}
-                                </Tag>
-                                <CorrectIcon />
-                                <button className="left-side__like">
-                                    <LikeButton />
-                                    <span>{question.like1}</span>
-                                </button>
-                                <button className="left-side__dislike">
-                                    <DislikeButton />
-                                    <span>{question.dislike}</span>
-                                </button>
-                            </div>
-                            <div className="left-problem__text">
-                                <pre>{question.definition?.trim()}</pre>
-                            </div>
-                            <div className="left-problem__examples">
-                                {question.exampleList?.map((example, index) => {
-                                    return (
-                                        <ProblemLeftExampleCard
-                                            key={index}
-                                            example={example}
-                                            index={index}
-                                        />
-                                    );
-                                })}
-                            </div>
-                            <div className="left-problem__examples">
-                                {question.exampleList?.map((example, index) => {
-                                    return (
-                                        <ProblemLeftExampleCard
-                                            key={index}
-                                            example={example}
-                                            index={index}
-                                        />
-                                    );
-                                })}
-                            </div>
-                            <div className="left-problem__examples">
-                                {question.exampleList?.map((example, index) => {
-                                    return (
-                                        <ProblemLeftExampleCard
-                                            key={index}
-                                            example={example}
-                                            index={index}
-                                        />
-                                    );
-                                })}
-                            </div>
-                        </div>
-                        <Resizable
-                            className="playground-resizer"
-                            enable={{
-                                top: false,
-                                right: true,
-                                bottom: false,
-                                left: false,
-                                topRight: false,
-                                bottomRight: false,
-                                bottomLeft: false,
-                                topLeft: false,
-                            }}
-                            maxHeight="55%"
-                            onResize={onResize}
-                            defaultSize={{
-                                height: "40%",
-                                width: "100%",
+                    <h1>{question.name}</h1>
+                    <div className="left-side__info">
+                        <Tag
+                            color="orange"
+                            style={{
+                                borderRadius: "50px",
+                                padding: "2px 15px",
                             }}
                         >
-                            <div className="left-side__submit">sUMOFINSD</div>
-                        </Resizable>
+                            {getQuestionDifficulty(question.level)}
+                        </Tag>
+                        <CorrectIcon />
+                        <button className="left-side__like">
+                            <LikeButton />
+                            <span>{question.like1}</span>
+                        </button>
+                        <button className="left-side__dislike">
+                            <DislikeButton />
+                            <span>{question.dislike}</span>
+                        </button>
+                    </div>
+                    <div className="left-problem__text">
+                        <pre>{question.definition?.trim()}</pre>
+                    </div>
+                    <div className="left-problem__examples">
+                        {question.exampleList?.map((example, index) => {
+                            return (
+                                <ProblemLeftExampleCard
+                                    key={index}
+                                    example={example}
+                                    index={index}
+                                />
+                            );
+                        })}
+                    </div>
+                    <div className="left-problem__examples">
+                        {question.exampleList?.map((example, index) => {
+                            return (
+                                <ProblemLeftExampleCard
+                                    key={index}
+                                    example={example}
+                                    index={index}
+                                />
+                            );
+                        })}
+                    </div>
+                    <div className="left-problem__examples">
+                        {question.exampleList?.map((example, index) => {
+                            return (
+                                <ProblemLeftExampleCard
+                                    key={index}
+                                    example={example}
+                                    index={index}
+                                />
+                            );
+                        })}
                     </div>
                 </div>
             ),
@@ -129,13 +105,47 @@ const ProblemLeftSide = ({ question = {} }) => {
     ];
 
     return (
-        <section className="left-side">
-            <Tabs
-                size="small"
-                defaultActiveKey="1"
-                items={items}
-                onChange={onChangeTab}
-            />
+        <section className="problem-left-container">
+            <div
+                className="left-side"
+                // style={{ height: "auto" }}
+            >
+                <Tabs
+                    size="small"
+                    defaultActiveKey="1"
+                    items={items}
+                    onChange={onChangeTab}
+                />
+            </div>
+            <Resizable
+                className="playground-resizer__submit"
+                enable={{
+                    top: true,
+                    right: false,
+                    bottom: false,
+                    left: false,
+                    topRight: false,
+                    bottomRight: false,
+                    bottomLeft: false,
+                    topLeft: false,
+                }}
+                // maxHeight="55%"
+                onResize={onResize}
+                defaultSize={
+                    {
+                        // minHeight: "80%",
+                        // width: "100%",
+                    }
+                }
+            >
+                <div className="left-side__submit">
+                    <div className="left-side__toggler">Console v</div>
+                    <div className="left-side__actions">
+                        <Button size="small">Tekshirish</Button>
+                        <Button size="small">Javobni yuborish</Button>
+                    </div>
+                </div>
+            </Resizable>
         </section>
     );
 };

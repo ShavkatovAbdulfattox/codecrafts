@@ -10,7 +10,6 @@ import ProblemRightSide from "./components/ProblemRightSide";
 import "./problemPage.scss";
 
 function ProblemPage() {
-    // const editorRef = useRef(null);
     const [rightWidth, setRightWidth] = useState(0);
     const [editorLanguage, setEditorLanguage] = useState("java");
     const { id, query } = useParams();
@@ -21,10 +20,6 @@ function ProblemPage() {
         questionId: id,
         userId: getUserData()?.id,
     });
-
-    // useEffect(() => {
-    //      editorRef.current?.focus();
-    // }, [file.name]);
 
     const onResize = (a) => {
         setRightWidth(a.screenX);
