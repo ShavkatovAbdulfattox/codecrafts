@@ -28,6 +28,7 @@ const Navigation = () => {
             { title: "Asosiy", linkTo: "/" },
             { title: "Muammolar", linkTo: "/problemslist" },
             { title: "Intervyu", linkTo: "/interwiew" },
+            { title: "Leaderboard", linkTo: "/leaderboard" },
             // {title: "Contest", linkTo: "/p"},
             // {title: "Discuss", linkTo: "/p"},
         ],

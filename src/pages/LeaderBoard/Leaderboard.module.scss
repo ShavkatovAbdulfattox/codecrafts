@@ -1,0 +1,42 @@
+.mainContent {
+  display: flex;
+  justify-content: space-around;
+  padding: 50px 0;
+}
+
+.listWrapper {
+  width: 100%;
+  padding: 0 15px;
+
+  [data-title] {
+    font-size: 22px;
+    text-transform: capitalize;
+    margin-bottom: 15px;
+  }
+
+  .list {
+    max-width: 500px;
+    width: 100%;
+
+    li {
+      border-bottom: 0.5px solid gray;
+      padding: 5px 0;
+
+      [data-content] {
+        display: grid;
+        grid-template-columns: 50px 50px auto 30px;
+        align-items: center;
+
+        [data-number] {
+          text-align: center;
+        }
+
+        [data-picture] {
+          background: gray;
+          height: 40px;
+          aspect-ratio: 1/1;
+        }
+      }
+    }
+  }
+}

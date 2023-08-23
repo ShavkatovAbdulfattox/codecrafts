@@ -18,6 +18,7 @@ import Profile from "./pages/Profile/Profile";
 import PostSolution from "./pages/postSolution/PostSolution";
 import { Footer } from "./components/footer/Footer";
 import { Fragment } from "react";
+import Leaderboard from "./pages/LeaderBoard/LeaderBoard";
 
 const App = () => {
     const router = createBrowserRouter([
@@ -65,6 +66,15 @@ const App = () => {
                     element: (
                         // <PrivateRoute>
                         <ProblemPage />
+                        // </PrivateRoute>
+                    ),
+                },
+                {
+                    path: "/leaderboard",
+                    errorElement: <ErrorBoundary />,
+                    element: (
+                        // <PrivateRoute>
+                        <Leaderboard />
                         // </PrivateRoute>
                     ),
                 },
