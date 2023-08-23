@@ -98,8 +98,8 @@ const ProblemRightSide = ({
                 <User />
             ) : (
                 <section
-                    className="right-side"
-                    style={{ width: 1300 - rightWidth + "px", color: "#333" }}
+                    className="right-side overflow-hidden"
+                    // style={{ width: 1300 - rightWidth + "px", color: "#333" }}
                 >
                     <div className="right-side__header">
                         <Select

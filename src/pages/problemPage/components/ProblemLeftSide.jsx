@@ -12,142 +12,102 @@ import ProblemLeftExampleCard from "./ProblemLeftExampleCard";
 
 // problem data
 import Tab3 from "./ProblemLeftData/ProblemLeftTabData";
-import { Resizable } from "re-resizable";
+// import { Resizable } from "re-resizable";
+import { ReflexContainer, ReflexSplitter, ReflexElement } from "react-reflex";
 
 const ProblemLeftSide = ({ question = {} }) => {
-    const [elementHeight, setHeight] = useState(0);
+  const [elementHeight, setHeight] = useState(0);
 
-    const onChangeTab = (key) => {
-        // console.log(key);
-    };
+  const onChangeTab = (key) => {
+    // console.log(key);
+  };
 
-    const onResize = (a) => {
-        console.log(a.screenX);
-        setHeight(a.screenX);
-    };
+  const onResize = (a) => {
+    console.log(a.screenX);
+    setHeight(a.screenX);
+  };
 
-    const items = [
-        {
-            key: "1",
-            label: `Izoh`,
-            children: (
-                <div className="left-side__body">
-                    <h1>{question.name}</h1>
-                    <div className="left-side__info">
-                        <Tag
-                            color="orange"
-                            style={{
-                                borderRadius: "50px",
-                                padding: "2px 15px",
-                            }}
-                        >
-                            {getQuestionDifficulty(question.level)}
-                        </Tag>
-                        <CorrectIcon />
-                        <button className="left-side__like">
-                            <LikeButton />
-                            <span>{question.like1}</span>
-                        </button>
-                        <button className="left-side__dislike">
-                            <DislikeButton />
-                            <span>{question.dislike}</span>
-                        </button>
-                    </div>
-                    <div className="left-problem__text">
-                        <pre>{question.definition?.trim()}</pre>
-                    </div>
-                    <div className="left-problem__examples">
-                        {question.exampleList?.map((example, index) => {
-                            return (
-                                <ProblemLeftExampleCard
-                                    key={index}
-                                    example={example}
-                                    index={index}
-                                />
-                            );
-                        })}
-                    </div>
-                    <div className="left-problem__examples">
-                        {question.exampleList?.map((example, index) => {
-                            return (
-                                <ProblemLeftExampleCard
-                                    key={index}
-                                    example={example}
-                                    index={index}
-                                />
-                            );
-                        })}
-                    </div>
-                    <div className="left-problem__examples">
-                        {question.exampleList?.map((example, index) => {
-                            return (
-                                <ProblemLeftExampleCard
-                                    key={index}
-                                    example={example}
-                                    index={index}
-                                />
-                            );
-                        })}
-                    </div>
-                </div>
-            ),
-        },
-        {
-            key: "2",
-            label: `Boshqa yechimlar`,
-            children: `hey2`,
-        },
-        {
-            key: "3",
-            label: `Yuborigan javoblar`,
-            children: <Tab3 />,
-        },
-    ];
-
-    return (
-        <section className="problem-left-container">
-            <div
-                className="left-side"
-                // style={{ height: "auto" }}
+  const items = [
+    {
+      key: "1",
+      label: `Izoh`,
+      children: (
+        <div className="left-side__body">
+          <h1>{question.name}</h1>
+          <div className="left-side__info">
+            <Tag
+              color="orange"
+              style={{
+                borderRadius: "50px",
+                padding: "2px 15px",
+              }}
             >
-                <Tabs
-                    size="small"
-                    defaultActiveKey="1"
-                    items={items}
-                    onChange={onChangeTab}
-                />
+              {getQuestionDifficulty(question.level)}
+            </Tag>
+            <CorrectIcon />
+            <button className="left-side__like">
+              <LikeButton />
+              <span>{question.like1}</span>
+            </button>
+            <button className="left-side__dislike">
+              <DislikeButton />
+              <span>{question.dislike}</span>
+            </button>
+          </div>
+          <div className="left-problem__text">
+            <pre>{question.definition?.trim()}</pre>
+          </div>
+          <div className="left-problem__examples">
+            {question.exampleList?.map((example, index) => {
+              return <ProblemLeftExampleCard key={index} example={example} index={index} />;
+            })}
+          </div>
+          <div className="left-problem__examples">
+            {question.exampleList?.map((example, index) => {
+              return <ProblemLeftExampleCard key={index} example={example} index={index} />;
+            })}
+          </div>
+          <div className="left-problem__examples">
+            {question.exampleList?.map((example, index) => {
+              return <ProblemLeftExampleCard key={index} example={example} index={index} />;
+            })}
+          </div>
+        </div>
+      ),
+    },
+    {
+      key: "2",
+      label: `Boshqa yechimlar`,
+      children: `hey2`,
+    },
+    {
+      key: "3",
+      label: `Yuborigan javoblar`,
+      children: <Tab3 />,
+    },
+  ];
+
+  return (
+    <section className="problem-left-container h-full flex w-full">
+      <ReflexContainer orientation="horizontal" className="h-full w-full flex flex-col">
+        <ReflexElement style={{overflow: 'hidden'}}>
+          <div className="left-side">
+            <Tabs size="small" defaultActiveKey="1" items={items} onChange={onChangeTab} />
+          </div>
+        </ReflexElement>
+        <ReflexSplitter />
+        <ReflexElement size={150}>
+          <div className="left-side__submit">
+            <div className="left-side__toggler">Console v</div>
+            <div className="left-side__actions">
+              <Button size="small">Tekshirish</Button>
+              <Button size="small">Javobni yuborish</Button>
             </div>
-            <Resizable
-                className="playground-resizer__submit"
-                enable={{
-                    top: true,
-                    right: false,
-                    bottom: false,
-                    left: false,
-                    topRight: false,
-                    bottomRight: false,
-                    bottomLeft: false,
-                    topLeft: false,
-                }}
-                // maxHeight="55%"
-                onResize={onResize}
-                defaultSize={
-                    {
-                        // minHeight: "80%",
-                        // width: "100%",
-                    }
-                }
-            >
-                <div className="left-side__submit">
-                    <div className="left-side__toggler">Console v</div>
-                    <div className="left-side__actions">
-                        <Button size="small">Tekshirish</Button>
-                        <Button size="small">Javobni yuborish</Button>
-                    </div>
-                </div>
-            </Resizable>
-        </section>
-    );
+          </div>
+        </ReflexElement>
+      </ReflexContainer>
+    </section>
+  );
 };
 
 export default memo(ProblemLeftSide);

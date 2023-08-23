@@ -8,58 +8,44 @@ import { getUserData } from "../../utils/functions";
 import ProblemLeftSide from "./components/ProblemLeftSide";
 import ProblemRightSide from "./components/ProblemRightSide";
 import "./problemPage.scss";
+import { ReflexContainer, ReflexSplitter, ReflexElement } from "react-reflex";
 
 function ProblemPage() {
-    const [rightWidth, setRightWidth] = useState(0);
-    const [editorLanguage, setEditorLanguage] = useState("java");
-    const { id, query } = useParams();
-    const isQueryPage = query === "query";
+  const [rightWidth, setRightWidth] = useState(0);
+  const [editorLanguage, setEditorLanguage] = useState("java");
+  const { id, query } = useParams();
+  const isQueryPage = query === "query";
 
-    const { data: question = {}, isLoading } = useGetQuestionQuery({
-        urlPart: !isQueryPage ? "query" : "question",
-        questionId: id,
-        userId: getUserData()?.id,
-    });
+  const { data: question = {}, isLoading } = useGetQuestionQuery({
+    urlPart: !isQueryPage ? "query" : "question",
+    questionId: id,
+    userId: getUserData()?.id,
+  });
 
-    const onResize = (a) => {
-        setRightWidth(a.screenX);
-    };
+//   const onResize = (a) => {
+//     setRightWidth(a.screenX);
+//   };
 
-    return (
-        <div className="playground-body">
-            <Resizable
-                className="playground-resizer"
-                enable={{
-                    top: false,
-                    right: true,
-                    bottom: false,
-                    left: false,
-                    topRight: false,
-                    bottomRight: false,
-                    bottomLeft: false,
-                    topLeft: false,
-                }}
-                maxWidth="70%"
-                onResize={onResize}
-                defaultSize={{
-                    width: "40%",
-                }}
-            >
-                <ProblemLeftSide
-                    question={question}
-                    isQueryPage={isQueryPage}
-                />
-            </Resizable>
-            <ProblemRightSide
-                question={question}
-                rightWidth={rightWidth}
-                isLoading={isLoading}
-                setEditorLanguage={setEditorLanguage}
-                editorLanguage={editorLanguage}
-                isQueryPage={isQueryPage}
-            />
-        </div>
-    );
+  return (
+    <div className="playground-body">
+      <ReflexContainer orientation="vertical" style={{ display: "flex", width: '100%' }}>
+        <ReflexElement style={{overflow: 'hidden'}}>
+          <ProblemLeftSide question={question} isQueryPage={isQueryPage} />
+        </ReflexElement>
+        <ReflexSplitter />
+        <ReflexElement style={{overflow: 'hidden'}}>
+          <ProblemRightSide
+            question={question}
+            rightWidth={rightWidth}
+            isLoading={isLoading}
+            setEditorLanguage={setEditorLanguage}
+            editorLanguage={editorLanguage}
+            isQueryPage={isQueryPage}
+          />
+        </ReflexElement>
+      </ReflexContainer>
+    </div>
+  );
 }
 
 export default ProblemPage;
