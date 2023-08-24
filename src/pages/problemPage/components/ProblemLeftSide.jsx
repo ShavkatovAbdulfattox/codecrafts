@@ -96,7 +96,7 @@ const ProblemLeftSide = ({ question = {} }) => {
           </div>
         </ReflexElement>
         <ReflexSplitter />
-        <ReflexElement size={150}>
+        <ReflexElement size={150} minSize={150}>
           <div className="left-side__submit">
             <div className="left-side__toggler">Console v</div>
             <div className="left-side__actions">

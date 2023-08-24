@@ -1,6 +1,6 @@
 import React from "react";
 import { useGetLeadersQuery } from "../../services/leaderboardApi";
-import classes from "./Leaderboard.module.scss";
+import classes from "./LeaderBoard.module.scss";
 
 const Leaderboard = () => {
   const { data } = useGetLeadersQuery();
