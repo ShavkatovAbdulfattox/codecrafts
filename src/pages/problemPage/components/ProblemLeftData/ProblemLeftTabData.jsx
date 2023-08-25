@@ -12,11 +12,15 @@ import {
   TableRow,
   Paper,
 } from "@mui/material";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { setSelectedId } from "../../../../app/features/rightSide/leftSideSlice";
 
 const Tab3 = () => {
+  const { id, subId, selectedTabLabel } = useParams();
+  const selectedId = useSelector((state) => state.leftSide.selectedId);
+  console.log(selectedId);
+
   const dispatch = useDispatch();
 
   const [data, setData] = useState([]);
@@ -46,10 +50,13 @@ const Tab3 = () => {
       });
   }, []);
 
-  const handleRowClick = (id) => {
-    navigate(`problem/2/${id}`)
-    dispatch(setSelectedId(id));
+  const handleRowClick = (subId) => {
+    if (subId) {
+      navigate(`/problem/${id}/${selectedTabLabel}/${subId}`);
+      dispatch(setSelectedId(subId));
+    }
   };
+  console.log(subId);
 
   const [status, setStatus] = useState("");
 
@@ -139,7 +146,6 @@ const Tab3 = () => {
               <TableRow
                 key={el.id}
                 onClick={() => handleRowClick(el.id)}
-                to={`/problem/2/${el.id}`} // Replace with your route structure
                 sx={{
                   textDecoration: "none",
                   "&:hover": { backgroundColor: "#ffffff12" },

@@ -19,163 +19,180 @@ import PostSolution from "./pages/postSolution/PostSolution";
 import { Footer } from "./components/footer/Footer";
 import { Fragment } from "react";
 import Leaderboard from "./pages/LeaderBoard/LeaderBoard";
+import ProblemLeftSide from "./pages/problemPage/components/ProblemLeftSide";
 
 const App = () => {
-    const router = createBrowserRouter([
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: (
+        <PrivateRoute>
+          <MainLayout />
+        </PrivateRoute>
+      ),
+      children: [
         {
-            path: "/",
-            element: (
-                <PrivateRoute>
-                    <MainLayout />
-                </PrivateRoute>
-            ),
-            children: [
-                {
-                    path: "/",
-                    errorElement: <ErrorBoundary />,
-                    element: (
-                        <Fragment>
-                            <MainPage />
-                            <Footer />
-                        </Fragment>
+          path: "/",
+          errorElement: <ErrorBoundary />,
+          element: (
+            <Fragment>
+              <MainPage />
+              <Footer />
+            </Fragment>
+          ),
+        },
+        {
+          path: "/problemslist",
+          errorElement: <ErrorBoundary />,
+          element: (
+            <Fragment>
+              <ProblemsListPage />
+              {/* <Footer /> */}
+            </Fragment>
+          ),
+        },
+        {
+          path: "/problem/:id",
+          errorElement: <ErrorBoundary />,
+          element: (
+            // <PrivateRoute>
+            <ProblemPage />
+            // </PrivateRoute>
+          ),
+          //   children: [
+          //     {
+          //       path: ":source?",
+          //   errorElement: <ErrorBoundary />,
+          //   element: <ProblemPage />,
+          //     },
+          //   ],
+        },
+        {
+          path: "/problem/:id/:selectedTabLabel",
+          errorElement: <ErrorBoundary />,
+          element: <ProblemPage />,
+        },
+        {
+          path: "/problem/:id/:selectedTabLabel/:subId",
+          errorElement: <ErrorBoundary />,
+          element: <ProblemPage />,
+        },
+        {
+          path: "/problem/:query/:id",
+          errorElement: <ErrorBoundary />,
+          element: (
+            // <PrivateRoute>
+            <ProblemPage />
+            // </PrivateRoute>
+          ),
+        },
+        {
+          path: "/leaderboard",
+          errorElement: <ErrorBoundary />,
+          element: (
+            // <PrivateRoute>
+            <Leaderboard />
+            // </PrivateRoute>
+          ),
+        },
+        {
+          path: "/profile",
+          element: <Profile />,
+        },
+        {
+          path: "/profileSettings",
+          element: <ProfileSettings />,
+        },
+        {
+          path: "*",
+          element: <MainPage />,
+        },
+      ],
+    },
+    {
+      path: "/",
+      element: (
+        <PrivateRoute>
+          <MainLayout />
+        </PrivateRoute>
+      ),
+      children: [
+        {
+          path: "/",
+          errorElement: <ErrorBoundary />,
+          element: (
+            // <PrivateRoute>
+            <MainPage />
+            // </PrivateRoute>
+          ),
+        },
+        {
+          path: "/problemslist",
+          errorElement: <ErrorBoundary />,
+          element: (
+            // <PrivateRoute>
+            <ProblemsListPage />
+            // </PrivateRoute>
+          ),
+        },
+        {
+          path: "/problem/:id",
+          errorElement: <ErrorBoundary />,
+          element: (
+            // <PrivateRoute>
+            <ProblemPage />
+            // </PrivateRoute>
+          ),
+        },
+        {
+          path: "/profile",
+          element: <Profile />,
+        },
+        {
+          path: "/profileSettings",
+          element: <ProfileSettings />,
+        },
+        {
+          path: "*",
+          element: <MainPage />,
+        },
+      ],
+    },
+    {
+      path: "/post-solution",
+      element: <PostSolution />,
+    },
+    {
+      path: "/login",
+      element: <SignIn />,
+    },
+    {
+      path: "/signup",
+      element: <SignUpPage />,
+    },
 
-                    ),
-                },
-                {
-                    path: "/problemslist",
-                    errorElement: <ErrorBoundary />,
-                    element: (
-                        <Fragment>
-                            <ProblemsListPage />
-                            {/* <Footer /> */}
-                        </Fragment>
-                    ),
-                },
-                {
-                    path: "/problem/:id",
-                    errorElement: <ErrorBoundary />,
-                    element: (
-                        // <PrivateRoute>
-                        <ProblemPage />
-                        // </PrivateRoute>
-                    ),
-                },
-                {
-                    path: "/problem/:query/:id",
-                    errorElement: <ErrorBoundary />,
-                    element: (
-                        // <PrivateRoute>
-                        <ProblemPage />
-                        // </PrivateRoute>
-                    ),
-                },
-                {
-                    path: "/leaderboard",
-                    errorElement: <ErrorBoundary />,
-                    element: (
-                        // <PrivateRoute>
-                        <Leaderboard />
-                        // </PrivateRoute>
-                    ),
-                },
-                {
-                    path: "/profile",
-                    element: <Profile />,
-                },
-                {
-                    path: "/profileSettings",
-                    element: <ProfileSettings />,
-                },
-                {
-                    path: "*",
-                    element: <MainPage />,
-                },
-            ],
-        },
-        {
-            path: "/",
-            element: (
-                <PrivateRoute>
-                    <MainLayout />
-                </PrivateRoute>
-            ),
-            children: [
-                {
-                    path: "/",
-                    errorElement: <ErrorBoundary />,
-                    element: (
-                        // <PrivateRoute>
-                        <MainPage />
-                        // </PrivateRoute>
-                    ),
-                },
-                {
-                    path: "/problemslist",
-                    errorElement: <ErrorBoundary />,
-                    element: (
-                        // <PrivateRoute>
-                        <ProblemsListPage />
-                        // </PrivateRoute>
-                    ),
-                },
-                {
-                    path: "/problem/:id",
-                    errorElement: <ErrorBoundary />,
-                    element: (
-                        // <PrivateRoute>
-                        <ProblemPage />
-                        // </PrivateRoute>
-                    ),
-                },
-                {
-                    path: "/profile",
-                    element: <Profile />,
-                },
-                {
-                    path: "/profileSettings",
-                    element: <ProfileSettings />,
-                },
-                {
-                    path: "*",
-                    element: <MainPage />,
-                },
-            ],
-        },
-        {
-            path: "/post-solution",
-            element: <PostSolution />
-        },
-        {
-            path: "/login",
-            element: <SignIn />,
-        },
-        {
-            path: "/signup",
-            element: <SignUpPage />,
-        },
+    {
+      path: "*",
+      element: <NotFoundPage />,
+    },
+  ]);
 
-        {
-            path: "*",
-            element: <NotFoundPage />,
-        },
-    ]);
-
-    return (
-        <Provider store={store}>
-            <ConfigProvider
-                theme={{
-                    token: {
-                        // any theme overirdes
-                        colorPrimary: "#7f00ff",
-                    },
-                    // this line sets it to dark mode
-                    algorithm: theme.darkAlgorithm,
-                }}
-            >
-                <RouterProvider router={router} />
-            </ConfigProvider>
-        </Provider>
-    );
+  return (
+    <Provider store={store}>
+      <ConfigProvider
+        theme={{
+          token: {
+            // any theme overirdes
+            colorPrimary: "#7f00ff",
+          },
+          // this line sets it to dark mode
+          algorithm: theme.darkAlgorithm,
+        }}
+      >
+        <RouterProvider router={router} />
+      </ConfigProvider>
+    </Provider>
+  );
 };
 
 export default App;

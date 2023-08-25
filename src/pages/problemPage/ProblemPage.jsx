@@ -13,7 +13,8 @@ import { ReflexContainer, ReflexSplitter, ReflexElement } from "react-reflex";
 function ProblemPage() {
   const [rightWidth, setRightWidth] = useState(0);
   const [editorLanguage, setEditorLanguage] = useState("java");
-  const { id, query } = useParams();
+  const { id, query, additionalInfo } = useParams();
+
   const isQueryPage = query === "query";
 
   const { data: question = {}, isLoading } = useGetQuestionQuery({
@@ -22,18 +23,25 @@ function ProblemPage() {
     userId: getUserData()?.id,
   });
 
-//   const onResize = (a) => {
-//     setRightWidth(a.screenX);
-//   };
+  //   const onResize = (a) => {
+  //     setRightWidth(a.screenX);
+  //   };
 
   return (
     <div className="playground-body">
-      <ReflexContainer orientation="vertical" style={{ display: "flex", width: '100%' }}>
-        <ReflexElement style={{overflow: 'hidden'}}>
-          <ProblemLeftSide question={question} isQueryPage={isQueryPage} />
+      <ReflexContainer
+        orientation="vertical"
+        style={{ display: "flex", width: "100%" }}
+      >
+        <ReflexElement style={{ overflow: "hidden" }}>
+          <ProblemLeftSide
+            question={question}
+            isQueryPage={isQueryPage}
+            additionalInfo={additionalInfo}
+          />
         </ReflexElement>
         <ReflexSplitter />
-        <ReflexElement style={{overflow: 'hidden'}}>
+        <ReflexElement style={{ overflow: "hidden" }}>
           <ProblemRightSide
             question={question}
             rightWidth={rightWidth}

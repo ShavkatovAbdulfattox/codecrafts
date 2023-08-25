@@ -10,26 +10,32 @@ import { CorrectIcon, DislikeButton, LikeButton } from "../../../utils/icons";
 import { getQuestionDifficulty } from "../../../utils/functions";
 import ProblemLeftExampleCard from "./ProblemLeftExampleCard";
 
-// problem data
 import Tab3 from "./ProblemLeftData/ProblemLeftTabData";
-// import { Resizable } from "re-resizable";
 import { ReflexContainer, ReflexSplitter, ReflexElement } from "react-reflex";
+import { useNavigate, useParams } from "react-router-dom";
 
 const ProblemLeftSide = ({ question = {} }) => {
   const [elementHeight, setHeight] = useState(0);
 
+  const { id, selectedTabLabel } = useParams();
+  const navigate = useNavigate();
+
   const onChangeTab = (key) => {
-    // console.log(key);
+    if (key) {
+      // console.log(selectedTab.label);
+      const url = `/problem/${id}/${key}`;
+      navigate(url);
+    }
   };
 
   const onResize = (a) => {
-    console.log(a.screenX);
+    // console.log(a.screenX);
     setHeight(a.screenX);
   };
 
   const items = [
     {
-      key: "1",
+      key: "description",
       label: `Izoh`,
       children: (
         <div className="left-side__body">
@@ -59,29 +65,47 @@ const ProblemLeftSide = ({ question = {} }) => {
           </div>
           <div className="left-problem__examples">
             {question.exampleList?.map((example, index) => {
-              return <ProblemLeftExampleCard key={index} example={example} index={index} />;
+              return (
+                <ProblemLeftExampleCard
+                  key={index}
+                  example={example}
+                  index={index}
+                />
+              );
             })}
           </div>
           <div className="left-problem__examples">
             {question.exampleList?.map((example, index) => {
-              return <ProblemLeftExampleCard key={index} example={example} index={index} />;
+              return (
+                <ProblemLeftExampleCard
+                  key={index}
+                  example={example}
+                  index={index}
+                />
+              );
             })}
           </div>
           <div className="left-problem__examples">
             {question.exampleList?.map((example, index) => {
-              return <ProblemLeftExampleCard key={index} example={example} index={index} />;
+              return (
+                <ProblemLeftExampleCard
+                  key={index}
+                  example={example}
+                  index={index}
+                />
+              );
             })}
           </div>
         </div>
       ),
     },
     {
-      key: "2",
+      key: "solutions",
       label: `Boshqa yechimlar`,
       children: `hey2`,
     },
     {
-      key: "3",
+      key: "submissions",
       label: `Yuborigan javoblar`,
       children: <Tab3 />,
     },
@@ -89,10 +113,19 @@ const ProblemLeftSide = ({ question = {} }) => {
 
   return (
     <section className="problem-left-container h-full flex w-full">
-      <ReflexContainer orientation="horizontal" className="h-full w-full flex flex-col">
-        <ReflexElement style={{overflow: 'hidden'}}>
+      <ReflexContainer
+        orientation="horizontal"
+        className="h-full w-full flex flex-col"
+      >
+        <ReflexElement style={{ overflow: "hidden" }}>
           <div className="left-side">
-            <Tabs size="small" defaultActiveKey="1" items={items} onChange={onChangeTab} />
+            <Tabs
+              // defaultActiveKey={match.params.source}
+              size="small"
+              defaultActiveKey={selectedTabLabel}
+              onChange={onChangeTab}
+              items={items}
+            />
           </div>
         </ReflexElement>
         <ReflexSplitter />
