@@ -4,6 +4,8 @@ import { v4 as uuidv4 } from "uuid";
 
 const User = () => {
   const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
   //https://edubinplatform-a01d5146e549.herokuapp.com/submissions/get
   useEffect(() => {
     axios({
@@ -19,17 +21,22 @@ const User = () => {
     })
       .then((response) => {
         const apiData = response.data.data;
-        const dataWithIds = apiData.map((item) => ({
-          ...item,
-          id: uuidv4(),
-        }));
-        console.log(dataWithIds);
-        setData(dataWithIds);
+        // const dataWithIds = apiData.map((item) => ({
+        //   ...item,
+        //   id: uuidv4(),
+        // }));
+        // console.log(dataWithIds);
+        console.log(apiData);
+        setData(apiData);
       })
       .catch((error) => {
         console.error("Error:", error);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }, []);
+
   const latestDate = new Date(Math.max(...data.map((el) => new Date(el.time))));
 
   const uniqueStatusValuesLang = Array.from(
@@ -40,48 +47,55 @@ const User = () => {
   const uniqueConsole = Array.from(new Set(data.map((el) => el.console)));
   // console.log();
   return (
-    <div className="pl-4 mt-8 items-start">
-      <div className="flex items-center gap-4">
-        <img
-          src="https://www.picsum.photos/45/45"
-          // src={uniquePictures[0]}
-          alt="profile"
-          className="rounded-full w-16"
-        />
-        <div>
-          <h4>{uniqueUserNames[0]}</h4>
-          <p>{`${latestDate
-            .toLocaleString("en-US", {
-              month: "short",
-            })
-            .toLowerCase()} ${latestDate.getDate()}, ${latestDate.getFullYear()} 
+    <>
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <div className="pl-4 mt-8 items-start">
+          <div className="flex items-center gap-4">
+            <img
+              src="https://www.picsum.photos/45/45"
+              // src={uniquePictures[0]}
+              alt="profile"
+              className="rounded-full w-16"
+            />
+            <div>
+              <h4>{uniqueUserNames[0]}</h4>
+              <p>{`${latestDate
+                .toLocaleString("en-US", {
+                  month: "short",
+                })
+                .toLowerCase()} ${latestDate.getDate()}, ${latestDate.getFullYear()} 
             ${String(latestDate.getHours()).padStart(2, "0")}:${String(
-            latestDate.getMinutes()
-          ).padStart(2, "0")}`}</p>
-        </div>
-      </div>
-      <div className="mt-6">
-        {uniqueStatusValuesLang.map((lang) => (
-          <div>
-            {lang == "java" && (
-              <span
-                key={lang}
-                className="text-xs rounded-full bg-blue-200 text-blue-700 px-3 py-1 font-medium leading-4"
-              >
-                {lang}
-              </span>
-            )}
+                latestDate.getMinutes()
+              ).padStart(2, "0")}`}</p>
+            </div>
           </div>
-        ))}
-      </div>
-      <div className="bg-fill-4 dark:bg-dark-fill-4 w-full rounded-lg p-4">
-        <textarea
-          className="h-[62vh] mt-4 resize text-blue-400 focus:outline-none bg-[#ffffff12] w-[50vw] rounded-lg p-4 overflow-hidden"
-          placeholder="kod"
-          value={uniqueConsole[0]}
-        ></textarea>
-      </div>
-    </div>
+          <div className="mt-6">
+            {uniqueStatusValuesLang.map((lang) => (
+              <div key={lang}>
+                {lang == "java" && (
+                  <span
+                    key={lang}
+                    className="text-xs rounded-full bg-blue-200 text-blue-700 px-3 py-1 font-medium leading-4"
+                  >
+                    {lang}
+                  </span>
+                )}
+              </div>
+            ))}
+          </div>
+          <div className="bg-fill-4 dark:bg-dark-fill-4 w-full rounded-lg p-4">
+            <textarea
+              className="h-[62vh] mt-4 resize text-blue-400 focus:outline-none bg-[#ffffff12] w-[50vw] rounded-lg p-4 overflow-hidden"
+              placeholder="kod"
+              value={uniqueConsole[0]}
+              readOnly
+            ></textarea>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

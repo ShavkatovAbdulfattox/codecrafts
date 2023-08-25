@@ -18,8 +18,9 @@ import { setSelectedId } from "../../../../app/features/rightSide/leftSideSlice"
 
 const Tab3 = () => {
   const { id, subId, selectedTabLabel } = useParams();
+  const [isLoading, setIsLoading] = useState(true);
+
   const selectedId = useSelector((state) => state.leftSide.selectedId);
-  console.log(selectedId);
 
   const dispatch = useDispatch();
 
@@ -47,6 +48,9 @@ const Tab3 = () => {
       })
       .catch((error) => {
         console.error("Error:", error);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }, []);
 
@@ -54,9 +58,9 @@ const Tab3 = () => {
     if (subId) {
       navigate(`/problem/${id}/${selectedTabLabel}/${subId}`);
       dispatch(setSelectedId(subId));
+      console.log(subId);
     }
   };
-  console.log(subId);
 
   const [status, setStatus] = useState("");
 
@@ -77,127 +81,131 @@ const Tab3 = () => {
 
   return (
     <>
-      <TableContainer
-        component={Paper}
-        sx={{
-          backgroundColor: "transparent",
-          boxShadow: "none",
-        }}
-      >
-        <Table aria-label="custom table">
-          <TableHead>
-            <TableRow>
-              <TableCell
-                sx={{
-                  borderBottomColor: "#f7faff2e",
-                }}
-              >
-                <Select
-                  defaultValue={{
-                    value: "status",
-                    label: "Status",
-                  }}
-                  onChange={handleChange}
-                  options={uniqueStatusValues.map((status) => ({
-                    value: status,
-                    label: status,
-                  }))}
-                  style={{
-                    width: 90,
-                  }}
-                />
-              </TableCell>
-              <TableCell sx={{ borderBottomColor: "#f7faff2e" }}>
-                <Select
-                  defaultValue={{
-                    value: "langauge",
-                    label: "Language",
-                  }}
-                  onChange={handleChangeLang}
-                  options={uniqueStatusValuesLang.map((lang) => ({
-                    value: lang,
-                    label: lang,
-                  }))}
-                  style={{
-                    width: 90,
-                  }}
-                />
-              </TableCell>
-              <TableCell
-                sx={{
-                  borderBottomColor: "#f7faff2e",
-                  color: "#eff1f6bf",
-                }}
-              >
-                <button>Runtime</button>
-              </TableCell>
-              <TableCell
-                sx={{
-                  borderBottomColor: "#f7faff2e",
-                  color: "#eff1f6bf",
-                }}
-              >
-                <button>Time</button>
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {data.map((el) => (
-              <TableRow
-                key={el.id}
-                onClick={() => handleRowClick(el.id)}
-                sx={{
-                  textDecoration: "none",
-                  "&:hover": { backgroundColor: "#ffffff12" },
-                }}
-                style={{ cursor: "pointer" }}
-              >
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <TableContainer
+          component={Paper}
+          sx={{
+            backgroundColor: "transparent",
+            boxShadow: "none",
+          }}
+        >
+          <Table aria-label="custom table">
+            <TableHead>
+              <TableRow>
                 <TableCell
-                  component="th"
-                  scope="row"
                   sx={{
-                    borderBottom: "none",
-                    color: (theme) =>
-                      el.status === "ERROR"
-                        ? theme.palette.error.main
-                        : theme.palette.success.main,
+                    borderBottomColor: "#f7faff2e",
                   }}
                 >
-                  {el.status}
+                  <Select
+                    defaultValue={{
+                      value: "status",
+                      label: "Status",
+                    }}
+                    onChange={handleChange}
+                    options={uniqueStatusValues.map((status) => ({
+                      value: status,
+                      label: status,
+                    }))}
+                    style={{
+                      width: 90,
+                    }}
+                  />
+                </TableCell>
+                <TableCell sx={{ borderBottomColor: "#f7faff2e" }}>
+                  <Select
+                    defaultValue={{
+                      value: "langauge",
+                      label: "Language",
+                    }}
+                    onChange={handleChangeLang}
+                    options={uniqueStatusValuesLang.map((lang) => ({
+                      value: lang,
+                      label: lang,
+                    }))}
+                    style={{
+                      width: 90,
+                    }}
+                  />
                 </TableCell>
                 <TableCell
                   sx={{
-                    borderBottom: "none",
+                    borderBottomColor: "#f7faff2e",
                     color: "#eff1f6bf",
                   }}
                 >
-                  {el.language}
+                  <button>Runtime</button>
                 </TableCell>
                 <TableCell
                   sx={{
-                    borderBottom: "none",
+                    borderBottomColor: "#f7faff2e",
                     color: "#eff1f6bf",
                   }}
                 >
-                  {" "}
-                  {`${el.runtime} ms`}
-                </TableCell>
-                <TableCell
-                  sx={{
-                    borderBottom: "none",
-                    color: "#eff1f6bf",
-                  }}
-                >
-                  {`${new Date(el.time)
-                    .toLocaleString("en-US", { month: "short" })
-                    .toLowerCase()} ${new Date(el.time).getDate()}, 
-                  ${new Date(el.time).getFullYear()}`}
+                  <button>Time</button>
                 </TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+            </TableHead>
+            <TableBody>
+              {data.map((el) => (
+                <TableRow
+                  key={el.id}
+                  onClick={() => handleRowClick(el.id)}
+                  sx={{
+                    textDecoration: "none",
+                    "&:hover": { backgroundColor: "#ffffff12" },
+                  }}
+                  style={{ cursor: "pointer" }}
+                >
+                  <TableCell
+                    component="th"
+                    scope="row"
+                    sx={{
+                      borderBottom: "none",
+                      color: (theme) =>
+                        el.status === "ERROR"
+                          ? theme.palette.error.main
+                          : theme.palette.success.main,
+                    }}
+                  >
+                    {el.status}
+                  </TableCell>
+                  <TableCell
+                    sx={{
+                      borderBottom: "none",
+                      color: "#eff1f6bf",
+                    }}
+                  >
+                    {el.language}
+                  </TableCell>
+                  <TableCell
+                    sx={{
+                      borderBottom: "none",
+                      color: "#eff1f6bf",
+                    }}
+                  >
+                    {" "}
+                    {`${el.runtime} ms`}
+                  </TableCell>
+                  <TableCell
+                    sx={{
+                      borderBottom: "none",
+                      color: "#eff1f6bf",
+                    }}
+                  >
+                    {`${new Date(el.time)
+                      .toLocaleString("en-US", { month: "short" })
+                      .toLowerCase()} ${new Date(el.time).getDate()}, 
+                  ${new Date(el.time).getFullYear()}`}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      )}  
     </>
   );
 };

@@ -5,7 +5,7 @@
  */
 
 import { Button, Tabs, Tag } from "antd";
-import { memo, useState } from "react";
+import { memo, useEffect, useMemo, useState } from "react";
 import { CorrectIcon, DislikeButton, LikeButton } from "../../../utils/icons";
 import { getQuestionDifficulty } from "../../../utils/functions";
 import ProblemLeftExampleCard from "./ProblemLeftExampleCard";
@@ -23,8 +23,9 @@ const ProblemLeftSide = ({ question = {} }) => {
   const onChangeTab = (key) => {
     if (key) {
       // console.log(selectedTab.label);
-      const url = `/problem/${id}/${key}`;
+      const url = `/problem/${id}/${key}/`;
       navigate(url);
+      console.log(key);
     }
   };
 
@@ -33,9 +34,13 @@ const ProblemLeftSide = ({ question = {} }) => {
     setHeight(a.screenX);
   };
 
+  const DESCRIPTION_TAB_KEY = "description";
+  const SOLUTIONS_TAB_KEY = "solutions";
+  const SUBMISSIONS_TAB_KEY = "submissions";
+
   const items = [
     {
-      key: "description",
+      key: DESCRIPTION_TAB_KEY,
       label: `Izoh`,
       children: (
         <div className="left-side__body">
@@ -100,12 +105,12 @@ const ProblemLeftSide = ({ question = {} }) => {
       ),
     },
     {
-      key: "solutions",
+      key: SOLUTIONS_TAB_KEY,
       label: `Boshqa yechimlar`,
       children: `hey2`,
     },
     {
-      key: "submissions",
+      key: SUBMISSIONS_TAB_KEY,
       label: `Yuborigan javoblar`,
       children: <Tab3 />,
     },
