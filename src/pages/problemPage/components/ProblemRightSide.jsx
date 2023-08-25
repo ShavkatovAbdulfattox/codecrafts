@@ -12,6 +12,7 @@ import { useSelector } from "react-redux/es/hooks/useSelector";
 import { usePostAnswerMutation } from "../../../services/questionApi";
 import { ErrorCatcher, getUserData } from "../../../utils/functions.js";
 import User from "./RightUser";
+import { useParams } from "react-router-dom";
 
 const languageOptions = {
   defaultLanguages: [
@@ -46,8 +47,9 @@ const ProblemRightSide = ({
   file = {},
 }) => {
   const state = useSelector((state) => state.leftSide.selectedId);
-//   console.log(state, "store"); // null,
-
+  //   console.log(state, "store"); // null,
+  const params = useParams();
+  console.log(params?.subId);
   const [theme, setTheme] = useState("vs-dark");
   const [editorValue, setEditorValue] = useState("");
   const [answerError, setAnswerError] = useState("");
@@ -94,7 +96,7 @@ const ProblemRightSide = ({
 
   return (
     <>
-      {state ? (
+      {params?.subId ? (
         <User />
       ) : (
         <section

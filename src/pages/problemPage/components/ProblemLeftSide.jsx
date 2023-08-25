@@ -128,6 +128,7 @@ const ProblemLeftSide = ({ question = {} }) => {
               // defaultActiveKey={match.params.source}
               size="small"
               defaultActiveKey={selectedTabLabel}
+              activeKey={selectedTabLabel}
               onChange={onChangeTab}
               items={items}
             />

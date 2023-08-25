@@ -18,6 +18,7 @@ import { setSelectedId } from "../../../../app/features/rightSide/leftSideSlice"
 
 const Tab3 = () => {
   const { id, subId, selectedTabLabel } = useParams();
+  console.log(subId);
   const [isLoading, setIsLoading] = useState(true);
 
   const selectedId = useSelector((state) => state.leftSide.selectedId);
@@ -43,7 +44,7 @@ const Tab3 = () => {
           ...item,
           id: uuidv4(),
         }));
-        // console.log(dataWithIds);
+        console.log(dataWithIds);
         setData(dataWithIds);
       })
       .catch((error) => {
