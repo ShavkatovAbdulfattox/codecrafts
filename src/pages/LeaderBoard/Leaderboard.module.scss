@@ -1,42 +1,107 @@
 .mainContent {
-  display: flex;
-  justify-content: space-around;
   padding: 50px 0;
+  padding: 0 15px;
 }
 
-.listWrapper {
-  width: 100%;
-  padding: 0 15px;
-
-  [data-title] {
-    font-size: 22px;
-    text-transform: capitalize;
-    margin-bottom: 15px;
-  }
-
-  .list {
-    max-width: 500px;
+.listContainer {
+  .listWrapper {
     width: 100%;
 
-    li {
-      border-bottom: 0.5px solid gray;
-      padding: 5px 0;
+    &[data-champion="true"] {
+      .list {
+        li {
+          animation: fade-in 0.2s forwards;
+          transform: translateY(-10px);
+          opacity: 0;
 
-      [data-content] {
-        display: grid;
-        grid-template-columns: 50px 50px auto 30px;
-        align-items: center;
+          @keyframes fade-in {
+            100% {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
 
-        [data-number] {
-          text-align: center;
-        }
+          &:hover {
+            filter: saturate(1.5);
+            transition: 0;
+          }
 
-        [data-picture] {
-          background: gray;
-          height: 40px;
-          aspect-ratio: 1/1;
+          &:nth-child(odd) {
+            background: linear-gradient(to right, rgb(66, 49, 44), rgb(69, 34, 37));
+          }
+          &:nth-child(even) {
+            background: linear-gradient(to right, rgba(66, 49, 44, 0.277), rgba(69, 34, 37, 0.243));
+          }
+
+          [data-content] {
+            [data-picture] {
+              height: 50px;
+            }
+          }
         }
       }
+    }
+
+    .listHeader {
+      display: grid;
+      grid-template-columns: 60px 70px auto 90px;
+      padding: 10px 0;
+
+      span {
+        text-align: center;
+      }
+    }
+
+    [data-title] {
+      font-size: 22px;
+      text-transform: capitalize;
+      margin-bottom: 15px;
+    }
+
+    .list {
+      width: 100%;
+
+      li {
+        border-bottom: 0.5px solid gray;
+        padding: 5px 0;
+
+        [data-content] {
+          display: grid;
+          grid-template-columns: 60px 70px auto 50px;
+          align-items: center;
+
+          [data-number] {
+            text-align: center;
+          }
+
+          [data-picture] {
+            background: gray;
+            height: 40px;
+            aspect-ratio: 1/1;
+          }
+        }
+      }
+    }
+  }
+}
+
+.listButtons {
+  display: flex;
+  column-gap: 10px;
+  margin: 30px 0;
+
+  button {
+    text-transform: capitalize;
+    border-radius: 8px;
+    border: 0.3px solid rgb(148, 148, 148);
+    padding: 5px 10px;
+    color: rgb(226, 226, 226);
+    background: transparent;
+
+    &[active="true"] {
+      animation: btn-fade 0.2s forwards;
+      background: linear-gradient(to right, rgb(66, 49, 44), rgb(69, 34, 37));
+      color: white;
     }
   }
 }
