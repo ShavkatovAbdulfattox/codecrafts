@@ -8,10 +8,12 @@ import { DislikeButton, LikeButton } from "../../utils/icons";
 const QuestionTable = ({ questions }) => {
 
      const gotoPath = (question) => {
-          if (question.query) {
-               console.log({ question });
-          }
-          const path = question.query ? "/problem/query/" : "/problem/"
+          // if (question.query) {
+               // console.log({ question });
+          // }
+          // const path = question.query ? "/problem/query/" : "/problem/"
+          // return path + question.id
+          const path = question.query ? "/query/" : "/problem/"
           return path + question.id
      }
 

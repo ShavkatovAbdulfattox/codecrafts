@@ -78,6 +78,20 @@
             background: gray;
             height: 40px;
             aspect-ratio: 1/1;
+
+            img {
+              object-fit: cover;
+              visibility: hidden;
+              opacity: 0;
+              height: 100%;
+              width: 100%;
+              transition: 0.3s;
+
+              &[data-loaded="true"] {
+                visibility: visible;
+                opacity: 1;
+              }
+            }
           }
         }
       }

@@ -18,7 +18,7 @@ function ProblemPage() {
   const isQueryPage = query === "query";
 
   const { data: question = {}, isLoading } = useGetQuestionQuery({
-    urlPart: !isQueryPage ? "query" : "question",
+    urlPart: isQueryPage ? "query" : "question",
     questionId: id,
     userId: getUserData()?.id,
   });

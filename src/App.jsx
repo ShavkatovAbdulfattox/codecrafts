@@ -77,7 +77,7 @@ const App = () => {
           element: <ProblemPage />,
         },
         {
-          path: "/problem/:query/:id",
+          path: "/:query/:id",
           errorElement: <ErrorBoundary />,
           element: (
             // <PrivateRoute>
