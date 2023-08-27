@@ -63,6 +63,26 @@ export const problemsApi = createApi({
             }),
             transformResponse: (response) => response.data,
         }),
+
+        // Like button
+        like: builder.mutation({
+            query: (body) => ({
+                url: `/question/button/like/${body.userId}/${body.questionId}`,
+                method: "PUT",
+                body,
+            }),
+            transformResponse: (response) => response.data,
+        }),
+
+        // Dislike button
+        dislike: builder.mutation({
+            query: (body) => ({
+                url: `/question/button/dislike/${body.userId}/${body.questionId}`,
+                method: "PUT",
+                body,
+            }),
+            transformResponse: (response) => response.data,
+        }),
     }),
 });
 
@@ -71,6 +91,8 @@ export const {
     useGetQuestionQuery,
     usePostSolutionMutation,
     usePostAnswerMutation,
+    useLikeMutation,
+    useDislikeMutation,
     useGetQuestionsByTopicQuery,
     useGetCategoriesQuery,
 } = problemsApi;
