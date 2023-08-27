@@ -1,18 +1,21 @@
 .start-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   .start-section-context {
     width: 100%;
-    position: absolute;
-    top: 30%;
+    // position: absolute;
+    // top: 30%;
 
     .start-section__title {
-      line-height: .9em;
-      letter-spacing: -11px;
+      // line-height: .9em;
+      // letter-spacing: -11px;
 
       & span {
         background-size: 100%;
-        line-height: .9em;
-        letter-spacing: -11px;
+        // line-height: .9em;
+        // letter-spacing: -11px;
         background-clip: text;
         -webkit-text-fill-color: transparent;
         background-color: rgb(120, 62, 255);
@@ -29,7 +32,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  overflow: hidden !important;
   z-index: -5;
 }
 
@@ -163,8 +166,8 @@
 
 .shadow {
   position: absolute;
-  width: 600px;
-  height: 300px;
+  width: 100%;
+  height: 60%;
   background: red;
   filter: blur(350px);
   bottom: -10rem;

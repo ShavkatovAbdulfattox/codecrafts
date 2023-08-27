@@ -20,3 +20,9 @@
     margin: 0 auto;
     padding: 0 15px;
 }
+
+@media screen and (max-width: 1128px){
+    .main-content{
+        padding-top: 67px !important;
+    }
+}

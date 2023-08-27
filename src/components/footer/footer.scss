@@ -1,9 +1,10 @@
 /** @format */
 
 .global-footer {
-  padding: 10px;
+  padding: 10px !important;
   display: flex;
   justify-content: space-around;
+  overflow: hidden !important;
 
   .bottom {
     padding-bottom: 20px;

@@ -72,19 +72,21 @@ const ProblemsListPage = () => {
     }, [topics]);
 
   return (
-    <section className="problems-list-page container">
-      <div className="problems-list__head">
-        <h1 className="text-[1.3em]">
-          Savollar <Loader show={isLoading} />
-        </h1>
-        <div className="flex gap-[8px] text-[#ccc] py-2">
-          <Categories />
-        </div>
-        <div className="flex gap-[8px] text-[#ccc] text-[.85em]">
-          <Topics />
-        </div>
-        <div className="flex flex-col gap-[8px] text-[#ccc] py-4">
-          <QuestionsTable questions={questions} />
+    <section className="container main-content">
+      <div className="problems-list-page">
+        <div className="problems-list__head">
+          <h1 className="text-[1.3em]">
+            Savollar <Loader show={isLoading} />
+          </h1>
+          <div className="flex gap-[8px] text-[#ccc] py-2">
+            <Categories />
+          </div>
+          <div className="flex gap-[8px] text-[#ccc] text-[.85em]">
+            <Topics />
+          </div>
+          <div className="flex flex-col gap-[8px] text-[#ccc] py-4">
+            <QuestionsTable questions={questions} />
+          </div>
         </div>
       </div>
     </section>

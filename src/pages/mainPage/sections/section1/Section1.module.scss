@@ -24,32 +24,52 @@
   grid-template-columns: repeat(5, 1fr);
   grid-auto-flow: row;
   grid-gap: 1.5rem;
+
+  @media screen and (max-width: 1000px) {
+    display: flex;
+    flex-direction: column;
+    grid-gap: 1rem;
+  }
 }
 
 .verticalCard {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  align-content: space-between;
   position: relative;
-  overflow: hidden;
+  // overflow: hidden;
   border-radius: 15px;
 }
 
-.relativeImg{
-    margin-top: 40px;
+.relativeImg {
+  margin-top: 40px;
 }
 
 /******/
+*{
+  overflow: visible !important;
+}
 
 .horizontalCard {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
   justify-content: space-between;
   position: relative;
-  overflow: hidden;
+  // overflow: hidden;
   border-radius: 15px;
 
+  @media screen and (max-width: 1000px) {
+    display: block;
+  }
+
   img[data-main-img] {
-    width: 40%;
+    width: 100%;
     object-fit: contain;
+
+    @media screen and (max-width: 1000px) {
+      padding: 20px;
+      padding-right: 0;
+    }
   }
 }
 
@@ -59,9 +79,14 @@
   row-gap: 22px;
   align-items: flex-start;
   padding: 65px;
+  width: 100%;
 
   &[horizontal="true"] {
     margin-right: 220px;
+  }
+
+  @media screen and (max-width: 1000px) {
+    padding: 20px;
   }
 }
 
@@ -71,12 +96,20 @@
 
 .cardTitle {
   @include fontStyle(30px, "InputSans-Regular", white);
+
+  @media screen and (max-width: 1200px) {
+    @include fontStyle(22px, "InputSans-Regular", white);
+  }
 }
 
 .cardText {
   @include fontStyle((20px), "IBMPlexSans-Light", white);
   font-weight: 400;
   line-height: 160%;
+
+  @media screen and (max-width: 1200px) {
+    @include fontStyle(16px, "IBMPlexSans-Light", white);
+  }
 }
 
 .cardLink {
