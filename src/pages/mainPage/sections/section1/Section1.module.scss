@@ -36,7 +36,7 @@
   display: grid;
   align-content: space-between;
   position: relative;
-  // overflow: hidden;
+  overflow: hidden !important;
   border-radius: 15px;
 }
 
