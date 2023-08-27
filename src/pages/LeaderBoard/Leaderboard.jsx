@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useGetLeadersQuery } from "../../services/leaderboardApi";
 import classes from "./LeaderBoard.module.scss";
 import { baseURL } from "../../constants/apiConstants";
+import { memo } from "react";
 
 const Leaderboard = () => {
   const { data } = useGetLeadersQuery();
@@ -64,4 +65,4 @@ const Leaderboard = () => {
     );
 };
 
-export default Leaderboard;
+export default memo(Leaderboard);

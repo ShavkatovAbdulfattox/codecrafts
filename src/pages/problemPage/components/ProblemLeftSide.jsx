@@ -13,8 +13,9 @@ import ProblemLeftExampleCard from "./ProblemLeftExampleCard";
 import Tab3 from "./ProblemLeftData/ProblemLeftTabData";
 import { ReflexContainer, ReflexSplitter, ReflexElement } from "react-reflex";
 import { useNavigate, useParams } from "react-router-dom";
+import parse from 'html-react-parser';
 
-const ProblemLeftSide = ({ question = {} }) => {
+const ProblemLeftSide = ({ question = {}, isQueryPage }) => {
   const [elementHeight, setHeight] = useState(0);
 
   const { id, selectedTabLabel } = useParams();
@@ -25,7 +26,6 @@ const ProblemLeftSide = ({ question = {} }) => {
       // console.log(selectedTab.label);
       const url = `/problem/${id}/${key}/`;
       navigate(url);
-      console.log(key);
     }
   };
 
@@ -66,7 +66,9 @@ const ProblemLeftSide = ({ question = {} }) => {
             </button>
           </div>
           <div className="left-problem__text">
-            <pre>{question.definition?.trim()}</pre>
+            {/* <pre>{question.definition?.trim()}</pre> */}
+            {question.definition && parse(question.definition)}
+            {/*  */}
           </div>
           <div className="left-problem__examples">
             {question.exampleList?.map((example, index) => {
@@ -75,28 +77,7 @@ const ProblemLeftSide = ({ question = {} }) => {
                   key={index}
                   example={example}
                   index={index}
-                />
-              );
-            })}
-          </div>
-          <div className="left-problem__examples">
-            {question.exampleList?.map((example, index) => {
-              return (
-                <ProblemLeftExampleCard
-                  key={index}
-                  example={example}
-                  index={index}
-                />
-              );
-            })}
-          </div>
-          <div className="left-problem__examples">
-            {question.exampleList?.map((example, index) => {
-              return (
-                <ProblemLeftExampleCard
-                  key={index}
-                  example={example}
-                  index={index}
+                  isQueryPage={isQueryPage}
                 />
               );
             })}
