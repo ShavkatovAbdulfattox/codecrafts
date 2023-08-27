@@ -1,8 +1,7 @@
-import React, { useId } from "react";
+import React from "react";
 import { Select } from "antd";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { v4 as uuidv4 } from "uuid";
 import {
   Table,
   TableBody,
@@ -17,10 +16,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { setSelectedId } from "../../../../app/features/rightSide/leftSideSlice";
 
 const Tab3 = () => {
-  const { id, subId, selectedTabLabel } = useParams();
-  console.log(subId);
+  const { id, selectedTabLabel } = useParams();
   const [isLoading, setIsLoading] = useState(true);
-
+  
   const selectedId = useSelector((state) => state.leftSide.selectedId);
 
   const dispatch = useDispatch();
@@ -40,12 +38,13 @@ const Tab3 = () => {
     })
       .then((response) => {
         const apiData = response.data.data;
-        const dataWithIds = apiData.map((item) => ({
-          ...item,
-          id: uuidv4(),
-        }));
-        console.log(dataWithIds);
-        setData(dataWithIds);
+        // const dataWithIds = apiData.map((item) => ({
+        //   ...item,
+        //   id: uuidv4(),
+        // }));
+        // console.log(dataWithIds);
+        console.log(apiData);
+        setData(apiData);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -59,7 +58,6 @@ const Tab3 = () => {
     if (subId) {
       navigate(`/problem/${id}/${selectedTabLabel}/${subId}`);
       dispatch(setSelectedId(subId));
-      console.log(subId);
     }
   };
 
@@ -187,7 +185,6 @@ const Tab3 = () => {
                       color: "#eff1f6bf",
                     }}
                   >
-                    {" "}
                     {`${el.runtime} ms`}
                   </TableCell>
                   <TableCell
@@ -206,7 +203,7 @@ const Tab3 = () => {
             </TableBody>
           </Table>
         </TableContainer>
-      )}  
+      )}
     </>
   );
 };

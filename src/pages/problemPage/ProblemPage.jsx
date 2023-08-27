@@ -28,7 +28,7 @@ function ProblemPage() {
   //   };
 
   return (
-    <div className="playground-body">
+    <div className="playground-body main-content">
       <ReflexContainer
         orientation="vertical"
         style={{ display: "flex", width: "100%" }}
