@@ -47,9 +47,10 @@ const ProblemRightSide = ({
   file = {},
 }) => {
   const state = useSelector((state) => state.leftSide.selectedId);
-  //   console.log(state, "store"); // null,
+
   const params = useParams();
-  console.log(params?.subId);
+  const paramId = params?.subId;
+
   const [theme, setTheme] = useState("vs-dark");
   const [editorValue, setEditorValue] = useState("");
   const [answerError, setAnswerError] = useState("");
@@ -96,8 +97,8 @@ const ProblemRightSide = ({
 
   return (
     <>
-      {params?.subId ? (
-        <User />
+      {paramId ? (
+        <User paramId={paramId}/>
       ) : (
         <section
           className="right-side overflow-hidden"
