@@ -5,7 +5,7 @@ export function getQuestionDifficulty(level) {
     switch (level) {
         case "easy":
             return "oson";
-        case "meduim":
+        case "medium":
             return "o'rta";
         case "difficult":
             return "qiyin";
