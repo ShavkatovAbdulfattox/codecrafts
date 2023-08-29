@@ -20,8 +20,8 @@ const ProblemsListPage = () => {
   // Categoriyalarni ichidagi topiclarni olish
   const topics = useMemo(
     () =>
-      categories.find((category) => category.id === categoryId)
-        ?.topicList || [],
+      categories.find((category) => category.id === categoryId)?.topicList ||
+      [],
     [categories, categoryId]
   );
 
@@ -39,9 +39,7 @@ const ProblemsListPage = () => {
 
   const Categories = () => {
     const className = (category) =>
-      category.id === categoryId
-        ? "category-button-active"
-        : "category-button";
+      category.id === categoryId ? "category-button-active" : "category-button";
     return categories.map((category) => (
       <div key={category.id}>
         <Button
