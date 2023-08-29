@@ -54,49 +54,45 @@ export const problemsApi = createApi({
       transformResponse: (response) => response.data,
     }),
 
+    // Yechimni qo'shish
+    postSolution: builder.mutation({
+      query: (answer) => ({
+        url: `/solution/create`,
+        method: "POST",
+        body: answer,
+      }),
+      transformResponse: (response) => response.data,
+    }),
 
-        // Yechimni qo'shish
-        postSolution: builder.mutation({
-            query: (answer) => ({
-                url: `/solution/create`,
-                method: "POST",
-                body: answer,
-            }),
-            transformResponse: (response) => response.data,
-        }),
+    // Like button
+    like: builder.mutation({
+      query: (body) => ({
+        url: `/question/button/like/${body.userId}/${body.questionId}`,
+        method: "PUT",
+        body,
+      }),
+      transformResponse: (response) => response.data,
+    }),
 
-        // Like button
-        like: builder.mutation({
-            query: (body) => ({
-                url: `/question/button/like/${body.userId}/${body.questionId}`,
-                method: "PUT",
-                body,
-            }),
-            transformResponse: (response) => response.data,
-        }),
-
-        // Dislike button
-        dislike: builder.mutation({
-            query: (body) => ({
-                url: `/question/button/dislike/${body.userId}/${body.questionId}`,
-                method: "PUT",
-                body,
-            }),
-            transformResponse: (response) => response.data,
-        }),
-
+    // Dislike button
+    dislike: builder.mutation({
+      query: (body) => ({
+        url: `/question/button/dislike/${body.userId}/${body.questionId}`,
+        method: "PUT",
+        body,
+      }),
+      transformResponse: (response) => response.data,
     }),
   }),
 });
 
 export const {
-    useGetTopicsQuery,
-    useGetQuestionQuery,
-    usePostSolutionMutation,
-    usePostAnswerMutation,
-    useLikeMutation,
-    useDislikeMutation,
-    useGetQuestionsByTopicQuery,
-    useGetCategoriesQuery,
-
+  useGetTopicsQuery,
+  useGetQuestionQuery,
+  usePostSolutionMutation,
+  usePostAnswerMutation,
+  useLikeMutation,
+  useDislikeMutation,
+  useGetQuestionsByTopicQuery,
+  useGetCategoriesQuery,
 } = problemsApi;
