@@ -5,7 +5,7 @@ import Faq from "../../components/Faq/Faq";
 
 const MainPage = () => {
     return (
-        <div className="main-page">
+        <div className="main-page main-content">
             <StartSection/>
             <Section1/>
             {/* <div className={classes.noiseBg}></div> */}

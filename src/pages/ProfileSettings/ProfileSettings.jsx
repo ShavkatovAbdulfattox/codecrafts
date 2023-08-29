@@ -6,13 +6,14 @@ import { toast } from "react-toastify";
 import { motion } from "framer-motion";
 
 function ProfileSettings() {
-  const userData = useSelector((state) => state.user.data);
+  const { isLogged, userData } = useSelector((state) => state.user);
 
-  const [isVisiblePassword, setIsVisiblePassword] = useState(false);
+  console.log(userData);
+  // const [isVisiblePassword, setIsVisiblePassword] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
 
-  const [name, setName] = useState(userData.data.name);
-  const [email, setEmail] = useState(userData.data.email);
+  const [name, setName] = useState(userData.name);
+  const [email, setEmail] = useState(userData.email);
   const [selectedFile, setSelectedFile] = useState(null);
 
   // ! The function below is choosing the picture and setting it to the state
@@ -21,66 +22,65 @@ function ProfileSettings() {
     setSelectedFile(event.target.files[0]);
   };
 
-  async function updateUserPhoto(e, userId) {
-    e.preventDefault();
-    // Get the selected file from the file inpu
+  // async function updateUserPhoto(e, userId) {
+  //   e.preventDefault();
+  //   // Get the selected file from the file inpu
 
-    if (!selectedFile) {
-      console.error("No file selected!");
-      toast.error("Iltimos rasm tanlang", {
-        position: "top-right",
-        autoClose: 3965,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
-      return;
-    }
+  //   if (!selectedFile) {
+  //     console.error("No file selected!");
+  //     toast.error("Iltimos rasm tanlang", {
+  //       position: "top-right",
+  //       autoClose: 3965,
+  //       hideProgressBar: false,
+  //       closeOnClick: true,
+  //       pauseOnHover: true,
+  //       draggable: true,
+  //       progress: undefined,
+  //       theme: "dark",
+  //     });
+  //     return;
+  //   }
 
-    // Create a FormData object to send the file as part of the request
-    const formData = new FormData();
-    formData.append("photo", selectedFile);
-    console.log(formData);
+  //   // Create a FormData object to send the file as part of the request
+  //   const formData = new FormData();
+  //   formData.append("photo", selectedFile);
+  //   console.log(formData);
 
-    try {
-      const response = await fetch(
-        `https://edubinplatform-a01d5146e549.herokuapp.com/user/v1/update/${userId}`,
-        {
-          method: "PUT",
-          body: formData,
-        }
-      );
+  //   try {
+  //     const response = await fetch(
+  //       `https://edubinplatform-a01d5146e549.herokuapp.com/user/v1/update/${userId}`,
+  //       {
+  //         method: "PUT",
+  //         body: formData,
+  //       }
+  //     );
 
-      if (!(response.status >= 200) & (response.status <= 300)) {
-        throw new Error("Network response was not ok");
-      }else{
-        toast.success("Sizning suratingiz  yuklandi ", {
-          position: "top-right",
-          autoClose: 3965,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-        });
-      }
+  //     if (!(response.status >= 200) & (response.status <= 300)) {
+  //       throw new Error("Network response was not ok");
+  //     } else {
+  //       toast.success("Sizning suratingiz  yuklandi ", {
+  //         position: "top-right",
+  //         autoClose: 3965,
+  //         hideProgressBar: false,
+  //         closeOnClick: true,
+  //         pauseOnHover: true,
+  //         draggable: true,
+  //         progress: undefined,
+  //         theme: "dark",
+  //       });
+  //     }
 
-      const data = await response.json();
-      console.log("Photo update successful:", data);
-    } catch (error) {
-      toast.error("Xato iltimos qaytadan yuklang", { theme: "dark" });
-      console.error("Error updating photo:", error);
-    }
-  }
+  //     const data = await response.json();
+  //     console.log("Photo update successful:", data);
+  //   } catch (error) {
+  //     toast.error("Xato iltimos qaytadan yuklang", { theme: "dark" });
+  //     console.error("Error updating photo:", error);
+  //   }
+  // }
   return (
     <>
       <header className="mt-10 container">
         <h1 className="text-3xl text-gray-300  font-Lexend">Account settngs</h1>
-
         <div className="bg-gray-800 rounded-md p-5 pb-16 mt-10 ">
           <div className="flex justify-between items-center mb-10">
             <h2 className="uppercase font-Lexend font-bold tracking-wider text-xl ">
@@ -89,7 +89,9 @@ function ProfileSettings() {
             <div className="flex items-center gap-5">
               <motion.div
                 whileTap={{ scale: 0.8 }}
-                className="text-4xl p-1 rounded-lg bg-emerald-500 cursor-pointer"
+                className={`text-4xl p-1 rounded-lg ${
+                  isEditMode ? "bg-red-500" : "bg-yellow-500"
+                }  cursor-pointer`}
               >
                 {isEditMode ? (
                   <MdKeyboardReturn
@@ -97,8 +99,8 @@ function ProfileSettings() {
                       const parentElement = e.target.parentNode;
 
                       if (parentElement) {
-                        setName(userData.data.name);
-                        setEmail(userData.data.email);
+                        setName(userData.name);
+                        setEmail(userData.email);
                         setIsEditMode(false);
                         toast.info("Xech nasra ozgartirilmadi", {
                           position: "top-right",
@@ -115,6 +117,7 @@ function ProfileSettings() {
                   />
                 ) : (
                   <AiFillEdit
+                    className=""
                     onClick={(e) => {
                       const parentElement = e.target.parentNode;
 
@@ -143,7 +146,7 @@ function ProfileSettings() {
                   });
                   setIsEditMode(false);
                 }}
-                className={`text-4xl p-1 rounded-lg bg-red-500  ${
+                className={`text-4xl p-1 rounded-lg bg-emerald-500  ${
                   isEditMode
                     ? "opacity-100 cursor-pointer"
                     : " opacity-50 cursor-not-allowed"

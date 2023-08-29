@@ -38,7 +38,8 @@
         .quesiton-link-button {
             transition: 0.05s !important;
             &:hover {
-                color: var(--color-active-primary);
+                color: #fff;
+                text-decoration: underline;
             }
         }
         .question-table-likes {
@@ -48,6 +49,21 @@
             & > div {
                 display: flex;
                 gap: 8px;
+
+                &:nth-child(2) {
+                    svg {
+                        margin-top: 2px;
+                    }
+                }
+
+                &:hover {
+                    cursor: pointer;
+                    svg {
+                        path {
+                            fill: #fff;
+                        }
+                    }
+                }
             }
         }
         .table-row-light {
@@ -55,6 +71,12 @@
                 color: #fff;
                 border-color: var(--color-bg-secondary);
                 background-color: var(--color-bg-secondary) !important;
+                a {
+                    &:hover {
+                        text-decoration: underline;
+                        color: #fff;
+                    }
+                }
             }
         }
         .ant-table-thead,

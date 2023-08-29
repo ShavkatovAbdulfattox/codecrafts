@@ -78,6 +78,7 @@
             background: gray;
             height: 40px;
             aspect-ratio: 1/1;
+            overflow: hidden !important;
 
             img {
               object-fit: cover;
