@@ -1,13 +1,12 @@
 import React from "react";
-
+import LeftSide from "./components/LeftSide";
+import RightSide from "./components/RightSide";
 function Profile() {
   return (
-    <>
-      <header>
-        <h1 className="text-5xl text-center text-white">Profile</h1>
-      </header>
-      <main></main>
-    </>
+    <main className="container flex p-5 gap-5">
+      <LeftSide />
+      <RightSide />
+    </main>
   );
 }
 
