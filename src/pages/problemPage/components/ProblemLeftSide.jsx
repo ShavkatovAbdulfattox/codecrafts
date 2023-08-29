@@ -13,7 +13,7 @@ import ProblemLeftExampleCard from "./ProblemLeftExampleCard";
 import Tab3 from "./ProblemLeftData/ProblemLeftTabData";
 import { ReflexContainer, ReflexSplitter, ReflexElement } from "react-reflex";
 import { useNavigate, useParams } from "react-router-dom";
-import parse from 'html-react-parser';
+import parse from "html-react-parser";
 
 const ProblemLeftSide = ({ question = {}, isQueryPage }) => {
   const [elementHeight, setHeight] = useState(0);
