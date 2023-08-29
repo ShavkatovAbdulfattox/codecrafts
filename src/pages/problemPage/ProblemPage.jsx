@@ -31,7 +31,7 @@ function ProblemPage() {
     <div className="playground-body main-content">
       <ReflexContainer
         orientation="vertical"
-        style={{ display: "flex", width: "100%" }}
+        style={{ display: "flex", width: "100%", height: '100%' }}
       >
         <ReflexElement style={{ overflow: "hidden" }}>
           <ProblemLeftSide
