@@ -11,6 +11,7 @@ import { getQuestionDifficulty } from "../../../utils/functions";
 import ProblemLeftExampleCard from "./ProblemLeftExampleCard";
 
 import Tab3 from "./ProblemLeftData/ProblemLeftTabData";
+<<<<<<< HEAD
 import { ReflexContainer, ReflexSplitter, ReflexElement } from "react-reflex";
 import { useNavigate, useParams } from "react-router-dom";
 import parse from "html-react-parser";
@@ -20,6 +21,21 @@ const ProblemLeftSide = ({ question = {}, isQueryPage }) => {
 
   const { id, selectedTabLabel } = useParams();
   const navigate = useNavigate();
+=======
+import EditorialTab from "./EditorialTab";
+import {
+  useDislikeMutation,
+  useLikeMutation,
+} from "../../../services/questionApi";
+
+const ProblemLeftSide = ({ question = {} }) => {
+  const [elementHeight, setHeight] = useState(0);
+  const { id, selectedTabLabel } = useParams();
+  const navigate = useNavigate();
+
+  const [giveLike, { isLoading: isLiking }] = useLikeMutation();
+  const [giveDislike, { isLoading: isDisliking }] = useDislikeMutation();
+>>>>>>> 095782acdfd122a597d0ed32b4d338043f68789e
 
   const onChangeTab = (key) => {
     if (key) {
@@ -29,6 +45,7 @@ const ProblemLeftSide = ({ question = {}, isQueryPage }) => {
     }
   };
 
+<<<<<<< HEAD
   const onResize = (a) => {
     // console.log(a.screenX);
     setHeight(a.screenX);
@@ -38,13 +55,39 @@ const ProblemLeftSide = ({ question = {}, isQueryPage }) => {
   const SOLUTIONS_TAB_KEY = "solutions";
   const SUBMISSIONS_TAB_KEY = "submissions";
 
+=======
+  const onGiveLike = () => {
+    giveLike({ questionId: id, userId: getUserData()?.id });
+  };
+
+  const onGiveDislike = () => {
+    giveDislike({ questionId: id, userId: getUserData()?.id });
+  };
+
+  const DESCRIPTION_TAB_KEY = "description";
+  const SOLUTIONS_TAB_KEY = "solutions";
+  const SUBMISSIONS_TAB_KEY = "submissions";
+  const EDITORIAL_TAB_KEY = "editorial";
+
+>>>>>>> 095782acdfd122a597d0ed32b4d338043f68789e
   const items = [
     {
       key: DESCRIPTION_TAB_KEY,
       label: `Izoh`,
       children: (
         <div className="left-side__body">
+<<<<<<< HEAD
           <h1>{question.name}</h1>
+=======
+          <h1>
+            {question.name}{" "}
+            {isLiking || isDisliking ? (
+              <Spin style={{ marginInlineStart: "10px" }} />
+            ) : (
+              ""
+            )}{" "}
+          </h1>
+>>>>>>> 095782acdfd122a597d0ed32b4d338043f68789e
           <div className="left-side__info">
             <Tag
               color="orange"
@@ -56,19 +99,30 @@ const ProblemLeftSide = ({ question = {}, isQueryPage }) => {
               {getQuestionDifficulty(question.level)}
             </Tag>
             <CorrectIcon />
+<<<<<<< HEAD
             <button className="left-side__like">
               <LikeButton />
               <span>{question.like1}</span>
             </button>
             <button className="left-side__dislike">
+=======
+            <button className="left-side__like" onClick={onGiveLike}>
+              <LikeButton />
+              <span>{question.like1}</span>
+            </button>
+            <button className="left-side__dislike" onClick={onGiveDislike}>
+>>>>>>> 095782acdfd122a597d0ed32b4d338043f68789e
               <DislikeButton />
               <span>{question.dislike}</span>
             </button>
           </div>
           <div className="left-problem__text">
+<<<<<<< HEAD
             {/* <pre>{question.definition?.trim()}</pre> */}
             {question.definition && parse(question.definition)}
             {/*  */}
+=======
+            <pre>{question.definition?.trim()}</pre>
           </div>
           <div className="left-problem__examples">
             {question.exampleList?.map((example, index) => {
@@ -77,7 +131,33 @@ const ProblemLeftSide = ({ question = {}, isQueryPage }) => {
                   key={index}
                   example={example}
                   index={index}
+                />
+              );
+            })}
+          </div>
+          <div className="left-problem__examples">
+            {question.exampleList?.map((example, index) => {
+              return (
+                <ProblemLeftExampleCard
+                  key={index}
+                  example={example}
+                  index={index}
+                />
+              );
+            })}
+>>>>>>> 095782acdfd122a597d0ed32b4d338043f68789e
+          </div>
+          <div className="left-problem__examples">
+            {question.exampleList?.map((example, index) => {
+              return (
+                <ProblemLeftExampleCard
+                  key={index}
+                  example={example}
+                  index={index}
+<<<<<<< HEAD
                   isQueryPage={isQueryPage}
+=======
+>>>>>>> 095782acdfd122a597d0ed32b4d338043f68789e
                 />
               );
             })}
@@ -86,6 +166,14 @@ const ProblemLeftSide = ({ question = {}, isQueryPage }) => {
       ),
     },
     {
+<<<<<<< HEAD
+=======
+      key: EDITORIAL_TAB_KEY,
+      label: `Editorial`,
+      children: <EditorialTab />,
+    },
+    {
+>>>>>>> 095782acdfd122a597d0ed32b4d338043f68789e
       key: SOLUTIONS_TAB_KEY,
       label: `Boshqa yechimlar`,
       children: `hey2`,
@@ -98,7 +186,11 @@ const ProblemLeftSide = ({ question = {}, isQueryPage }) => {
   ];
 
   return (
+<<<<<<< HEAD
     <section className="problem-left-container flex w-full global-layout">
+=======
+    <section className="problem-left-container h-full flex w-full">
+>>>>>>> 095782acdfd122a597d0ed32b4d338043f68789e
       <ReflexContainer
         orientation="horizontal"
         className="h-full w-full flex flex-col"
