@@ -5,13 +5,14 @@ import "./index.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ConfigProvider } from "antd";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 const customStyles = {
-  colorPrimary: '#fff',
-  boxShadowSecondary: '#fff',
-  colorPrimaryHover: '#333A44',
-  colorPrimaryActive: '#ddd',
-}
+  colorPrimary: "#fff",
+  boxShadowSecondary: "#fff",
+  colorPrimaryHover: "#333A44",
+  colorPrimaryActive: "#ddd",
+};
 
 const theme = {
   components: {
@@ -29,15 +30,18 @@ const theme = {
     },
     Spin: {
       colorPrimary: "#fff",
-    }
-  }
-}
+    },
+  },
+};
+const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <ConfigProvider theme={theme}>
-      <App />
-    </ConfigProvider>
-    <ToastContainer />
+    <QueryClientProvider client={queryClient}>
+      <ConfigProvider theme={theme}>
+        <App />
+      </ConfigProvider>
+      <ToastContainer />
+    </QueryClientProvider>
   </React.StrictMode>
 );
