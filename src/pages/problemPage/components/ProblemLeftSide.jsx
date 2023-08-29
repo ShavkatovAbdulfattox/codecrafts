@@ -98,7 +98,7 @@ const ProblemLeftSide = ({ question = {}, isQueryPage }) => {
   ];
 
   return (
-    <section className="problem-left-container h-full flex w-full">
+    <section className="problem-left-container flex w-full global-layout">
       <ReflexContainer
         orientation="horizontal"
         className="h-full w-full flex flex-col"

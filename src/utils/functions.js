@@ -2,16 +2,18 @@
 import { message } from "antd";
 
 export function getQuestionDifficulty(level) {
-  switch (level) {
-    case "easy":
-      return "oson";
-    case "meduim":
-      return "o'rta";
-    case "difficult":
-      return "qiyin";
-    default:
-      return "-";
-  }
+
+    switch (level) {
+        case "easy":
+            return "oson";
+        case "medium":
+            return "o'rta";
+        case "difficult":
+            return "qiyin";
+        default:
+            return "-";
+    }
+
 }
 
 // UserData and Token Functions

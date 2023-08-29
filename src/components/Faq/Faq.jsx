@@ -26,14 +26,14 @@ const faq = [
 function Faq() {
   return (
     <section className="container">
-      <h2 className="text-4xl text-center font-Lexend leading-tight ">
+      <h2 className="text-4xl text-center font-Lexend leading-tight max-[1000px]:text-3xl">
         Codewars-dan nima <br /> uchun foydalanishim mumkin?
       </h2>
-      <p className="text-2xl text-center mt-5 font-Karla text-gray-300">
+      <p className="text-2xl text-center mt-5 font-Karla text-gray-300 max-[1000px]:text-[20px]">
         Boshlang'ichdan mutaxassisgacha va undan yuqori ...
       </p>
 
-      <div className="grid grid-cols-3 gap-6 mt-10">
+      <div className="grid grid-cols-3 gap-6 mt-10 max-[1000px]:flex max-[1000px]:flex-col">
         {faq.map((item, i) => {
           return (
             <div className={`${style.faq_item} flex flex-col p-10 `} key={i}>
@@ -43,7 +43,7 @@ function Faq() {
               <h3 className="text-2xl font-Karla font-bold mt-6 mb-3">
                 {item.title}
               </h3>
-              <p className="text-sm font-Lexend text-gray-300 text-justify">
+              <p className="text-sm font-Lexend text-gray-300">
                 {item.text}
               </p>
             </div>

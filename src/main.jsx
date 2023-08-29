@@ -4,28 +4,38 @@ import App from "./App.jsx";
 import "./index.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { ConfigProvider, theme } from "antd";
+import { ConfigProvider } from "antd";
 
-// Bu AntDesign ni configuratsiyasi, customization qilsa bo`ladi
-// const { defaultAlgorithm, darkAlgorithm } = theme;
+const customStyles = {
+  colorPrimary: '#fff',
+  boxShadowSecondary: '#fff',
+  colorPrimaryHover: '#333A44',
+  colorPrimaryActive: '#ddd',
+}
 
-// const customTheme = {
-//   // algorithm: darkAlgorithm,
-//   components: {
-//     Button: {
-//       colorBgContainer: '#4433FF',
-//       colorBorder: '#1A1A1A',
-//       colorPrimaryHover: '#fff',
-//       colorPrimary: '#7F56D9',
-//     },
-//   },
-// }
+const theme = {
+  components: {
+    // Checkbox: {
+    //   colorPrimary: '#7F56D9',
+    //   colorBgContainer: '#fff',
+    //   colorPrimaryHover: '#7F56D9',
+    // },
+    // DatePicker: customStyles,
+    // Input: customStyles,
+    Button: customStyles,
+    Select: {
+      ...customStyles,
+      controlItemBgActive: "#fff",
+    },
+    Spin: {
+      colorPrimary: "#fff",
+    }
+  }
+}
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <ConfigProvider
-    // theme={customTheme}
-    >
+    <ConfigProvider theme={theme}>
       <App />
     </ConfigProvider>
     <ToastContainer />
