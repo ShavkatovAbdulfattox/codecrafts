@@ -9,13 +9,14 @@ import { memo, useEffect, useMemo, useState } from "react";
 import { CorrectIcon, DislikeButton, LikeButton } from "../../../utils/icons";
 import { getQuestionDifficulty } from "../../../utils/functions";
 import ProblemLeftExampleCard from "./ProblemLeftExampleCard";
-
+import { ReflexContainer, ReflexSplitter, ReflexElement } from "react-reflex";
 import Tab3 from "./ProblemLeftData/ProblemLeftTabData";
 import EditorialTab from "./EditorialTab";
 import {
   useDislikeMutation,
   useLikeMutation,
 } from "../../../services/questionApi";
+import { useNavigate, useParams } from "react-router-dom";
 
 const ProblemLeftSide = ({ question = {} }) => {
   const [elementHeight, setHeight] = useState(0);
