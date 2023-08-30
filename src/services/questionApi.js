@@ -4,7 +4,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { baseURL } from "../constants/apiConstants";
 
 export const problemsApi = createApi({
-  // reducerPath: "problems",
+  reducerPath: "problems",
   baseQuery: fetchBaseQuery({ baseUrl: baseURL }),
   endpoints: (builder) => ({
     // Kategoriyalarni olish

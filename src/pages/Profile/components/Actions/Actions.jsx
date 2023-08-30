@@ -20,9 +20,7 @@ function Actions() {
           <h2 className="p-2 px-5 rounded-md font-Lexend cursor-pointer text-slate-200">
             Solutions
           </h2>
-          <h2 className="p-2 px-5 rounded-md font-Lexend cursor-pointer text-slate-200">
-            Discuss
-          </h2>
+
         </div>
         <p className="font-Karla hover:text-gray-300 duration-100 cursor-pointer">
           View all submissions {">"}
