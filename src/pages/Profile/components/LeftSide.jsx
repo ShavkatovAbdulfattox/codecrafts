@@ -3,6 +3,7 @@ import { BsFillEyeFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useGetUserInformationQuery } from "../../../services/userProfileApi";
+import { baseURL } from "../../../constants/apiConstants";
 const stats = [
   {
     text: "Views",
@@ -70,8 +71,7 @@ const stats = [
 
 function LeftSide() {
   const { userData } = useSelector((state) => state.user);
-  const { data, isLoading } = useGetUserInformationQuery();
-  console.log(data);
+  const { data, isLoading } = useGetUserInformationQuery(userData.id);
 
   return (
     <aside
@@ -81,11 +81,20 @@ function LeftSide() {
       }}
     >
       <div className="flex space-x-4 ">
-        <img
-          src="https://img.myloview.com/stickers/default-avatar-profile-icon-vector-social-media-user-photo-700-205577532.jpg"
-          alt="avatar"
-          className="h-20 w-20 bg-slate-500 rounded-md"
-        />
+        {!isLoading && data.picture ? (
+          <img
+            src={`${baseURL}/api/image/${data.picture}`}
+            alt="profile-img"
+            className="h-20 w-20 bg-slate-500 rounded-md object-contain"
+          />
+        ) : (
+          <img
+            src="https://img.myloview.com/stickers/default-avatar-profile-icon-vector-social-media-user-photo-700-205577532.jpg"
+            alt="avatar"
+            className="h-20 w-20 bg-slate-500 rounded-md"
+          />
+        )}
+
         {isLoading ? (
           <div role="status" className="flex-1 my-auto">
             <svg

@@ -20,7 +20,11 @@ const Leaderboard = () => {
                 .reverse()
                 .map((key, index) => {
                   return (
-                    <button active={key == currentList ? "true" : "false"} onClick={() => setCurrentList(key)} key={index}>
+                    <button
+                      active={key == currentList ? "true" : "false"}
+                      onClick={() => setCurrentList(key)}
+                      key={index}
+                    >
                       {key}
                     </button>
                   );
@@ -49,11 +53,20 @@ const Leaderboard = () => {
                     <ul className={classes.list}>
                       {data[key].map((el, idx) => {
                         return (
-                          <li key={idx} style={{ animationDelay: 0.05 * idx + "s" }}>
+                          <li
+                            key={idx}
+                            style={{ animationDelay: 0.05 * idx + "s" }}
+                          >
                             <div data-content>
                               <span data-number>{idx + 1}</span>
                               <div data-picture>
-                                <img src={pictureUrl + el.picture} alt="" onLoad={(e) => e.target.setAttribute("data-loaded", "true")} />
+                                <img
+                                  src={pictureUrl + el.picture}
+                                  alt=""
+                                  onLoad={(e) =>
+                                    e.target.setAttribute("data-loaded", "true")
+                                  }
+                                />
                               </div>
                               <p data-name>{el.name}</p>
                               <span data-ball>{el.ball}</span>

@@ -1,31 +1,58 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   CircularProgressbar,
   CircularProgressbarWithChildren,
   buildStyles,
 } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import { useGetUserInformationQuery } from "../../../../services/userProfileApi";
+import { useSelector } from "react-redux";
 function Solved() {
-  const problemLevels = [
+  const { userData } = useSelector((state) => state.user);
+  const { data, isLoading } = useGetUserInformationQuery(userData.id);
+  const initialState = [
     {
       level: "easy",
-      total: 711,
-      solved: 4,
+      total: !isLoading ? data.countEasy : 0,
+      solved: !isLoading
+        ? data.solvedEasyAlgorithm + data.solvedEasyDatabase
+        : 0,
       color: "green",
     },
     {
       level: "medium",
-      total: 1502,
-      solved: 0,
+      total: !isLoading ? data.countMedium : 0,
+      solved: !isLoading
+        ? data.solvedMediumAlgorithm + data.solvedMediumDatabase
+        : 0,
       color: "yellow",
     },
     {
       level: "hard",
-      total: 624,
-      solved: 0,
+      total: !isLoading ? data.countHard : 0,
+      solved: !isLoading
+        ? data.solvedHardAlgorithm + data.solvedHarDatabase
+        : 0,
       color: "red",
     },
   ];
+
+  const totalQuestion = !isLoading
+    ? data.countEasy + data.countMedium + data.countHard
+    : 0;
+  const totalSolved = !isLoading
+    ? data.solvedEasyAlgorithm +
+      data.solvedEasyDatabase +
+      data.solvedMediumAlgorithm +
+      data.solvedMediumDatabase +
+      data.solvedHardAlgorithm +
+      data.solvedHarDatabase
+    : 0;
+  console.log(totalQuestion, totalSolved);
+  const [problemLevels, setProblemLevels] = useState(initialState);
+  useEffect(() => {
+    setProblemLevels(initialState);
+  }, [isLoading]);
 
   return (
     <section
@@ -38,13 +65,14 @@ function Solved() {
       <div className="flex justify-between mt-3">
         <div className="flex-1 my-auto ">
           <div className="h-[120px] w-[120px]">
+            {/* // ! Circular prograssbar */}
             <CircularProgressbarWithChildren
-              value={5}
+              value={0}
               styles={buildStyles({
                 pathColor: `#FFA500`, // Set your desired color here
               })}
             >
-              <p className="text-2xl font-Lexend">4</p>
+              <p className="text-2xl font-Lexend">{totalSolved}</p>
               <p className="text-gray-400">Solved</p>
             </CircularProgressbarWithChildren>
           </div>

@@ -8,10 +8,15 @@ export const userProfileAPi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: baseURL }),
   endpoints: (builder) => ({
     getUserInformation: builder.query({
-      query: () => `/user/v1/profile/28`,
+      query: (id) => `/user/v1/profile/${id}`,
+      transformResponse: (response) => response.data,
+    }),
+    getUsertContribution: builder.query({
+      query: (id) => `source/calendar/action/${id}`,
       transformResponse: (response) => response.data,
     }),
   }),
 });
 
-export const { useGetUserInformationQuery } = userProfileAPi;
+export const { useGetUserInformationQuery, useGetUsertContributionQuery } =
+  userProfileAPi;

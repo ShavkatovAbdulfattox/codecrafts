@@ -1,7 +1,12 @@
 import React from "react";
 import CalendarHeatmap from "react-calendar-heatmap";
 import "react-calendar-heatmap/dist/styles.css";
+import { useGetUsertContributionQuery } from "../../../../services/userProfileApi";
+import { useSelector } from "react-redux";
 function Calendar() {
+  const { userData } = useSelector((state) => state.user);
+  const { data } = useGetUsertContributionQuery(userData.id);
+  console.log(data);
   const contributions = [
     { date: "2023-08-01", count: 1 },
     { date: "2023-08-02", count: 2 },
