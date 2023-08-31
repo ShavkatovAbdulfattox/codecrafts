@@ -73,7 +73,7 @@ const ProblemsListPage = () => {
         }, [topics]);
 
     return (
-        <section className="problems-list-page container">
+        <section className="problems-list-page container main-content">
             <div className="problems-list__head">
                 <h1 className="text-[1.3em]">
                     Muammolar <Loader show={isLoadingCategories} />

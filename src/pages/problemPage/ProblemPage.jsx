@@ -1,7 +1,7 @@
 /** @format */
 
 import { Resizable } from "re-resizable";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useGetQuestionQuery } from "../../services/questionApi";
 import { getUserData } from "../../utils/functions";
@@ -27,30 +27,39 @@ function ProblemPage() {
   //     setRightWidth(a.screenX);
   //   };
 
+  const [desktopVersion, setDesktopVersion] = useState(true);
+
+  const setWindowDimensions = () => {
+    window.innerWidth < 1000 ? setDesktopVersion(false) : setDesktopVersion(true);
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", setWindowDimensions);
+
+    return () => {
+      window.removeEventListener("resize", setWindowDimensions);
+    };
+  }, []);
+
   return (
     <div className="playground-body main-content">
-      <ReflexContainer
-        orientation="vertical"
-        style={{ display: "flex", width: "100%", height: '100%' }}
-      >
+      <ReflexContainer orientation="vertical" style={{ display: "flex", width: "100%", height: "100%" }}>
         <ReflexElement style={{ overflow: "hidden" }}>
-          <ProblemLeftSide
-            question={question}
-            isQueryPage={isQueryPage}
-            additionalInfo={additionalInfo}
-          />
+          <ProblemLeftSide question={question} isQueryPage={isQueryPage} additionalInfo={additionalInfo} />
         </ReflexElement>
         <ReflexSplitter />
-        <ReflexElement style={{ overflow: "hidden" }}>
-          <ProblemRightSide
-            question={question}
-            rightWidth={rightWidth}
-            isLoading={isLoading}
-            setEditorLanguage={setEditorLanguage}
-            editorLanguage={editorLanguage}
-            isQueryPage={isQueryPage}
-          />
-        </ReflexElement>
+        {desktopVersion && (
+          <ReflexElement style={{ overflow: "hidden" }}>
+            <ProblemRightSide
+              question={question}
+              rightWidth={rightWidth}
+              isLoading={isLoading}
+              setEditorLanguage={setEditorLanguage}
+              editorLanguage={editorLanguage}
+              isQueryPage={isQueryPage}
+            />
+          </ReflexElement>
+        )}
       </ReflexContainer>
     </div>
   );
