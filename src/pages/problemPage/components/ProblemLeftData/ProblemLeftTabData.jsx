@@ -2,6 +2,9 @@ import React from "react";
 import { Select } from "antd";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+
 import {
   Table,
   TableBody,
@@ -18,7 +21,7 @@ import { setSelectedId } from "../../../../app/features/rightSide/leftSideSlice"
 const Tab3 = () => {
   const { id, selectedTabLabel } = useParams();
   const [isLoading, setIsLoading] = useState(true);
-  
+
   const selectedId = useSelector((state) => state.leftSide.selectedId);
 
   const dispatch = useDispatch();
@@ -80,130 +83,147 @@ const Tab3 = () => {
 
   return (
     <>
-      {isLoading ? (
+      {/* {isLoading ? (
         <p>Loading...</p>
-      ) : (
-        <TableContainer
-          component={Paper}
-          sx={{
-            backgroundColor: "transparent",
-            boxShadow: "none",
-          }}
-        >
-          <Table aria-label="custom table">
-            <TableHead>
-              <TableRow>
-                <TableCell
-                  sx={{
-                    borderBottomColor: "#f7faff2e",
+      ) : ( */}
+      <TableContainer
+        component={Paper}
+        sx={{
+          backgroundColor: "transparent",
+          boxShadow: "none",
+        }}
+      >
+        <Table aria-label="custom table">
+          <TableHead>
+            <TableRow>
+              <TableCell
+                sx={{
+                  borderBottomColor: "#f7faff2e",
+                }}
+              >
+                <Select
+                  defaultValue={{
+                    value: "status",
+                    label: "Status",
                   }}
-                >
-                  <Select
-                    defaultValue={{
-                      value: "status",
-                      label: "Status",
-                    }}
-                    onChange={handleChange}
-                    options={uniqueStatusValues.map((status) => ({
-                      value: status,
-                      label: status,
-                    }))}
-                    style={{
-                      width: 90,
-                    }}
-                  />
-                </TableCell>
-                <TableCell sx={{ borderBottomColor: "#f7faff2e" }}>
-                  <Select
-                    defaultValue={{
-                      value: "langauge",
-                      label: "Language",
-                    }}
-                    onChange={handleChangeLang}
-                    options={uniqueStatusValuesLang.map((lang) => ({
-                      value: lang,
-                      label: lang,
-                    }))}
-                    style={{
-                      width: 90,
-                    }}
-                  />
-                </TableCell>
-                <TableCell
-                  sx={{
-                    borderBottomColor: "#f7faff2e",
-                    color: "#eff1f6bf",
+                  onChange={handleChange}
+                  options={uniqueStatusValues.map((status) => ({
+                    value: status,
+                    label: status,
+                  }))}
+                  style={{
+                    width: 90,
                   }}
-                >
-                  <button>Runtime</button>
-                </TableCell>
-                <TableCell
-                  sx={{
-                    borderBottomColor: "#f7faff2e",
-                    color: "#eff1f6bf",
+                />
+              </TableCell>
+              <TableCell sx={{ borderBottomColor: "#f7faff2e" }}>
+                <Select
+                  defaultValue={{
+                    value: "langauge",
+                    label: "Language",
                   }}
-                >
-                  <button>Time</button>
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {data.map((el) => (
-                <TableRow
-                  key={el.id}
-                  onClick={() => handleRowClick(el.id)}
-                  sx={{
-                    textDecoration: "none",
-                    "&:hover": { backgroundColor: "#ffffff12" },
+                  onChange={handleChangeLang}
+                  options={uniqueStatusValuesLang.map((lang) => ({
+                    value: lang,
+                    label: lang,
+                  }))}
+                  style={{
+                    width: 90,
                   }}
-                  style={{ cursor: "pointer" }}
-                >
-                  <TableCell
-                    component="th"
-                    scope="row"
+                />
+              </TableCell>
+              <TableCell
+                sx={{
+                  borderBottomColor: "#f7faff2e",
+                  color: "#eff1f6bf",
+                }}
+              >
+                <button>Runtime</button>
+              </TableCell>
+              <TableCell
+                sx={{
+                  borderBottomColor: "#f7faff2e",
+                  color: "#eff1f6bf",
+                }}
+              >
+                <button>Time</button>
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {isLoading
+              ? // Show Skeletons during loading
+                Array.from({ length: 18 }).map((_, index) => (
+                  <TableRow key={index}>
+                    <TableCell>
+                      <Skeleton width={100} height={20} />
+                    </TableCell>
+                    <TableCell>
+                      <Skeleton width={90} height={20} />
+                    </TableCell>
+                    <TableCell>
+                      <Skeleton width={50} height={20} />
+                    </TableCell>
+                    <TableCell>
+                      <Skeleton width={80} height={20} />
+                    </TableCell>
+                  </TableRow>
+                ))
+              : data.map((el) => (
+                  <TableRow
+                    key={el.id}
+                    onClick={() => handleRowClick(el.id)}
                     sx={{
-                      borderBottom: "none",
-                      color: (theme) =>
-                        el.status === "ERROR"
-                          ? theme.palette.error.main
-                          : theme.palette.success.main,
+                      textDecoration: "none",
+                      "&:hover": { backgroundColor: "#ffffff12" },
                     }}
+                    style={{ cursor: "pointer" }}
                   >
-                    {el.status}
-                  </TableCell>
-                  <TableCell
-                    sx={{
-                      borderBottom: "none",
-                      color: "#eff1f6bf",
-                    }}
-                  >
-                    {el.language}
-                  </TableCell>
-                  <TableCell
-                    sx={{
-                      borderBottom: "none",
-                      color: "#eff1f6bf",
-                    }}
-                  >
-                    {`${el.runtime} ms`}
-                  </TableCell>
-                  <TableCell
-                    sx={{
-                      borderBottom: "none",
-                      color: "#eff1f6bf",
-                    }}
-                  >
-                    {`${new Date(el.time)
-                      .toLocaleString("en-US", { month: "short" })
-                      .toLowerCase()} ${new Date(el.time).getDate()}, 
-                  ${new Date(el.time).getFullYear()}`}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      )}
+                    <TableCell
+                      component="th"
+                      scope="row"
+                      sx={{
+                        borderBottom: "none",
+                        color: (theme) =>
+                          el.status === "ERROR"
+                            ? theme.palette.error.main
+                            : theme.palette.success.main,
+                      }}
+                    >
+                      {el.status}
+                    </TableCell>
+                    <TableCell
+                      sx={{
+                        borderBottom: "none",
+                        color: "#eff1f6bf",
+                      }}
+                    >
+                      {el.language}
+                    </TableCell>
+                    <TableCell
+                      sx={{
+                        borderBottom: "none",
+                        color: "#eff1f6bf",
+                      }}
+                    >
+                      {`${el.runtime} ms`}
+                    </TableCell>
+                    <TableCell
+                      sx={{
+                        borderBottom: "none",
+                        color: "#eff1f6bf",
+                      }}
+                    >
+                      {`${new Date(el.time)
+                        .toLocaleString("en-US", { month: "short" })
+                        .toLowerCase()} ${new Date(el.time).getDate()}, 
+                ${new Date(el.time).getFullYear()}`}
+                    </TableCell>
+                  </TableRow>
+                ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </>
   );
 };

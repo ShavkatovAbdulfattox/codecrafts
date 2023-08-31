@@ -9,17 +9,22 @@ import { memo, useEffect, useMemo, useState } from "react";
 import { CorrectIcon, DislikeButton, LikeButton } from "../../../utils/icons";
 import { getQuestionDifficulty } from "../../../utils/functions";
 import ProblemLeftExampleCard from "./ProblemLeftExampleCard";
-
-import Tab3 from "./ProblemLeftData/ProblemLeftTabData";
 import { ReflexContainer, ReflexSplitter, ReflexElement } from "react-reflex";
+import Tab3 from "./ProblemLeftData/ProblemLeftTabData";
+import EditorialTab from "./EditorialTab";
+import {
+  useDislikeMutation,
+  useLikeMutation,
+} from "../../../services/questionApi";
 import { useNavigate, useParams } from "react-router-dom";
-import parse from 'html-react-parser';
 
-const ProblemLeftSide = ({ question = {}, isQueryPage }) => {
+const ProblemLeftSide = ({ question = {} }) => {
   const [elementHeight, setHeight] = useState(0);
-
   const { id, selectedTabLabel } = useParams();
   const navigate = useNavigate();
+
+  const [giveLike, { isLoading: isLiking }] = useLikeMutation();
+  const [giveDislike, { isLoading: isDisliking }] = useDislikeMutation();
 
   const onChangeTab = (key) => {
     if (key) {
@@ -28,15 +33,18 @@ const ProblemLeftSide = ({ question = {}, isQueryPage }) => {
       navigate(url);
     }
   };
+  const onGiveLike = () => {
+    giveLike({ questionId: id, userId: getUserData()?.id });
+  };
 
-  const onResize = (a) => {
-    // console.log(a.screenX);
-    setHeight(a.screenX);
+  const onGiveDislike = () => {
+    giveDislike({ questionId: id, userId: getUserData()?.id });
   };
 
   const DESCRIPTION_TAB_KEY = "description";
   const SOLUTIONS_TAB_KEY = "solutions";
   const SUBMISSIONS_TAB_KEY = "submissions";
+  const EDITORIAL_TAB_KEY = "editorial";
 
   const items = [
     {
@@ -44,7 +52,14 @@ const ProblemLeftSide = ({ question = {}, isQueryPage }) => {
       label: `Izoh`,
       children: (
         <div className="left-side__body">
-          <h1>{question.name}</h1>
+          <h1>
+            {question.name}{" "}
+            {isLiking || isDisliking ? (
+              <Spin style={{ marginInlineStart: "10px" }} />
+            ) : (
+              ""
+            )}{" "}
+          </h1>
           <div className="left-side__info">
             <Tag
               color="orange"
@@ -56,19 +71,18 @@ const ProblemLeftSide = ({ question = {}, isQueryPage }) => {
               {getQuestionDifficulty(question.level)}
             </Tag>
             <CorrectIcon />
-            <button className="left-side__like">
+
+            <button className="left-side__like" onClick={onGiveLike}>
               <LikeButton />
               <span>{question.like1}</span>
             </button>
-            <button className="left-side__dislike">
+            <button className="left-side__dislike" onClick={onGiveDislike}>
               <DislikeButton />
               <span>{question.dislike}</span>
             </button>
           </div>
           <div className="left-problem__text">
-            {/* <pre>{question.definition?.trim()}</pre> */}
-            {question.definition && parse(question.definition)}
-            {/*  */}
+            <pre>{question.definition?.trim()}</pre>
           </div>
           <div className="left-problem__examples">
             {question.exampleList?.map((example, index) => {
@@ -77,13 +91,39 @@ const ProblemLeftSide = ({ question = {}, isQueryPage }) => {
                   key={index}
                   example={example}
                   index={index}
-                  isQueryPage={isQueryPage}
+                />
+              );
+            })}
+          </div>
+          <div className="left-problem__examples">
+            {question.exampleList?.map((example, index) => {
+              return (
+                <ProblemLeftExampleCard
+                  key={index}
+                  example={example}
+                  index={index}
+                />
+              );
+            })}
+          </div>
+          <div className="left-problem__examples">
+            {question.exampleList?.map((example, index) => {
+              return (
+                <ProblemLeftExampleCard
+                  key={index}
+                  example={example}
+                  index={index}
                 />
               );
             })}
           </div>
         </div>
       ),
+    },
+    {
+      key: EDITORIAL_TAB_KEY,
+      label: `Editorial`,
+      children: <EditorialTab />,
     },
     {
       key: SOLUTIONS_TAB_KEY,
@@ -98,7 +138,7 @@ const ProblemLeftSide = ({ question = {}, isQueryPage }) => {
   ];
 
   return (
-    <section className="problem-left-container flex w-full global-layout">
+    <section className="problem-left-container h-full flex w-full">
       <ReflexContainer
         orientation="horizontal"
         className="h-full w-full flex flex-col"

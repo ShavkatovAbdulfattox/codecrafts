@@ -18,11 +18,13 @@ const ProblemsListPage = () => {
     const { data: categories = [], isLoading: isLoadingCategories } =
         useGetCategoriesQuery();
 
+
     // Categoriyalarni ichidagi topiclarni olish
     const topics = useMemo(
         () => categories?.[0]?.topicList || [],
         [categories, categoryId]
     );
+
 
     useEffect(() => {
         setCategoryId(categories?.[0]?.id);
@@ -37,6 +39,7 @@ const ProblemsListPage = () => {
     const getQuestions = (id) => {
         setTopicId(id);
     };
+
 
     const Categories = () => {
         const className = (category) =>
@@ -55,6 +58,7 @@ const ProblemsListPage = () => {
             </div>
         ));
     };
+
 
     const Topics = () =>
         useMemo(() => {
