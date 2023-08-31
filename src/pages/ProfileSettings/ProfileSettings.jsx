@@ -4,12 +4,11 @@ import { AiFillEdit, AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { MdKeyboardReturn, MdOutlineDownloadDone } from "react-icons/md";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
+import { useEditUserNameAndEmailMutation } from "../../services/userProfileApi";
+import { baseURL } from "../../constants/apiConstants";
 
 function ProfileSettings() {
   const { isLogged, userData } = useSelector((state) => state.user);
-
-  console.log(userData);
-  // const [isVisiblePassword, setIsVisiblePassword] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
 
   const [name, setName] = useState(userData.name);
@@ -22,13 +21,29 @@ function ProfileSettings() {
     setSelectedFile(event.target.files[0]);
   };
 
-  // async function updateUserPhoto(e, userId) {
-  //   e.preventDefault();
-  //   // Get the selected file from the file inpu
+  // const [editUser] = useEditUserNameAndEmailMutation();
+  // // console.log(editUser());
+  // const handleEditNameAndEmail = async () => {
+  //   if (!isEditMode) {
+  //     return;
+  //   }
+  //   if (!email.endsWith(".com")) {
+  //     toast.warn("Iltimos email toliq yozing!", {
+  //       theme: "dark",
+  //     });
+  //     return;
+  //   }
 
-  //   if (!selectedFile) {
-  //     console.error("No file selected!");
-  //     toast.error("Iltimos rasm tanlang", {
+  //   const response = await editUser({
+  //     body: [{ email, name, picture: "", password: "" }],
+  //     id: userData.id,
+  //   });
+
+  //   console.log("Response from API:", response);
+
+  //   if (response.isSuccess) {
+  //     console.log("User data successfully edited.");
+  //     toast.success("Malumotlaringiz mofaqiyatli ozgartirildi!", {
   //       position: "top-right",
   //       autoClose: 3965,
   //       hideProgressBar: false,
@@ -38,50 +53,73 @@ function ProfileSettings() {
   //       progress: undefined,
   //       theme: "dark",
   //     });
-  //     return;
+  //     console.log("Close the edit mode ");
+  //     setIsEditMode(false);
+  //   } else {
+  //     console.log("User data edit failed.");
+  //     // You might want to add an error toast or handle the error accordingly.
   //   }
+  // };
+  const handleEditNameAndEmail = async () => {
+    try {
+      if (!isEditMode) {
+        return;
+      }
 
-  //   // Create a FormData object to send the file as part of the request
-  //   const formData = new FormData();
-  //   formData.append("photo", selectedFile);
-  //   console.log(formData);
+      if (!email.endsWith(".com")) {
+        toast.warn("Iltimos email to'liq yozing!", {
+          theme: "dark",
+        });
+        return;
+      }
 
-  //   try {
-  //     const response = await fetch(
-  //       `https://edubinplatform-a01d5146e549.herokuapp.com/user/v1/update/${userId}`,
-  //       {
-  //         method: "PUT",
-  //         body: formData,
-  //       }
-  //     );
+      const response = await fetch(`${baseURL}/user/v1/update/${userData.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: name,
+          email: email,
+          picture: "", // Add other properties as needed
+          password: "", // Add other properties as needed
+        }),
+      });
 
-  //     if (!(response.status >= 200) & (response.status <= 300)) {
-  //       throw new Error("Network response was not ok");
-  //     } else {
-  //       toast.success("Sizning suratingiz  yuklandi ", {
-  //         position: "top-right",
-  //         autoClose: 3965,
-  //         hideProgressBar: false,
-  //         closeOnClick: true,
-  //         pauseOnHover: true,
-  //         draggable: true,
-  //         progress: undefined,
-  //         theme: "dark",
-  //       });
-  //     }
+      if (response.status >= 200 && response.status <= 299) {
+        const data = await response.json();
+        console.log("Response from API:", data);
+        toast.success("Malumotlaringiz mofaqiyatli ozgartirildi!", {
+          position: "top-right",
+          autoClose: 3965,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+        setIsEditMode(false);
+      } else {
+        console.log("User data edit failed.");
+        // Handle the error or show an appropriate error message
+      }
+    } catch (error) {
+      console.error("Error editing user data:", error);
+      // Handle the error or show an appropriate error message
+    }
+  };
 
-  //     const data = await response.json();
-  //     console.log("Photo update successful:", data);
-  //   } catch (error) {
-  //     toast.error("Xato iltimos qaytadan yuklang", { theme: "dark" });
-  //     console.error("Error updating photo:", error);
-  //   }
-  // }
   return (
     <>
-      <header className="mt-10 container">
+      <header
+        className="mt-10 container p-5 rounded-md"
+        style={{
+          backgroundColor: "rgb(40 40 40)",
+        }}
+      >
         <h1 className="text-3xl text-gray-300  font-Lexend">Account settngs</h1>
-        <div className="bg-gray-800 rounded-md p-5 pb-16 mt-10 ">
+        <div className=" rounded-md p-5 pb-16 mt-10 ">
           <div className="flex justify-between items-center mb-10">
             <h2 className="uppercase font-Lexend font-bold tracking-wider text-xl ">
               MA'LUMOTLAR
@@ -131,20 +169,7 @@ function ProfileSettings() {
               <motion.div
                 whileTap={{ scale: 0.8 }}
                 onClick={() => {
-                  if (!isEditMode) {
-                    return;
-                  }
-                  toast.success("Malumotlaringiz mofaqiyatli ozgartirildi!", {
-                    position: "top-right",
-                    autoClose: 3965,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "dark",
-                  });
-                  setIsEditMode(false);
+                  handleEditNameAndEmail();
                 }}
                 className={`text-4xl p-1 rounded-lg bg-emerald-500  ${
                   isEditMode
