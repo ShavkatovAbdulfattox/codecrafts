@@ -4,27 +4,23 @@
  * @format
  */
 
-import {Button, Spin, Tabs, Tag} from "antd";
+import {Button, Tabs, Tag} from "antd";
 import {memo, useEffect, useMemo, useState} from "react";
 import {CorrectIcon, DislikeButton, LikeButton} from "../../../utils/icons";
 import {getQuestionDifficulty} from "../../../utils/functions";
 import ProblemLeftExampleCard from "./ProblemLeftExampleCard";
-import {ReflexContainer, ReflexSplitter, ReflexElement} from "react-reflex";
-import Tab3 from "./ProblemLeftData/ProblemLeftTabData";
-import EditorialTab from "./EditorialTab";
-import {
-    useDislikeMutation,
-    useLikeMutation,
-} from "../../../services/questionApi";
-import {useNavigate, useParams} from "react-router-dom";
 
-const ProblemLeftSide = ({question = {}}) => {
+import Tab3 from "./ProblemLeftData/ProblemLeftTabData";
+import {ReflexContainer, ReflexSplitter, ReflexElement} from "react-reflex";
+import {useNavigate, useParams} from "react-router-dom";
+import parse from 'html-react-parser';
+import CommentSection from "./commentSection/CommentSection.jsx";
+
+const ProblemLeftSide = ({question = {}, isQueryPage}) => {
     const [elementHeight, setHeight] = useState(0);
+
     const {id, selectedTabLabel} = useParams();
     const navigate = useNavigate();
-
-    const [giveLike, {isLoading: isLiking}] = useLikeMutation();
-    const [giveDislike, {isLoading: isDisliking}] = useDislikeMutation();
 
     const onChangeTab = (key) => {
         if (key) {
@@ -33,18 +29,15 @@ const ProblemLeftSide = ({question = {}}) => {
             navigate(url);
         }
     };
-    const onGiveLike = () => {
-        giveLike({questionId: id, userId: getUserData()?.id});
-    };
 
-    const onGiveDislike = () => {
-        giveDislike({questionId: id, userId: getUserData()?.id});
+    const onResize = (a) => {
+        // console.log(a.screenX);
+        setHeight(a.screenX);
     };
 
     const DESCRIPTION_TAB_KEY = "description";
     const SOLUTIONS_TAB_KEY = "solutions";
     const SUBMISSIONS_TAB_KEY = "submissions";
-    const EDITORIAL_TAB_KEY = "editorial";
 
     const items = [
         {
@@ -52,14 +45,7 @@ const ProblemLeftSide = ({question = {}}) => {
             label: `Izoh`,
             children: (
                 <div className="left-side__body">
-                    <h1>
-                        {question.name}{" "}
-                        {isLiking || isDisliking ? (
-                            <Spin style={{marginInlineStart: "10px"}}/>
-                        ) : (
-                            ""
-                        )}{" "}
-                    </h1>
+                    <h1>{question.name}</h1>
                     <div className="left-side__info">
                         <Tag
                             color="orange"
@@ -71,18 +57,19 @@ const ProblemLeftSide = ({question = {}}) => {
                             {getQuestionDifficulty(question.level)}
                         </Tag>
                         <CorrectIcon/>
-
-                        <button className="left-side__like" onClick={onGiveLike}>
+                        <button className="left-side__like">
                             <LikeButton/>
                             <span>{question.like1}</span>
                         </button>
-                        <button className="left-side__dislike" onClick={onGiveDislike}>
+                        <button className="left-side__dislike">
                             <DislikeButton/>
                             <span>{question.dislike}</span>
                         </button>
                     </div>
                     <div className="left-problem__text">
-                        <pre>{question.definition?.trim()}</pre>
+                        {/* <pre>{question.definition?.trim()}</pre> */}
+                        {question.definition && parse(question.definition)}
+                        {/*  */}
                     </div>
                     <div className="left-problem__examples">
                         {question.exampleList?.map((example, index) => {
@@ -91,40 +78,14 @@ const ProblemLeftSide = ({question = {}}) => {
                                     key={index}
                                     example={example}
                                     index={index}
+                                    isQueryPage={isQueryPage}
                                 />
                             );
                         })}
                     </div>
-                    <div className="left-problem__examples">
-                        {question.exampleList?.map((example, index) => {
-                            return (
-                                <ProblemLeftExampleCard
-                                    key={index}
-                                    example={example}
-                                    index={index}
-                                />
-                            );
-                        })}
-                    </div>
-                    <div className="left-problem__examples">
-                        {question.exampleList?.map((example, index) => {
-                            return (
-                                <ProblemLeftExampleCard
-                                    key={index}
-                                    example={example}
-                                    index={index}
-                                />
-                            );
-                        })}
-                    </div>
-
+                    <CommentSection/>
                 </div>
             ),
-        },
-        {
-            key: EDITORIAL_TAB_KEY,
-            label: `Editorial`,
-            children: <EditorialTab/>,
         },
         {
             key: SOLUTIONS_TAB_KEY,
@@ -139,7 +100,7 @@ const ProblemLeftSide = ({question = {}}) => {
     ];
 
     return (
-        <section className="problem-left-container h-full flex w-full">
+        <section className="problem-left-container flex w-full global-layout">
             <ReflexContainer
                 orientation="horizontal"
                 className="h-full w-full flex flex-col"

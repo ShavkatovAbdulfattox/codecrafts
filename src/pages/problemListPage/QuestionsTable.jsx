@@ -5,13 +5,16 @@
  * @format
  */
 
-import { Table, Tag } from "antd";
-import { memo } from "react";
-import { Link } from "react-router-dom";
-import { getQuestionDifficulty } from "../../utils/functions";
-import { CorrectIcon } from "../../utils/icons";
+import {Table, Tag} from "antd";
+import {memo} from "react";
+import {Link} from "react-router-dom";
+import {getQuestionDifficulty} from "../../utils/functions";
+import {CorrectIcon} from "../../utils/icons";
+import {setCurrentQuestion} from "../../app/features/mainFeaturesSlice.js";
+import {useDispatch} from "react-redux";
 
-const QuestionTable = ({ questions, isLoadingCategories, isLoadingQuestions }) => {
+const QuestionTable = ({questions, isLoadingCategories, isLoadingQuestions}) => {
+
     const gotoPath = (question) => {
         // if (question.query) {
         // console.log({ question });
@@ -38,7 +41,7 @@ const QuestionTable = ({ questions, isLoadingCategories, isLoadingQuestions }) =
             align: "center",
             render: (solved) => {
                 // shu joyga iconkalar qo'yamiz true va false holatlari uchun
-                return !!solved ? <CorrectIcon /> : "";
+                return !!solved ? <CorrectIcon/> : "";
             },
         },
         {
