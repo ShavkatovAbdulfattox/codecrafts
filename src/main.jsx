@@ -5,7 +5,7 @@ import "./index.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ConfigProvider } from "antd";
-import { QueryClient, QueryClientProvider } from "react-query";
+// import { QueryClient, QueryClientProvider } from "react-query";
 
 const customStyles = {
   colorPrimary: "#fff",
@@ -33,15 +33,15 @@ const theme = {
     },
   },
 };
-const queryClient = new QueryClient();
+// const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
+    {/* <QueryClientProvider client={queryClient}> */}
       <ConfigProvider theme={theme}>
         <App />
       </ConfigProvider>
       <ToastContainer />
-    </QueryClientProvider>
+    {/* </QueryClientProvider> */}
   </React.StrictMode>
 );
