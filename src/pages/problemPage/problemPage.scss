@@ -12,11 +12,6 @@
   background-color: #1a1a1a;
   overflow: hidden;
 
-  @media screen and (max-width: 1000px){
-    flex-direction: column;
-    height: auto; 
-  }
-
   .problem-left-container {
     height: 100%;
     width: 100%;
