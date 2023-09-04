@@ -1,0 +1,94 @@
+.problems-comments-section {
+  margin: 20px 0;
+
+  .problem-one-comment {
+    border: 1px solid #222;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 10px 0;
+
+    .comment__foot-item__edit {
+      visibility: hidden;
+    }
+
+    &:hover {
+      .comment__foot-item__edit {
+        visibility: visible;
+      }
+    }
+
+    .problem-one-comment__head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .problem-one-comment__user {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+
+        .problem-one-comment__avatar {
+
+        }
+
+        .problem-one-comment__author {
+
+        }
+      }
+
+      .problem-one-comment__date {
+        color: #999;
+
+      }
+    }
+
+    .problem-one-comment__body {
+      padding: 14px 0 14px 5px;
+    }
+
+    .problem-one-comment__foot {
+      display: flex;
+      color: #999;
+      gap: 20px;
+      user-select: none;
+
+      .problem-one-comment__foot-item {
+        display: flex;
+        gap: 7px;
+        align-items: center;
+
+        button {
+          display: flex;
+          gap: 7px;
+          align-items: center;
+
+          &:hover {
+            svg path {
+              fill: #aaa;
+            }
+          }
+        }
+
+        &.comment__foot-item__reply {
+          cursor: pointer;
+
+          &:hover {
+            color: #aaa;
+          }
+        }
+      }
+    }
+  }
+
+  .problem-one-comment-input {
+    margin: 20px 0;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #333;
+
+    .problem-one-comment-input__foot {
+      text-align: right;
+      padding: 10px 0;
+    }
+  }
+}

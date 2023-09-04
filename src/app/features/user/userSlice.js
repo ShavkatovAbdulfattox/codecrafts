@@ -1,14 +1,7 @@
 /** @format */
 
-import { createSlice } from "@reduxjs/toolkit";
-import {
-  getToken,
-  getUserData,
-  removeToken,
-  removeUserData,
-  saveToken,
-  saveUserData,
-} from "../../../utils/functions.js";
+import {createSlice} from "@reduxjs/toolkit";
+import {getUserData, removeUserData, saveUserData,} from "../../../utils/functions.js";
 
 const userSlice = createSlice({
   name: "user",

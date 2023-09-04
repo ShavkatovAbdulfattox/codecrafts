@@ -1,21 +1,24 @@
 /** @format */
 
-import { Button } from "antd";
-import { useEffect, useMemo, useState } from "react";
+import {Button} from "antd";
+import {useEffect, useMemo, useState} from "react";
 import Loader from "../../components/Loader";
 import {
     useGetCategoriesQuery,
     useGetQuestionsByTopicQuery,
 } from "../../services/questionApi";
-import { default as QuestionsTable } from "./QuestionsTable";
+import {default as QuestionsTable} from "./QuestionsTable";
 import "./problemListPage.scss";
+import {setQuestions} from "../../app/features/mainFeaturesSlice.js";
+import {useDispatch} from "react-redux";
 
 const ProblemsListPage = () => {
     const [topicId, setTopicId] = useState(null);
     const [categoryId, setCategoryId] = useState(2);
+    const dispatch = useDispatch()
 
     // Categoriyalarni olib kelish
-    const { data: categories = [], isLoading: isLoadingCategories } =
+    const {data: categories = [], isLoading: isLoadingCategories} =
         useGetCategoriesQuery();
 
 
@@ -31,10 +34,16 @@ const ProblemsListPage = () => {
         setTopicId(topics[0]?.id);
     }, [topics]);
 
-    const { data: questions = [], isLoading: isLoadingQuestions, refetch: refetchQuestions } =
+    const {data: questions = [], isLoading: isLoadingQuestions, refetch: refetchQuestions} =
         useGetQuestionsByTopicQuery(topicId, {
             skip: !topicId,
         });
+
+    useEffect(() => {
+        if (questions) {
+            dispatch(setQuestions(questions))
+        }
+    }, [questions]);
 
     const getQuestions = (id) => {
         setTopicId(id);
@@ -80,13 +89,13 @@ const ProblemsListPage = () => {
         <section className="problems-list-page container">
             <div className="problems-list__head">
                 <h1 className="text-[1.3em]">
-                    Muammolar <Loader show={isLoadingCategories} />
+                    Muammolar <Loader show={isLoadingCategories}/>
                 </h1>
                 <div className="flex gap-[8px] text-[#ccc] py-2">
-                    <Categories />
+                    <Categories/>
                 </div>
                 <div className="flex gap-[8px] text-[#ccc] text-[.85em]">
-                    <Topics />
+                    <Topics/>
                 </div>
                 <div className="flex flex-col gap-[8px] text-[#ccc] py-4">
                     <QuestionsTable
