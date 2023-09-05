@@ -87,8 +87,10 @@
     border: 1px solid #333;
 
     .problem-one-comment-input__foot {
-      text-align: right;
       padding: 10px 0;
+      display: flex;
+      justify-content: end;
+      gap: 10px;
     }
   }
 }
